@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Brythee</string>
+    <string name="app_tagline">Techniques de relaxation et gestion de l\'anxiété</string>
+    <string name="back">Retour</string>
+    <string name="start_exercise">Commencer l\'exercice</string>
+    <string name="technique">Technique</string>
+    <string name="about">À propos</string>
+    <string name="full_description">Description complète</string>
+    <string name="related_techniques">Techniques similaires</string>
+    <string name="pause">Pause</string>
+    <string name="play">Commencer</string>
+    <string name="reset">Recommencer</string>
+    <string name="prepare">Préparez-vous...</string>
+    <string name="in_progress">En cours</string>
+    <string name="paused">En pause</string>
+    
+    <!-- Technique Tags -->
+    <string name="high_anxiety">Anxiété élevée</string>
+    <string name="moderate_anxiety">Anxiété modérée</string>
+    <string name="short_time">Temps court</string>
+    <string name="medium_time">Temps moyen</string>
+    <string name="long_time">Temps long</string>
+</resources>

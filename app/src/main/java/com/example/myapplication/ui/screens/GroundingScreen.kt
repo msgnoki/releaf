@@ -69,7 +69,7 @@ fun GroundingScreen(
                 number = 3,
                 title = "3 choses que vous ENTENDEZ",
                 instruction = "Écoutez attentivement et identifiez 3 sons",
-                icon = Icons.Default.Hearing,
+                icon = Icons.Default.VolumeUp,
                 color = Color(0xFFFF9800),
                 examples = listOf("Le bruit de fond", "Votre respiration", "Des sons lointains", "Le silence")
             ),
@@ -77,7 +77,7 @@ fun GroundingScreen(
                 number = 2,
                 title = "2 choses que vous SENTEZ",
                 instruction = "Concentrez-vous sur 2 odeurs ou parfums",
-                icon = Icons.Default.Air,
+                icon = Icons.Default.Cloud,
                 color = Color(0xFF9C27B0),
                 examples = listOf("L'air frais", "Un parfum familier", "L'odeur de l'espace", "Votre environnement")
             ),

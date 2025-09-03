@@ -10,17 +10,83 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.myapplication.data.TechniquesRepository
 import com.example.myapplication.ui.screens.*
+import com.example.myapplication.ui.screens.auth.*
+import com.example.myapplication.ui.viewmodel.AuthViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.platform.LocalContext
+import com.example.myapplication.BrytheeApplication
+import com.example.myapplication.ui.viewmodel.AuthViewModelFactory
 
 @Composable
 fun CalmNavigation(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val application = context.applicationContext as BrytheeApplication
+    val authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory(application.database))
+    val authState by authViewModel.authState.collectAsState()
+    val forgotPasswordMessage by authViewModel.forgotPasswordState.collectAsState()
+    
+    // Navigate to home when user logs in
+    LaunchedEffect(authState.isLoggedIn) {
+        if (authState.isLoggedIn) {
+            navController.navigate("home") {
+                popUpTo("login") { inclusive = true }
+            }
+        }
+    }
+    
     NavHost(
         navController = navController,
-        startDestination = "home",
+        startDestination = if (authState.isLoggedIn) "home" else "login", // Mode auth activé
         modifier = modifier
     ) {
+        
+        // Authentication screens
+        composable("login") {
+            LoginScreen(
+                onLoginClick = { email, password ->
+                    authViewModel.signIn(email, password)
+                },
+                onRegisterClick = {
+                    navController.navigate("register")
+                },
+                onForgotPasswordClick = {
+                    navController.navigate("forgot_password")
+                },
+                isLoading = authState.isLoading,
+                errorMessage = authState.errorMessage
+            )
+        }
+        
+        composable("register") {
+            RegisterScreen(
+                onRegisterClick = { email, password, displayName, anxietyLevel ->
+                    authViewModel.signUp(email, password, displayName, anxietyLevel)
+                },
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                isLoading = authState.isLoading,
+                errorMessage = authState.errorMessage
+            )
+        }
+        
+        composable("forgot_password") {
+            ForgotPasswordScreen(
+                onResetPasswordClick = { email ->
+                    authViewModel.resetPassword(email)
+                },
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                isLoading = authState.isLoading,
+                errorMessage = authState.errorMessage,
+                successMessage = forgotPasswordMessage
+            )
+        }
         composable("home") {
             HomeScreen(
                 onTechniqueClick = { technique ->

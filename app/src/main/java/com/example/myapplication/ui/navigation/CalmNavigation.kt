@@ -95,6 +95,26 @@ fun CalmNavigation(
             )
         }
         
+        composable("browse") {
+            BrowseScreen(
+                onTechniqueClick = { technique ->
+                    navController.navigate("technique/${technique.id}")
+                }
+            )
+        }
+        
+        composable("sleep") {
+            SleepScreen(
+                onTechniqueClick = { technique ->
+                    navController.navigate("technique/${technique.id}")
+                }
+            )
+        }
+        
+        composable("profile") {
+            ProfileScreen()
+        }
+        
         composable("technique/{techniqueId}") { backStackEntry ->
             val techniqueId = backStackEntry.arguments?.getString("techniqueId") ?: return@composable
             val technique = TechniquesRepository.getTechnique(techniqueId) ?: return@composable

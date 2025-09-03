@@ -2,6 +2,12 @@ package com.example.myapplication.data
 
 import androidx.compose.runtime.Stable
 import kotlinx.serialization.Serializable
+import com.example.myapplication.data.model.TechniqueCategory
+import com.example.myapplication.data.model.DurationPreference
+import com.example.myapplication.data.model.Recommendation
+import com.example.myapplication.data.model.RecommendationReason
+import com.example.myapplication.data.model.RecommendationWithTechnique
+import java.util.UUID
 
 @Stable
 @Serializable
@@ -13,7 +19,13 @@ data class Technique(
     val name: String,
     val shortDescription: String,
     val description: String,
-    val duration: String
+    val duration: String,
+    val category: TechniqueCategory,
+    val durationMinutesStart: Int,
+    val durationMinutesEnd: Int,
+    val difficultyLevel: Int = 1, // 1-5 scale
+    val popularity: Int = 0,
+    val isForCrisis: Boolean = false
 )
 
 enum class TechniqueTag(val value: String) {
@@ -35,7 +47,13 @@ object TechniquesRepository {
             name = "Respiration 2 Minutes",
             shortDescription = "Exercice de respiration simple qui calme votre système nerveux et réduit l'anxiété en quelques minutes",
             description = "Quand l'anxiété frappe, votre respiration devient superficielle et rapide. Cette technique vous enseigne des modèles de respiration simples qui activent la réponse naturelle de relaxation de votre corps.",
-            duration = "2-3 min"
+            duration = "2-3 min",
+            category = TechniqueCategory.RESPIRATION,
+            durationMinutesStart = 2,
+            durationMinutesEnd = 3,
+            difficultyLevel = 1,
+            popularity = 95,
+            isForCrisis = true
         ),
         "grounding" to Technique(
             id = "grounding",
@@ -45,7 +63,13 @@ object TechniquesRepository {
             name = "Ancrage 5-4-3-2-1",
             shortDescription = "Une technique sensorielle qui vous sort des pensées anxieuses en vous concentrant sur ce qui vous entoure maintenant",
             description = "La technique d'ancrage utilise vos cinq sens pour vous ancrer dans le moment présent. En remarquant 5 choses que vous pouvez voir, 4 que vous pouvez toucher, 3 que vous pouvez entendre, 2 que vous pouvez sentir et 1 que vous pouvez goûter, cela interrompt le cycle des pensées anxieuses.",
-            duration = "3-5 min"
+            duration = "3-5 min",
+            category = TechniqueCategory.ANCRAGE,
+            durationMinutesStart = 3,
+            durationMinutesEnd = 5,
+            difficultyLevel = 1,
+            popularity = 88,
+            isForCrisis = true
         ),
         "guided-breathing" to Technique(
             id = "guided-breathing",
@@ -55,7 +79,12 @@ object TechniquesRepository {
             name = "Respiration Guidée",
             shortDescription = "Modèles de respiration étape par étape pour ralentir votre rythme cardiaque et réduire la tension",
             description = "Suivez des exercices de respiration structurés conçus pour réguler votre système nerveux autonome. Ces guides visuels vous aident à maintenir un timing et un rythme appropriés.",
-            duration = "5-10 min"
+            duration = "5-10 min",
+            category = TechniqueCategory.RESPIRATION,
+            durationMinutesStart = 5,
+            durationMinutesEnd = 10,
+            difficultyLevel = 2,
+            popularity = 82
         ),
         "progressive-muscle-relaxation" to Technique(
             id = "progressive-muscle-relaxation",
@@ -65,7 +94,12 @@ object TechniquesRepository {
             name = "Relaxation Musculaire Progressive",
             shortDescription = "Libérez la tension physique en contractant et relâchant systématiquement les groupes musculaires",
             description = "L'anxiété crée souvent une tension physique que vous ne remarquez peut-être même pas. Cette technique vous apprend à contracter puis relâcher différents groupes musculaires.",
-            duration = "8-12 min"
+            duration = "8-12 min",
+            category = TechniqueCategory.RELAXATION,
+            durationMinutesStart = 8,
+            durationMinutesEnd = 12,
+            difficultyLevel = 2,
+            popularity = 75
         ),
         "peaceful-visualization" to Technique(
             id = "peaceful-visualization",
@@ -75,7 +109,12 @@ object TechniquesRepository {
             name = "Visualisation Paisible",
             shortDescription = "Imagerie mentale guidée qui vous transporte vers des environnements apaisants",
             description = "Votre esprit a le pouvoir de créer des expériences vivantes et apaisantes grâce à la visualisation. Cette technique vous guide à travers des scénarios paisibles.",
-            duration = "10-12 min"
+            duration = "10-12 min",
+            category = TechniqueCategory.VISUALISATION,
+            durationMinutesStart = 10,
+            durationMinutesEnd = 12,
+            difficultyLevel = 3,
+            popularity = 70
         ),
         "thought-labeling" to Technique(
             id = "thought-labeling",
@@ -85,7 +124,12 @@ object TechniquesRepository {
             name = "Étiquetage des Pensées",
             shortDescription = "Une technique de pleine conscience qui vous aide à reconnaître les pensées anxieuses comme des événements mentaux temporaires",
             description = "Les pensées anxieuses peuvent sembler accablantes quand vous les traitez comme des vérités absolues. Cette pratique de pleine conscience vous apprend à observer vos pensées avec curiosité.",
-            duration = "5-15 min"
+            duration = "5-15 min",
+            category = TechniqueCategory.RELAXATION,
+            durationMinutesStart = 5,
+            durationMinutesEnd = 15,
+            difficultyLevel = 3,
+            popularity = 65
         ),
         "stress-relief-bubbles" to Technique(
             id = "stress-relief-bubbles",
@@ -95,7 +139,13 @@ object TechniquesRepository {
             name = "Bulles Anti-Stress",
             shortDescription = "Activité interactive d'éclatement de bulles qui redirige l'énergie anxieuse vers un mouvement ludique",
             description = "Parfois, la meilleure façon de gérer l'anxiété est par une distraction douce et ludique. Cette activité interactive simple aide à rediriger l'énergie nerveuse.",
-            duration = "2-5 min"
+            duration = "2-5 min",
+            category = TechniqueCategory.STRESS_RELIEF,
+            durationMinutesStart = 2,
+            durationMinutesEnd = 5,
+            difficultyLevel = 1,
+            popularity = 85,
+            isForCrisis = true
         ),
         "sound-therapy" to Technique(
             id = "sound-therapy",
@@ -105,7 +155,12 @@ object TechniquesRepository {
             name = "Thérapie Sonore",
             shortDescription = "Fréquences curatives qui favorisent la relaxation et la clarté mentale",
             description = "Des fréquences sonores spécifiques ont montré leur capacité à influencer les ondes cérébrales et favoriser la relaxation.",
-            duration = "5-30 min"
+            duration = "5-30 min",
+            category = TechniqueCategory.RELAXATION,
+            durationMinutesStart = 5,
+            durationMinutesEnd = 30,
+            difficultyLevel = 2,
+            popularity = 60
         ),
         "stress-ball" to Technique(
             id = "stress-ball",
@@ -115,7 +170,13 @@ object TechniquesRepository {
             name = "Balle Anti-Stress",
             shortDescription = "Balle anti-stress interactive pour évacuer la tension et rediriger l'énergie anxieuse",
             description = "Parfois, la tension physique a besoin d'une libération physique. Cette balle anti-stress virtuelle offre une expérience tactile satisfaisante.",
-            duration = "1-5 min"
+            duration = "1-5 min",
+            category = TechniqueCategory.STRESS_RELIEF,
+            durationMinutesStart = 1,
+            durationMinutesEnd = 5,
+            difficultyLevel = 1,
+            popularity = 78,
+            isForCrisis = true
         )
     )
     
@@ -143,5 +204,167 @@ object TechniquesRepository {
     
     fun getTechniquesByTag(tag: String): List<Technique> {
         return techniquesData.values.filter { it.tags.contains(tag) }
+    }
+    
+    // New methods for v0.2 recommendations and filtering
+    
+    fun getTechniquesByCategory(category: TechniqueCategory): List<Technique> {
+        return techniquesData.values.filter { it.category == category }
+    }
+    
+    fun getTechniquesByDuration(durationPreference: DurationPreference): List<Technique> {
+        return techniquesData.values.filter { technique ->
+            technique.durationMinutesStart <= durationPreference.maxMinutes && 
+            technique.durationMinutesEnd >= durationPreference.minMinutes
+        }
+    }
+    
+    fun getCrisisTechniques(): List<Technique> {
+        return techniquesData.values.filter { it.isForCrisis }.sortedByDescending { it.popularity }
+    }
+    
+    fun getTechniquesByDifficulty(maxLevel: Int): List<Technique> {
+        return techniquesData.values.filter { it.difficultyLevel <= maxLevel }
+    }
+    
+    fun getMostPopularTechniques(limit: Int = 3): List<Technique> {
+        return techniquesData.values.sortedByDescending { it.popularity }.take(limit)
+    }
+    
+    fun getBeginnerFriendlyTechniques(): List<Technique> {
+        return getTechniquesByDifficulty(2).sortedByDescending { it.popularity }
+    }
+    
+    fun generateRecommendations(
+        userId: String,
+        recentTechniqueIds: List<String> = emptyList(),
+        favoriteCategory: TechniqueCategory? = null,
+        durationPreference: DurationPreference = DurationPreference.MEDIUM,
+        experienceLevel: Int = 1,
+        isInCrisis: Boolean = false
+    ): List<RecommendationWithTechnique> {
+        
+        if (isInCrisis) {
+            return getCrisisTechniques().take(3).map { technique ->
+                RecommendationWithTechnique(
+                    recommendation = Recommendation(
+                        id = UUID.randomUUID().toString(),
+                        userId = userId,
+                        techniqueId = technique.id,
+                        reason = RecommendationReason.ANXIETY_LEVEL,
+                        reasonText = "Idéal pour une crise d'anxiété",
+                        score = technique.popularity.toFloat(),
+                        category = technique.category,
+                        validUntil = System.currentTimeMillis() + 24 * 60 * 60 * 1000 // 24h
+                    ),
+                    techniqueId = technique.id,
+                    techniqueName = technique.name,
+                    duration = technique.duration,
+                    shortDescription = technique.shortDescription,
+                    icon = technique.icon,
+                    iconColor = technique.iconColor
+                )
+            }
+        }
+        
+        val recommendations = mutableListOf<RecommendationWithTechnique>()
+        
+        // Recent pattern recommendation
+        if (recentTechniqueIds.isNotEmpty()) {
+            val recentCategories = recentTechniqueIds.mapNotNull { getTechnique(it)?.category }
+            val mostUsedCategory = recentCategories.groupingBy { it }.eachCount().maxByOrNull { it.value }?.key
+            
+            mostUsedCategory?.let { category ->
+                getTechniquesByCategory(category)
+                    .filter { !recentTechniqueIds.contains(it.id) }
+                    .sortedByDescending { it.popularity }
+                    .firstOrNull()?.let { technique ->
+                        recommendations.add(
+                            RecommendationWithTechnique(
+                                recommendation = Recommendation(
+                                    id = UUID.randomUUID().toString(),
+                                    userId = userId,
+                                    techniqueId = technique.id,
+                                    reason = RecommendationReason.RECENT_PATTERN,
+                                    reasonText = "Basé sur votre usage récent",
+                                    score = technique.popularity.toFloat() * 1.2f,
+                                    category = technique.category,
+                                    validUntil = System.currentTimeMillis() + 24 * 60 * 60 * 1000
+                                ),
+                                techniqueId = technique.id,
+                                techniqueName = technique.name,
+                                duration = technique.duration,
+                                shortDescription = technique.shortDescription,
+                                icon = technique.icon,
+                                iconColor = technique.iconColor
+                            )
+                        )
+                    }
+            }
+        }
+        
+        // Duration preference recommendation
+        getTechniquesByDuration(durationPreference)
+            .filter { !recentTechniqueIds.contains(it.id) }
+            .filter { !recommendations.any { rec -> rec.techniqueId == it.id } }
+            .sortedByDescending { it.popularity }
+            .firstOrNull()?.let { technique ->
+                recommendations.add(
+                    RecommendationWithTechnique(
+                        recommendation = Recommendation(
+                            id = UUID.randomUUID().toString(),
+                            userId = userId,
+                            techniqueId = technique.id,
+                            reason = RecommendationReason.DURATION_PREFERENCE,
+                            reasonText = "Correspond à vos durées préférées",
+                            score = technique.popularity.toFloat() * 1.1f,
+                            category = technique.category,
+                            validUntil = System.currentTimeMillis() + 24 * 60 * 60 * 1000
+                        ),
+                        techniqueId = technique.id,
+                        techniqueName = technique.name,
+                        duration = technique.duration,
+                        shortDescription = technique.shortDescription,
+                        icon = technique.icon,
+                        iconColor = technique.iconColor
+                    )
+                )
+            }
+        
+        // Popular technique recommendation
+        if (recommendations.size < 3) {
+            getMostPopularTechniques()
+                .filter { !recentTechniqueIds.contains(it.id) }
+                .filter { !recommendations.any { rec -> rec.techniqueId == it.id } }
+                .take(3 - recommendations.size)
+                .forEach { technique ->
+                    recommendations.add(
+                        RecommendationWithTechnique(
+                            recommendation = Recommendation(
+                                id = UUID.randomUUID().toString(),
+                                userId = userId,
+                                techniqueId = technique.id,
+                                reason = RecommendationReason.MOST_USED,
+                                reasonText = "Populaire auprès des utilisateurs",
+                                score = technique.popularity.toFloat(),
+                                category = technique.category,
+                                validUntil = System.currentTimeMillis() + 24 * 60 * 60 * 1000
+                            ),
+                            techniqueId = technique.id,
+                            techniqueName = technique.name,
+                            duration = technique.duration,
+                            shortDescription = technique.shortDescription,
+                            icon = technique.icon,
+                            iconColor = technique.iconColor
+                        )
+                    )
+                }
+        }
+        
+        return recommendations.sortedByDescending { it.recommendation.score }.take(3)
+    }
+    
+    fun getAllCategories(): List<TechniqueCategory> {
+        return techniquesData.values.map { it.category }.distinct().sortedBy { it.displayName }
     }
 }

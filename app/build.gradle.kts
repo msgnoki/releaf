@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    id("com.google.gms.google-services") version "4.4.0" apply false
+    id("kotlin-kapt")
 }
 
 android {
@@ -84,6 +86,34 @@ dependencies {
     
     // Box2D pour la physique de la balle anti-stress
     implementation("org.jbox2d:jbox2d-library:2.2.1.1")
+    
+    // Firebase pour la gestion des utilisateurs
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    
+    // Room pour la base de données locale
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    
+    // DataStore pour les préférences
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    
+    // ViewModel et LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    
+    // WorkManager pour les tâches background
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    
+    // Biometric authentication
+    implementation("androidx.biometric:biometric:1.1.0")
+    
+    // Image loading pour les photos de profil
+    implementation("io.coil-kt:coil-compose:2.5.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

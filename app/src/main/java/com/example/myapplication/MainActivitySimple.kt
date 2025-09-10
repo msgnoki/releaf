@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.example.myapplication.R
 import com.example.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivitySimple : ComponentActivity() {
@@ -37,7 +39,7 @@ fun SimpleApp() {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Brythee v0.2",
+                text = "Releaf v0.2",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
@@ -57,7 +59,7 @@ fun SimpleApp() {
                 onClick = { /* Test button */ },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Version simplifiée pour test")
+                Text(stringResource(R.string.simple_version_test))
             }
         }
     }

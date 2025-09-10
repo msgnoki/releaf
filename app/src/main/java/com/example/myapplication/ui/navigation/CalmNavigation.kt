@@ -15,7 +15,7 @@ import com.example.myapplication.ui.viewmodel.AuthViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.myapplication.BrytheeApplication
+import com.example.myapplication.ReleafApplication
 import com.example.myapplication.ui.viewmodel.AuthViewModelFactory
 
 @Composable
@@ -24,25 +24,33 @@ fun CalmNavigation(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val application = context.applicationContext as BrytheeApplication
+    val application = context.applicationContext as ReleafApplication
     val authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory(application.database))
     val authState by authViewModel.authState.collectAsState()
     val forgotPasswordMessage by authViewModel.forgotPasswordState.collectAsState()
     
-    // Navigate to home when user logs in
-    LaunchedEffect(authState.isLoggedIn) {
-        if (authState.isLoggedIn) {
-            navController.navigate("home") {
-                popUpTo("login") { inclusive = true }
+    var showSplash by remember { mutableStateOf(true) }
+    
+    if (showSplash) {
+        SplashScreen(
+            onSplashFinished = { showSplash = false },
+            modifier = modifier
+        )
+    } else {
+        // Navigate to home when user logs in - only after splash is finished
+        LaunchedEffect(authState.isLoggedIn) {
+            if (authState.isLoggedIn) {
+                navController.navigate("home") {
+                    popUpTo("login") { inclusive = true }
+                }
             }
         }
-    }
-    
-    NavHost(
-        navController = navController,
-        startDestination = if (authState.isLoggedIn) "home" else "login", // Mode auth activé
-        modifier = modifier
-    ) {
+        
+        NavHost(
+            navController = navController,
+            startDestination = if (authState.isLoggedIn) "home" else "login", // Mode auth activé
+            modifier = modifier
+        ) {
         
         // Authentication screens
         composable("login") {
@@ -242,6 +250,115 @@ fun CalmNavigation(
                         }
                     )
                 }
+                "breathing-stress-15" -> {
+                    StressBreathingExerciseScreen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "respiration-e12" -> {
+                    DiaphragmaticBreathingScreen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "autogenic-training" -> {
+                    AutogenicTrainingScreen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "breathing-box" -> {
+                    BoxBreathingScreen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "breathing-478" -> {
+                    Breathing478Screen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "body-scan-meditation" -> {
+                    BodyScanScreen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "mindful-breathing" -> {
+                    MindfulBreathingScreen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "loving-kindness-meditation" -> {
+                    LovingKindnessScreen(
+                        technique = technique,
+                        onBackClick = {
+                            navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.popBackStack("technique/${technique.id}", false)
+                        }
+                    )
+                }
+                "auto-hypnosis-autogenic" -> {
+                    AutoHypnosisAutogenicScreen(
+                        onBackClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+                "forest-immersion-nature" -> {
+                    ForestImmersionScreen(
+                        onBackClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+                "meditation-breath-awareness" -> {
+                    MeditationBreathAwarenessScreen(
+                        onBackClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
                 else -> {
                     ExerciseScreen(
                         technique = technique,
@@ -354,4 +471,5 @@ fun CalmNavigation(
             }
         }
     }
+    } // Closing brace for else block
 }

@@ -37,5 +37,8 @@ enum class TechniqueCategory(val displayName: String, val colorHex: String, val 
     VISUALISATION("Visualisation", "#CE93D8", "🌸"),
     STRESS_RELIEF("Anti-stress", "#FFAB91", "💆"),
     SOMMEIL("Sommeil", "#B39DDB", "😴"),
-    CRISE("Crise d'anxiété", "#EF9A9A", "🚨")
+    CRISE("Crise d'anxiété", "#EF9A9A", "🚨"),
+    PLEINE_CONSCIENCE("Pleine Conscience", "#FFCC02", "🧠"),
+    INTERACTIF("Interactif", "#FF9800", "🎮"),
+    MEDITATION("Méditation", "#9C27B0", "🕉️")
 }

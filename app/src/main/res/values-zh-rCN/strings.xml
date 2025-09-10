@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Basic -->
+    <string name="app_name">Releaf</string>
+    <string name="app_tagline">放松技巧和焦虑管理</string>
+    
+    <!-- Navigation -->
+    <string name="back">返回</string>
+    <string name="start_exercise">开始练习</string>
+    <string name="technique">技巧</string>
+    <string name="about">关于</string>
+    <string name="full_description">详细描述</string>
+    <string name="related_techniques">相关技巧</string>
+    
+    <!-- Exercise Controls -->
+    <string name="pause">暂停</string>
+    <string name="play">开始</string>
+    <string name="reset">重新开始</string>
+    <string name="prepare">准备好...</string>
+    <string name="in_progress">进行中</string>
+    <string name="paused">已暂停</string>
+    
+    <string name="resume">恢复</string>
+    <string name="stop">停止</string>
+    <string name="finish">完成</string>
+    <string name="continue_text">继续</string>
+    <string name="cancel">取消</string>
+    
+    <!-- Technique Tags -->
+    <string name="high_anxiety">高焦虑</string>
+    <string name="moderate_anxiety">中度焦虑</string>
+    <string name="short_time">短时间</string>
+    <string name="medium_time">中等时间</string>
+    <string name="long_time">长时间</string>
+    
+    <!-- Breathing Exercise -->
+    <string name="guided_breathing_title">引导呼吸</string>
+    <string name="guided_breathing_exercise_title">引导呼吸</string>
+    
+    <!-- Thought Labeling -->
+    <string name="thought_labeling_title">思维标记</string>
+    <string name="finish_exercise">完成练习</string>
+    <string name="thought_input_placeholder">例如：我担心明天的演讲会失败...</string>
+    <string name="label_this_thought">标记这个想法</string>
+    
+    <!-- Authentication -->
+    <string name="email_label">电子邮件地址</string>
+    <string name="send_reset_link">发送重置链接</string>
+    <string name="back_to_login">返回登录</string>
+    
+    <!-- Test/Debug -->
+    <string name="simple_version_test">测试用简化版本</string>
+    
+    <!-- Technique Names -->
+    <string name="technique_breathing_name">2分钟呼吸</string>
+    <string name="technique_grounding_name">5-4-3-2-1接地</string>
+    <string name="technique_guided_breathing_name">引导呼吸</string>
+    <string name="technique_progressive_muscle_name">渐进式肌肉放松</string>
+    <string name="technique_peaceful_visualization_name">宁静可视化</string>
+    <string name="technique_thought_labeling_name">思维标记</string>
+    <string name="technique_bubble_stress_name">气泡减压</string>
+    <string name="technique_sound_therapy_name">声音疗法</string>
+    <string name="technique_stress_ball_name">压力球</string>
+    
+    <!-- Technique Short Descriptions -->
+    <string name="technique_breathing_short_desc">简单的呼吸练习，在几分钟内平静您的神经系统并减少焦虑</string>
+    <string name="technique_grounding_short_desc">一种感官技术，通过专注于周围环境来摆脱焦虑情绪</string>
+    <string name="technique_guided_breathing_short_desc">逐步呼吸模式来减慢心率和减少紧张</string>
+    <string name="technique_progressive_muscle_short_desc">系统性地紧张和放松肌肉群来释放身体紧张和焦虑</string>
+    <string name="technique_peaceful_visualization_short_desc">引导您的心灵到一个宁静、安全的地方，创造内在宁静感</string>
+    <string name="technique_thought_labeling_short_desc">观察和分类您的焦虑思维，以减少其情绪影响</string>
+    <string name="technique_bubble_stress_short_desc">通过简单手势的互动游戏来释放压力</string>
+    <string name="technique_sound_therapy_short_desc">治疗声音和频率，平静心灵并促进深度放松</string>
+    <string name="technique_stress_ball_short_desc">与虚拟压力球的交互物理来释放紧张</string>
+    
+    <!-- Duration Labels -->
+    <string name="duration_2_3_min">2-3 分钟</string>
+    <string name="duration_3_5_min">3-5 分钟</string>
+    <string name="duration_5_10_min">5-10 分钟</string>
+    <string name="duration_10_15_min">10-15 分钟</string>
+    <string name="duration_15_20_min">15-20 分钟</string>
+    <string name="duration_20_30_min">20-30 分钟</string>
+</resources>

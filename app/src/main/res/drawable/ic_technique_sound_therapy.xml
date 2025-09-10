@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100"
+>
+    
+    <!-- Sound therapy icon - person with sound waves -->
+    <group android:translateX="20" android:translateY="20">
+        <!-- Head -->
+        <path android:fillColor="@android:color/transparent"
+              android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,20 C 30,20 22,20 22,20 C 22,12 38,12 38,20 Z"/>
+        
+        <!-- Body -->
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,28 L30,45"/>
+        
+        <!-- Arms -->
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M22,35 L38,35"/>
+        
+        <!-- Legs -->
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,45 L25,55"/>
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,45 L35,55"/>
+        
+        <!-- Sound waves -->
+        <path android:fillColor="@android:color/transparent"
+              android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M10,25 Q15,20 20,25 Q25,30 30,25 Q35,20 40,25 Q45,30 50,25"/>
+        <path android:fillColor="@android:color/transparent"
+              android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M10,15 Q15,10 20,15 Q25,20 30,15 Q35,10 40,15 Q45,20 50,15"/>
+    </group>
+</vector>

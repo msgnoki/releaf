@@ -36,9 +36,9 @@ fun BreathingExerciseScreen(
                 delay(1000)
                 timeRemaining--
                 
-                // Count cycles (each cycle is ~12 seconds: 4s inhale + 2s hold + 6s exhale)
-                if (timeRemaining % 12 == 0) {
-                    completedCycles = (180 - timeRemaining) / 12
+                // Count cycles (each cycle is 14 seconds: 4s inhale + 2s hold + 6s exhale + 2s pause)
+                if (timeRemaining % 14 == 0) {
+                    completedCycles = (180 - timeRemaining) / 14
                 }
             }
             

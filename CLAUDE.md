@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is "Brythee" - a native Android stress and anxiety management application ported from a Nuxt.js web version. It provides 9 relaxation techniques with interactive animations and exercises.
+This is "Releaf" - a native Android stress and anxiety management application ported from a Nuxt.js web version. It provides 9 relaxation techniques with interactive animations and exercises.
 
 ## Build and Development Commands
 

@@ -2,6 +2,7 @@ package com.example.myapplication.ui.screens
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -15,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -24,6 +27,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.data.Technique
+import com.example.myapplication.R
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.myapplication.data.model.TechniqueCategory
 import kotlinx.coroutines.delay
 
 // Phases de l'exercice
@@ -261,11 +267,15 @@ private fun StartScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(
-            Icons.Default.Person,
-            contentDescription = null,
-            modifier = Modifier.size(64.dp),
-            tint = MaterialTheme.colorScheme.primary
+        // Image de couverture pour la relaxation musculaire progressive  
+        Image(
+            painter = painterResource(id = R.drawable.progressive_relaxation_small),
+            contentDescription = "Relaxation musculaire progressive",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1.2f)
+                .clip(RoundedCornerShape(24.dp))
         )
         
         Spacer(modifier = Modifier.height(24.dp))

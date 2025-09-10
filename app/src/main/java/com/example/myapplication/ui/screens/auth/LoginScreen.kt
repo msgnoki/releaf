@@ -20,8 +20,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -62,7 +66,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(16.dp))
         
         Text(
-            text = "Brythee",
+            text = "Releaf",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface
@@ -218,6 +222,86 @@ fun LoginScreen(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             lineHeight = 16.sp
+        )
+    }
+}
+
+// Preview Functions
+@Preview(name = "Normal State", showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    MyApplicationTheme {
+        LoginScreen(
+            onLoginClick = { _, _ -> },
+            onRegisterClick = { },
+            onForgotPasswordClick = { }
+        )
+    }
+}
+
+@Preview(name = "Loading State", showBackground = true)
+@Composable
+fun LoginScreenLoadingPreview() {
+    MyApplicationTheme {
+        LoginScreen(
+            onLoginClick = { _, _ -> },
+            onRegisterClick = { },
+            onForgotPasswordClick = { },
+            isLoading = true
+        )
+    }
+}
+
+@Preview(name = "With Error", showBackground = true)
+@Composable
+fun LoginScreenWithErrorPreview() {
+    MyApplicationTheme {
+        LoginScreen(
+            onLoginClick = { _, _ -> },
+            onRegisterClick = { },
+            onForgotPasswordClick = { },
+            errorMessage = "Email ou mot de passe incorrect. Veuillez réessayer."
+        )
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun LoginScreenLightDarkPreview() {
+    MyApplicationTheme {
+        LoginScreen(
+            onLoginClick = { _, _ -> },
+            onRegisterClick = { },
+            onForgotPasswordClick = { }
+        )
+    }
+}
+
+@PreviewScreenSizes
+@Composable
+fun LoginScreenSizesPreview() {
+    MyApplicationTheme {
+        LoginScreen(
+            onLoginClick = { _, _ -> },
+            onRegisterClick = { },
+            onForgotPasswordClick = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Landscape",
+    showBackground = true,
+    widthDp = 640,
+    heightDp = 360
+)
+@Composable
+fun LoginScreenLandscapePreview() {
+    MyApplicationTheme {
+        LoginScreen(
+            onLoginClick = { _, _ -> },
+            onRegisterClick = { },
+            onForgotPasswordClick = { }
         )
     }
 }

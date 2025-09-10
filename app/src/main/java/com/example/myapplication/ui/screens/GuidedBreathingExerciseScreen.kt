@@ -18,6 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.myapplication.R
 import com.example.myapplication.data.Technique
 import kotlinx.coroutines.delay
 
@@ -87,7 +89,7 @@ fun GuidedBreathingExerciseScreen(
                 
                 // Update counters
                 currentCycle++
-                timeRemaining -= 13 // Total cycle time
+                timeRemaining -= 13 // Total cycle time (4+2+6+1 seconds)
                 
                 if (timeRemaining <= 0) break
             }
@@ -108,7 +110,7 @@ fun GuidedBreathingExerciseScreen(
     ) {
         // Top App Bar
         TopAppBar(
-            title = { Text("Respiration Guidée") },
+            title = { Text(stringResource(R.string.guided_breathing_exercise_title)) },
             navigationIcon = {
                 IconButton(onClick = onBackClick) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Retour")
@@ -317,7 +319,7 @@ fun GuidedBreathingExerciseScreen(
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Recommencer")
+                    Text(stringResource(R.string.reset))
                 }
             }
             

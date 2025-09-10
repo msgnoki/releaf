@@ -29,16 +29,16 @@ class AuthViewModel(
     val forgotPasswordState: StateFlow<String?> = _forgotPasswordState.asStateFlow()
     
     init {
-        // Vérifier si un utilisateur démo existe déjà
-        viewModelScope.launch {
-            val exists = authRepository.checkIfDemoUserExists()
-            _authState.value = _authState.value.copy(isLoggedIn = exists)
-            
-            // Observer les changements d'état de connexion
-            authRepository.isLoggedInFlow.collect { isLoggedIn ->
-                _authState.value = _authState.value.copy(isLoggedIn = isLoggedIn)
-            }
-        }
+        // Désactivé pour tests - forcer l'affichage de l'écran de connexion
+        // viewModelScope.launch {
+        //     val exists = authRepository.checkIfDemoUserExists()
+        //     _authState.value = _authState.value.copy(isLoggedIn = exists)
+        //     
+        //     // Observer les changements d'état de connexion
+        //     authRepository.isLoggedInFlow.collect { isLoggedIn ->
+        //         _authState.value = _authState.value.copy(isLoggedIn = isLoggedIn)
+        //     }
+        // }
     }
     
     fun signIn(email: String, password: String) {
@@ -69,12 +69,12 @@ class AuthViewModel(
             _authState.value = _authState.value.copy(isLoading = true, errorMessage = null)
             
             // En mode démo, rediriger vers la connexion démo
-            if (email == "demo@brythee.com") {
+            if (email == "demo@releaf.com") {
                 signIn(email, password)
             } else {
                 _authState.value = _authState.value.copy(
                     isLoading = false,
-                    errorMessage = "Inscription non disponible en mode démo. Utilisez demo@brythee.com"
+                    errorMessage = "Inscription non disponible en mode démo. Utilisez demo@releaf.com"
                 )
             }
         }

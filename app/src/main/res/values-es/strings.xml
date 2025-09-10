@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Basic -->
+    <string name="app_name">Releaf</string>
+    <string name="app_tagline">Técnicas de relajación y gestión de la ansiedad</string>
+    
+    <!-- Navigation -->
+    <string name="back">Atrás</string>
+    <string name="start_exercise">Iniciar Ejercicio</string>
+    <string name="technique">Técnica</string>
+    <string name="about">Acerca de</string>
+    <string name="full_description">Descripción Completa</string>
+    <string name="related_techniques">Técnicas Relacionadas</string>
+    
+    <!-- Exercise Controls -->
+    <string name="pause">Pausar</string>
+    <string name="play">Comenzar</string>
+    <string name="reset">Reiniciar</string>
+    <string name="prepare">Prepárate...</string>
+    <string name="in_progress">En Progreso</string>
+    <string name="paused">Pausado</string>
+    
+    <string name="resume">Reanudar</string>
+    <string name="stop">Detener</string>
+    <string name="finish">Finalizar</string>
+    <string name="continue_text">Continuar</string>
+    <string name="cancel">Cancelar</string>
+    
+    <!-- Technique Tags -->
+    <string name="high_anxiety">Ansiedad Alta</string>
+    <string name="moderate_anxiety">Ansiedad Moderada</string>
+    <string name="short_time">Tiempo Corto</string>
+    <string name="medium_time">Tiempo Medio</string>
+    <string name="long_time">Tiempo Largo</string>
+    
+    <!-- Breathing Exercise -->
+    <string name="guided_breathing_title">Respiración Guiada</string>
+    <string name="guided_breathing_exercise_title">Respiración Guiada</string>
+    
+    <!-- Thought Labeling -->
+    <string name="thought_labeling_title">Etiquetado de Pensamientos</string>
+    <string name="finish_exercise">Finalizar Ejercicio</string>
+    <string name="thought_input_placeholder">Ejemplo: \'Me preocupa fallar en mi presentación mañana...\'</string>
+    <string name="label_this_thought">Etiquetar este pensamiento</string>
+    
+    <!-- Authentication -->
+    <string name="email_label">Dirección de Correo</string>
+    <string name="send_reset_link">Enviar Enlace de Restablecimiento</string>
+    <string name="back_to_login">Volver al Inicio de Sesión</string>
+    
+    <!-- Test/Debug -->
+    <string name="simple_version_test">Versión simple para pruebas</string>
+    
+    <!-- Technique Names -->
+    <string name="technique_breathing_name">Respiración 2 Minutos</string>
+    <string name="technique_grounding_name">Anclaje 5-4-3-2-1</string>
+    <string name="technique_guided_breathing_name">Respiración Guiada</string>
+    <string name="technique_progressive_muscle_name">Relajación Muscular Progresiva</string>
+    <string name="technique_peaceful_visualization_name">Visualización Pacífica</string>
+    <string name="technique_thought_labeling_name">Etiquetado de Pensamientos</string>
+    <string name="technique_bubble_stress_name">Burbujas Anti-Estrés</string>
+    <string name="technique_sound_therapy_name">Terapia de Sonido</string>
+    <string name="technique_stress_ball_name">Pelota Anti-Estrés</string>
+    
+    <!-- Technique Short Descriptions -->
+    <string name="technique_breathing_short_desc">Ejercicio de respiración simple que calma tu sistema nervioso y reduce la ansiedad en minutos</string>
+    <string name="technique_grounding_short_desc">Una técnica sensorial que te saca de los pensamientos ansiosos enfocándote en lo que te rodea ahora</string>
+    <string name="technique_guided_breathing_short_desc">Patrones de respiración paso a paso para ralentizar tu ritmo cardíaco y reducir la tensión</string>
+    <string name="technique_progressive_muscle_short_desc">Tensa y relaja sistemáticamente los grupos musculares para liberar la tensión física y la ansiedad</string>
+    <string name="technique_peaceful_visualization_short_desc">Guía tu mente hacia un lugar tranquilo y seguro para crear una sensación de paz interior</string>
+    <string name="technique_thought_labeling_short_desc">Observa y categoriza tus pensamientos ansiosos para reducir su impacto emocional</string>
+    <string name="technique_bubble_stress_short_desc">Una interacción lúdica y relajante para liberar el estrés a través de gestos simples</string>
+    <string name="technique_sound_therapy_short_desc">Sonidos curativos y frecuencias que calman la mente y promueven la relajación profunda</string>
+    <string name="technique_stress_ball_short_desc">Física interactiva con una pelota anti-estrés virtual para liberar la tensión</string>
+    
+    <!-- Duration Labels -->
+    <string name="duration_2_3_min">2-3 min</string>
+    <string name="duration_3_5_min">3-5 min</string>
+    <string name="duration_5_10_min">5-10 min</string>
+    <string name="duration_10_15_min">10-15 min</string>
+    <string name="duration_15_20_min">15-20 min</string>
+    <string name="duration_20_30_min">20-30 min</string>
+</resources>

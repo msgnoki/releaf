@@ -26,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.myapplication.R
 import com.example.myapplication.data.Technique
 import kotlinx.coroutines.delay
 
@@ -209,7 +211,7 @@ fun ThoughtLabelingScreen(
     ) {
         // Top App Bar
         TopAppBar(
-            title = { Text("Étiquetage des pensées") },
+            title = { Text(stringResource(R.string.thought_labeling_title)) },
             navigationIcon = {
                 IconButton(onClick = onBackClick) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Retour")
@@ -306,7 +308,7 @@ fun ThoughtLabelingScreen(
                         ) {
                             Icon(Icons.Default.Check, contentDescription = null)
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Terminer l'exercice")
+                            Text(stringResource(R.string.finish_exercise))
                         }
                     }
                 }
@@ -593,7 +595,7 @@ private fun ThoughtInputSection(
         OutlinedTextField(
             value = thoughtInput,
             onValueChange = onThoughtInputChange,
-            placeholder = { Text("Exemple : 'Je m'inquiète de rater ma présentation demain...'") },
+            placeholder = { Text(stringResource(R.string.thought_input_placeholder)) },
             modifier = Modifier.fillMaxWidth(),
             minLines = 4,
             supportingText = { Text("${thoughtInput.length}/500") }
@@ -609,7 +611,7 @@ private fun ThoughtInputSection(
                 containerColor = Color(0xFF4F46E5)
             )
         ) {
-            Text("Étiqueter cette pensée")
+            Text(stringResource(R.string.label_this_thought))
             Spacer(modifier = Modifier.width(8.dp))
             Icon(Icons.Default.ArrowForward, contentDescription = null)
         }
@@ -751,7 +753,7 @@ private fun ActionButtonsSection(
         ) {
             Icon(Icons.Default.Close, contentDescription = null)
             Spacer(modifier = Modifier.width(4.dp))
-            Text("Annuler")
+            Text(stringResource(R.string.cancel))
         }
 
         Button(
@@ -764,7 +766,7 @@ private fun ActionButtonsSection(
         ) {
             Icon(Icons.Default.Check, contentDescription = null)
             Spacer(modifier = Modifier.width(4.dp))
-            Text("Continuer")
+            Text(stringResource(R.string.continue_text))
         }
     }
 }

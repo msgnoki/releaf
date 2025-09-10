@@ -19,11 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.data.Technique
 import com.example.myapplication.data.TechniquesRepository
 import com.example.myapplication.ui.components.TechniqueCard
+import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @Composable
 fun HomeScreen(
@@ -41,8 +45,15 @@ fun HomeScreen(
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         item {
-            // Hero Section
-            HeroSection()
+            // App Title Only
+            Text(
+                text = "Releaf",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
         
         item {
@@ -51,16 +62,6 @@ fun HomeScreen(
                 techniques = techniques,
                 onTechniqueClick = onTechniqueClick
             )
-        }
-        
-        item {
-            // About Section
-            AboutSection()
-        }
-        
-        item {
-            // Resources Section
-            ResourcesSection()
         }
     }
 }
@@ -71,7 +72,7 @@ private fun HeroSection() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Brythee",
+            text = "Releaf",
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
@@ -406,5 +407,65 @@ private fun ResourceCard(
                 }
             }
         }
+    }
+}
+
+// Preview Functions
+@Preview(name = "Light Mode", showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    MyApplicationTheme {
+        HomeScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun HomeScreenLightDarkPreview() {
+    MyApplicationTheme {
+        HomeScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@PreviewScreenSizes
+@Composable
+fun HomeScreenDifferentSizesPreview() {
+    MyApplicationTheme {
+        HomeScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Landscape",
+    showBackground = true,
+    widthDp = 640,
+    heightDp = 360
+)
+@Composable
+fun HomeScreenLandscapePreview() {
+    MyApplicationTheme {
+        HomeScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Large Font",
+    showBackground = true,
+    fontScale = 1.5f
+)
+@Composable
+fun HomeScreenLargeFontPreview() {
+    MyApplicationTheme {
+        HomeScreen(
+            onTechniqueClick = { }
+        )
     }
 }

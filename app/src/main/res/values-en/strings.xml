@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Basic -->
+    <string name="app_name">Releaf</string>
+    <string name="app_tagline">Relaxation techniques and anxiety management</string>
+    
+    <!-- Navigation -->
+    <string name="back">Back</string>
+    <string name="start_exercise">Start Exercise</string>
+    <string name="technique">Technique</string>
+    <string name="about">About</string>
+    <string name="full_description">Full Description</string>
+    <string name="related_techniques">Related Techniques</string>
+    
+    <!-- Exercise Controls -->
+    <string name="pause">Pause</string>
+    <string name="play">Start</string>
+    <string name="reset">Restart</string>
+    <string name="prepare">Get ready...</string>
+    <string name="in_progress">In Progress</string>
+    <string name="paused">Paused</string>
+    
+    <string name="resume">Resume</string>
+    <string name="stop">Stop</string>
+    <string name="finish">Finish</string>
+    <string name="continue_text">Continue</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Technique Tags -->
+    <string name="high_anxiety">High Anxiety</string>
+    <string name="moderate_anxiety">Moderate Anxiety</string>
+    <string name="short_time">Short Time</string>
+    <string name="medium_time">Medium Time</string>
+    <string name="long_time">Long Time</string>
+    
+    <!-- Breathing Exercise -->
+    <string name="guided_breathing_title">Guided Breathing</string>
+    <string name="guided_breathing_exercise_title">Guided Breathing</string>
+    
+    <!-- Thought Labeling -->
+    <string name="thought_labeling_title">Thought Labeling</string>
+    <string name="finish_exercise">Finish Exercise</string>
+    <string name="thought_input_placeholder">Example: \'I\'m worried about failing my presentation tomorrow...\'</string>
+    <string name="label_this_thought">Label this thought</string>
+    
+    <!-- Authentication -->
+    <string name="email_label">Email Address</string>
+    <string name="send_reset_link">Send Reset Link</string>
+    <string name="back_to_login">Back to Login</string>
+    
+    <!-- Test/Debug -->
+    <string name="simple_version_test">Simple version for testing</string>
+    
+    <!-- Technique Names -->
+    <string name="technique_breathing_name">2-Minute Breathing</string>
+    <string name="technique_grounding_name">5-4-3-2-1 Grounding</string>
+    <string name="technique_guided_breathing_name">Guided Breathing</string>
+    <string name="technique_progressive_muscle_name">Progressive Muscle Relaxation</string>
+    <string name="technique_peaceful_visualization_name">Peaceful Visualization</string>
+    <string name="technique_thought_labeling_name">Thought Labeling</string>
+    <string name="technique_bubble_stress_name">Stress Relief Bubbles</string>
+    <string name="technique_sound_therapy_name">Sound Therapy</string>
+    <string name="technique_stress_ball_name">Stress Ball</string>
+    
+    <!-- Technique Short Descriptions -->
+    <string name="technique_breathing_short_desc">Simple breathing exercise that calms your nervous system and reduces anxiety in minutes</string>
+    <string name="technique_grounding_short_desc">A sensory technique that pulls you out of anxious thoughts by focusing on what surrounds you now</string>
+    <string name="technique_guided_breathing_short_desc">Step-by-step breathing patterns to slow your heart rate and reduce tension</string>
+    <string name="technique_progressive_muscle_short_desc">Systematically tense and release muscle groups to release physical tension and anxiety</string>
+    <string name="technique_peaceful_visualization_short_desc">Guide your mind to a calm, safe place to create a sense of inner peace</string>
+    <string name="technique_thought_labeling_short_desc">Observe and categorize your anxious thoughts to reduce their emotional impact</string>
+    <string name="technique_bubble_stress_short_desc">A playful, soothing interaction to release stress through simple gestures</string>
+    <string name="technique_sound_therapy_short_desc">Healing sounds and frequencies that calm the mind and promote deep relaxation</string>
+    <string name="technique_stress_ball_short_desc">Interactive physics with a virtual stress ball to release tension</string>
+    
+    <!-- Duration Labels -->
+    <string name="duration_2_3_min">2-3 min</string>
+    <string name="duration_3_5_min">3-5 min</string>
+    <string name="duration_5_10_min">5-10 min</string>
+    <string name="duration_10_15_min">10-15 min</string>
+    <string name="duration_15_20_min">15-20 min</string>
+    <string name="duration_20_30_min">20-30 min</string>
+</resources>

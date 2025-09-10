@@ -16,6 +16,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.myapplication.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,7 +89,7 @@ fun ForgotPasswordScreen(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Adresse e-mail") },
+            label = { Text(stringResource(R.string.email_label)) },
             leadingIcon = {
                 Icon(Icons.Default.Email, contentDescription = null)
             },
@@ -170,7 +172,7 @@ fun ForgotPasswordScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
             }
-            Text("Envoyer le lien de réinitialisation")
+            Text(stringResource(R.string.send_reset_link))
         }
         
         Spacer(modifier = Modifier.height(24.dp))
@@ -180,7 +182,7 @@ fun ForgotPasswordScreen(
             onClick = onBackClick,
             enabled = !isLoading
         ) {
-            Text("Retour à la connexion")
+            Text(stringResource(R.string.back_to_login))
         }
         
         Spacer(modifier = Modifier.weight(1f))

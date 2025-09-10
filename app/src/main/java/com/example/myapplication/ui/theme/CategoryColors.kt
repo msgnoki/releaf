@@ -14,6 +14,9 @@ object CategoryColors {
             TechniqueCategory.STRESS_RELIEF -> if (isDarkTheme) StressReliefDark else StressReliefLight
             TechniqueCategory.SOMMEIL -> if (isDarkTheme) SommeilDark else SommeilLight
             TechniqueCategory.CRISE -> if (isDarkTheme) CriseDark else CriseLight
+            TechniqueCategory.PLEINE_CONSCIENCE -> if (isDarkTheme) Color(0xFFFFB74D) else Color(0xFFFFCC02)
+            TechniqueCategory.INTERACTIF -> if (isDarkTheme) Color(0xFFFF8A65) else Color(0xFFFF9800)
+            TechniqueCategory.MEDITATION -> if (isDarkTheme) Color(0xFFAB47BC) else Color(0xFF9C27B0)
         }
     }
     
@@ -34,6 +37,9 @@ object CategoryColors {
             TechniqueCategory.STRESS_RELIEF -> Color(0xFFFFAB91)
             TechniqueCategory.SOMMEIL -> Color(0xFFB39DDB)
             TechniqueCategory.CRISE -> Color(0xFFEF9A9A)
+            TechniqueCategory.PLEINE_CONSCIENCE -> Color(0xFFFFE082)
+            TechniqueCategory.INTERACTIF -> Color(0xFFFFCC80)
+            TechniqueCategory.MEDITATION -> Color(0xFFCE93D8)
         }
     }
     

@@ -27,7 +27,7 @@ class AuthRepository(
     fun getCurrentUserFlow(): Flow<Any?> = kotlinx.coroutines.flow.flowOf(null)
     
     suspend fun signInDemo(email: String, password: String): Result<Boolean> {
-        return if (email == "demo@brythee.com" && password == "demo123") {
+        return if (email == "demo@releaf.com" && password == "demo123") {
             try {
                 // Créer un utilisateur démo local
                 val demoUser = User(
@@ -46,10 +46,10 @@ class AuthRepository(
             } catch (e: Exception) {
                 Result.failure(Exception("Erreur lors de la création du compte démo: ${e.message}"))
             }
-        } else if (email == "demo@brythee.com") {
+        } else if (email == "demo@releaf.com") {
             Result.failure(Exception("Mot de passe démo incorrect. Utilisez 'demo123'"))
         } else {
-            Result.failure(Exception("Email non reconnu. Utilisez demo@brythee.com"))
+            Result.failure(Exception("Email non reconnu. Utilisez demo@releaf.com"))
         }
     }
     

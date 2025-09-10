@@ -18,7 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.myapplication.R
 import kotlinx.coroutines.delay
+import com.example.myapplication.utils.SystemTimer
 
 // États de l'exercice
 enum class ExerciseState {
@@ -115,7 +118,7 @@ fun GuidedBreathingAdvancedScreen(
                 // Timer de progression
                 val startTime = System.currentTimeMillis()
                 while (remainingTime > 0 && exerciseState == ExerciseState.STARTED) {
-                    delay(50)
+                    delay(16) // 60fps pour plus de fluidité
                     
                     val elapsed = System.currentTimeMillis() - startTime
                     val progress = (elapsed.toFloat() / pattern.duration) * 100f
@@ -151,7 +154,7 @@ fun GuidedBreathingAdvancedScreen(
     ) {
         // Top App Bar
         TopAppBar(
-            title = { Text("Respiration guidée") },
+            title = { Text(stringResource(R.string.guided_breathing_title)) },
             navigationIcon = {
                 IconButton(onClick = onBackClick) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Retour")
@@ -608,7 +611,7 @@ private fun ControlButtonsRow(
             ) {
                 Icon(Icons.Default.PlayArrow, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Reprendre")
+                Text(stringResource(R.string.resume))
             }
         } else {
             Button(
@@ -622,7 +625,7 @@ private fun ControlButtonsRow(
             ) {
                 Icon(Icons.Default.Pause, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Pause")
+                Text(stringResource(R.string.pause))
             }
         }
         
@@ -634,7 +637,7 @@ private fun ControlButtonsRow(
         ) {
             Icon(Icons.Default.Stop, contentDescription = null)
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Arrêter")
+            Text(stringResource(R.string.stop))
         }
     }
 }
@@ -744,7 +747,7 @@ private fun CompletionContent(
             ) {
                 Icon(Icons.Default.Refresh, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Recommencer")
+                Text(stringResource(R.string.reset))
             }
             
             Spacer(modifier = Modifier.height(12.dp))
@@ -756,7 +759,7 @@ private fun CompletionContent(
                     .height(56.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Text("Terminer")
+                Text(stringResource(R.string.finish))
             }
         }
     }

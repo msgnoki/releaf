@@ -13,6 +13,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.data.TechniquesRepository
 import com.example.myapplication.data.Technique
@@ -20,6 +23,7 @@ import com.example.myapplication.data.model.TechniqueCategory
 import com.example.myapplication.ui.components.SearchBar
 import com.example.myapplication.ui.components.CategoryChipRow
 import com.example.myapplication.ui.components.TechniqueCard
+import com.example.myapplication.ui.theme.MyApplicationTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -226,5 +230,75 @@ fun BrowseScreen(
                 }
             }
         }
+    }
+}
+
+// Preview Functions
+@Preview(name = "Normal State", showBackground = true)
+@Composable
+fun BrowseScreenPreview() {
+    MyApplicationTheme {
+        BrowseScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@Preview(name = "Grid View", showBackground = true)
+@Composable
+fun BrowseScreenGridViewPreview() {
+    MyApplicationTheme {
+        BrowseScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@PreviewLightDark
+@Composable
+fun BrowseScreenLightDarkPreview() {
+    MyApplicationTheme {
+        BrowseScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@PreviewScreenSizes
+@Composable
+fun BrowseScreenSizesPreview() {
+    MyApplicationTheme {
+        BrowseScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Landscape",
+    showBackground = true,
+    widthDp = 640,
+    heightDp = 360
+)
+@Composable
+fun BrowseScreenLandscapePreview() {
+    MyApplicationTheme {
+        BrowseScreen(
+            onTechniqueClick = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Large Font",
+    showBackground = true,
+    fontScale = 1.5f
+)
+@Composable
+fun BrowseScreenLargeFontPreview() {
+    MyApplicationTheme {
+        BrowseScreen(
+            onTechniqueClick = { }
+        )
     }
 }

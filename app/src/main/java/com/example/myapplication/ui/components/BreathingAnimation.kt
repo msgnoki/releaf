@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import com.example.myapplication.utils.SystemTimer
 
 @Composable
 fun BreathingAnimation(
@@ -37,9 +38,9 @@ fun BreathingAnimation(
         animationSpec = when (animationState) {
             BreathingPhase.PREPARE -> tween(1000)
             BreathingPhase.INHALE -> tween(4000, easing = LinearEasing)
-            BreathingPhase.HOLD_IN -> tween(100)
+            BreathingPhase.HOLD_IN -> tween(2000, easing = LinearEasing) // Synchronisé avec delay
             BreathingPhase.EXHALE -> tween(6000, easing = LinearEasing)
-            BreathingPhase.HOLD_OUT -> tween(100)
+            BreathingPhase.HOLD_OUT -> tween(2000, easing = LinearEasing) // Synchronisé avec delay
         },
         label = "breathing_animation" // Stable label for performance
     )
@@ -48,31 +49,31 @@ fun BreathingAnimation(
     LaunchedEffect(isActive) {
         if (isActive) {
             while (isActive) {
-                // Inhale phase
+                // Inhale phase - 4 seconds précises avec horloge système
                 animationState = BreathingPhase.INHALE
                 onPhaseChange("Inspirez lentement...")
-                delay(4000)
+                SystemTimer.preciseDelay(4000L)
                 
                 if (!isActive) break
                 
-                // Hold inhale
+                // Hold inhale - 2 seconds précises avec horloge système
                 animationState = BreathingPhase.HOLD_IN
                 onPhaseChange("Retenez...")
-                delay(2000)
+                SystemTimer.preciseDelay(2000L)
                 
                 if (!isActive) break
                 
-                // Exhale phase
+                // Exhale phase - 6 seconds précises avec horloge système
                 animationState = BreathingPhase.EXHALE
                 onPhaseChange("Expirez doucement...")
-                delay(6000)
+                SystemTimer.preciseDelay(6000L)
                 
                 if (!isActive) break
                 
-                // Hold exhale
+                // Hold exhale - 2 seconds précises avec horloge système
                 animationState = BreathingPhase.HOLD_OUT
                 onPhaseChange("Pause...")
-                delay(2000)
+                SystemTimer.preciseDelay(2000L)
                 
                 cycleCount++
             }

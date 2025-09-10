@@ -35,7 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "brythee_database"
+                    "releaf_database"
                 ).build()
                 INSTANCE = instance
                 instance

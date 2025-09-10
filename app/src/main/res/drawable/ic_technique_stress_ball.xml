@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100"
+>
+    
+    <!-- Stress ball icon - person with squeezable ball -->
+    <group android:translateX="20" android:translateY="20">
+        <!-- Head -->
+        <path android:fillColor="@android:color/transparent"
+              android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,20 C 30,20 22,20 22,20 C 22,12 38,12 38,20 Z"/>
+        
+        <!-- Body -->
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,28 L30,40"/>
+        
+        <!-- Arms -->
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M22,32 L38,32"/>
+        
+        <!-- Stress ball (circle in hands area) -->
+        <path android:fillColor="@android:color/transparent"
+              android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:pathData="M30,35 m-8,0 a8,8 0,1,1 16,0 a8,8 0,1,1 -16,0"/>
+        
+        <!-- Legs -->
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,40 L25,50"/>
+        <path android:strokeColor="@android:color/black"
+              android:strokeWidth="3"
+              android:strokeLineCap="round"
+              android:pathData="M30,40 L35,50"/>
+    </group>
+</vector>

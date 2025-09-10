@@ -10,6 +10,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +21,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.myapplication.data.model.UserProgress
 import com.example.myapplication.data.model.UserLevel
 import com.example.myapplication.data.model.Badge
@@ -104,6 +107,11 @@ fun ProfileScreen(
         // Weekly Progress
         item {
             WeeklyProgressCard(progress = mockProgress)
+        }
+        
+        // Aller plus loin Section
+        item {
+            GoFurtherSection()
         }
         
         // Settings Section
@@ -501,6 +509,186 @@ private fun SettingsItem(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
             )
+        }
+    }
+}
+
+@Composable
+private fun GoFurtherSection() {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Aller plus loin ?",
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            // About App Description
+            Text(
+                text = "Outils gratuits pour vous aider lorsque vous vous sentez anxieux. Ces exercices sont simples à suivre et ne nécessitent aucun équipement particulier, utilisez-les dès que votre esprit est trop agité ou lorsque vous avez besoin d'un moment de calme.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+                lineHeight = 20.sp,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+            
+            // About anxiety section
+            Text(
+                text = "Comprendre l'anxiété",
+                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold),
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(bottom = 12.dp)
+            )
+            
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // What happens card
+                InfoCardProfile(
+                    icon = Icons.Default.Warning,
+                    title = "Ce qui se passe pendant l'anxiété",
+                    description = "Votre corps active la réponse « combat ou fuite », augmentant le rythme cardiaque, accélérant la respiration et libérant des hormones de stress comme l'adrénaline.",
+                    backgroundColor = Color(0xFFFEF3C7),
+                    iconColor = Color(0xFFD97706),
+                    borderColor = Color(0xFFF59E0B)
+                )
+                
+                // How techniques help card
+                InfoCardProfile(
+                    icon = Icons.Default.CheckCircle,
+                    title = "Comment ces techniques aident",
+                    description = "Ces techniques fondées sur des données scientifiques activent votre système nerveux parasympathique, qui contrebalance naturellement la réponse au stress.",
+                    backgroundColor = Color(0xFFDCFCE7),
+                    iconColor = Color(0xFF16A34A),
+                    borderColor = Color(0xFF22C55E)
+                )
+                
+                // Tips card
+                TipsCardProfile()
+            }
+        }
+    }
+}
+
+@Composable
+private fun InfoCardProfile(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    title: String,
+    description: String,
+    backgroundColor: Color,
+    iconColor: Color,
+    borderColor: Color
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, borderColor, RoundedCornerShape(8.dp)),
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(containerColor = backgroundColor)
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 6.dp)
+            ) {
+                Icon(
+                    icon,
+                    contentDescription = null,
+                    tint = iconColor,
+                    modifier = Modifier.size(16.dp)
+                )
+                
+                Spacer(modifier = Modifier.width(6.dp))
+                
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            
+            Text(
+                text = description,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                lineHeight = 16.sp
+            )
+        }
+    }
+}
+
+@Composable
+private fun TipsCardProfile() {
+    val tips = listOf(
+        "Trouvez un endroit calme et confortable",
+        "Commencez par des techniques courtes (2-5 min)",
+        "Pratiquez régulièrement pour développer vos compétences",
+        "Soyez patient avec vous-même"
+    )
+    
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, Color(0xFF60A5FA), RoundedCornerShape(8.dp)),
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFDBEAFE))
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 8.dp)
+            ) {
+                Icon(
+                    Icons.Default.Lightbulb,
+                    contentDescription = null,
+                    tint = Color(0xFF2563EB),
+                    modifier = Modifier.size(16.dp)
+                )
+                
+                Spacer(modifier = Modifier.width(6.dp))
+                
+                Text(
+                    text = "Conseils pour de meilleurs résultats",
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            
+            Column {
+                tips.forEach { tip ->
+                    Row(
+                        modifier = Modifier.padding(vertical = 1.dp)
+                    ) {
+                        Text(
+                            text = "•",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(end = 6.dp, top = 1.dp)
+                        )
+                        
+                        Text(
+                            text = tip,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            lineHeight = 16.sp,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+            }
         }
     }
 }

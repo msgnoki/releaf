@@ -103,14 +103,6 @@ fun CalmNavigation(
             )
         }
         
-        composable("browse") {
-            BrowseScreen(
-                onTechniqueClick = { technique ->
-                    navController.navigate("technique/${technique.id}")
-                }
-            )
-        }
-        
         composable("sleep") {
             SleepScreen(
                 onTechniqueClick = { technique ->

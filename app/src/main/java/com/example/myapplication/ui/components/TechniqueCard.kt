@@ -10,6 +10,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.material3.*
 import com.example.myapplication.R
@@ -38,38 +40,15 @@ fun TechniqueCard(
 ) {
     // Get drawable resource for the technique
     val iconResId = remember(technique.id) { getDrawableForTechnique(technique.id) }
-    val iconColor = remember(technique.iconColor) { getColorForTechnique(technique.iconColor) }
     
-    // Design rond simple pour la relaxation musculaire progressive
-    if (technique.id == "progressive-muscle-relaxation") {
-        RoundTechniqueCard(
-            name = technique.name,
-            duration = technique.duration,
-            iconResId = iconResId,
-            onClick = onClick,
-            modifier = modifier
-        )
-    } else {
-        // Design standard pour les autres techniques
-        Card(
-            modifier = modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .clickable { onClick() },
-            shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
-        ) {
-            TechniqueCardContent(
-                name = technique.name,
-                duration = technique.duration,
-                iconResId = iconResId,
-                iconColor = iconColor
-            )
-        }
-    }
+    // Design rond uniforme pour toutes les techniques
+    RoundTechniqueCard(
+        name = technique.name,
+        duration = technique.duration,
+        iconResId = iconResId,
+        onClick = onClick,
+        modifier = modifier
+    )
 }
 
 @Composable
@@ -88,7 +67,7 @@ private fun RoundTechniqueCard(
             .clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Image ronde
+        // Image ronde - all assets are now PNG bitmaps
         Image(
             painter = painterResource(id = iconResId),
             contentDescription = name,
@@ -124,95 +103,32 @@ private fun RoundTechniqueCard(
     }
 }
 
-@Composable
-private fun TechniqueCardContent(
-    name: String,
-    duration: String,
-    iconResId: Int,
-    iconColor: Color
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        // Icon or Image based on technique
-        if (iconResId == R.drawable.progressive_relaxation_small) {
-            // Use Image for bitmap resources (no tinting)
-            Image(
-                painter = painterResource(id = iconResId),
-                contentDescription = name,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.size(48.dp)
-            )
-        } else {
-            // Use Icon for vector drawables (with tinting)
-            Icon(
-                painter = painterResource(id = iconResId),
-                contentDescription = name,
-                tint = iconColor,
-                modifier = Modifier.size(48.dp)
-            )
-        }
-        
-        Spacer(modifier = Modifier.height(12.dp))
-        
-        // Title
-        Text(
-            text = name,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurface,
-            textAlign = TextAlign.Center,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.fillMaxWidth()
-        )
-        
-        Spacer(modifier = Modifier.height(8.dp))
-        
-        // Duration
-        Text(
-            text = duration,
-            fontSize = 12.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
-        )
-        
-    }
-}
 
-// Map technique IDs to custom drawable resources
-// Uses our custom Vector Drawables for better visual identity
+// Map technique IDs to custom drawable resources from assets
+// Uses the 4 main category icons: respiration, relaxation, meditation, music
 private fun getDrawableForTechnique(techniqueId: String): Int {
-    println("DEBUG TechniqueCard: techniqueId = '$techniqueId'")
-    val result = when (techniqueId) {
-        "breathing" -> R.drawable.ic_technique_breathing
-        "grounding" -> R.drawable.ic_technique_grounding
-        "guided-breathing" -> R.drawable.ic_technique_breathing
-        "progressive-muscle-relaxation" -> R.drawable.progressive_relaxation_small
-        "peaceful-visualization" -> R.drawable.ic_technique_visualization
-        "thought-labeling" -> android.R.drawable.ic_menu_edit // Fallback to system icon
-        "stress-relief-bubbles" -> android.R.drawable.ic_menu_view // Fallback to system icon
-        "sound-therapy" -> R.drawable.ic_technique_sound_therapy
-        "stress-ball" -> R.drawable.ic_technique_stress_ball
-        "breathing-stress-15" -> R.drawable.ic_technique_breathing
-        "respiration-e12" -> R.drawable.ic_technique_breathing
-        "autogenic-training" -> R.drawable.ic_technique_meditation
-        "breathing-box" -> R.drawable.ic_technique_breathing_box
-        "breathing-478" -> R.drawable.ic_technique_breathing_478
-        "body-scan-meditation" -> R.drawable.ic_technique_meditation
-        "mindful-breathing" -> R.drawable.ic_technique_breathing
-        "loving-kindness-meditation" -> R.drawable.ic_technique_meditation
-        "auto-hypnosis-autogenic" -> R.drawable.ic_technique_meditation
-        "forest-immersion-nature" -> R.drawable.ic_technique_visualization
-        "meditation-breath-awareness" -> R.drawable.ic_technique_meditation
-        else -> R.drawable.ic_technique_breathing // Default fallback to breathing
+    return when (techniqueId) {
+        // Breathing/Respiration techniques
+        "breathing", "guided-breathing", "breathing-stress-15", "respiration-e12", 
+        "breathing-box", "breathing-478", "mindful-breathing", "meditation-breath-awareness" -> 
+            R.drawable.respiration
+            
+        // Relaxation techniques
+        "progressive-muscle-relaxation", "autogenic-training", "stress-ball", "grounding",
+        "stress-relief-bubbles" -> 
+            R.drawable.relaxation
+            
+        // Meditation and visualization techniques  
+        "body-scan-meditation", "loving-kindness-meditation", "auto-hypnosis-autogenic",
+        "peaceful-visualization", "forest-immersion-nature", "thought-labeling" ->
+            R.drawable.meditayion
+            
+        // Sound therapy
+        "sound-therapy" -> 
+            R.drawable.music
+            
+        else -> R.drawable.respiration // Default fallback to respiration
     }
-    println("DEBUG TechniqueCard: result drawable = $result")
-    return result
 }
 
 // Pure function for color mapping

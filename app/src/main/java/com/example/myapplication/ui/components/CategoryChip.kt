@@ -67,13 +67,6 @@ fun CategoryChip(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = category.emoji,
-                style = MaterialTheme.typography.bodyMedium
-            )
-            
-            Spacer(modifier = Modifier.width(8.dp))
-            
-            Text(
                 text = category.displayName,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal
@@ -134,24 +127,12 @@ fun CompactCategoryChip(
         contentColor = CategoryColors.getCategoryColor(category, false),
         shape = RoundedCornerShape(12.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = category.emoji,
-                style = MaterialTheme.typography.bodySmall
-            )
-            
-            Spacer(modifier = Modifier.width(4.dp))
-            
-            Text(
-                text = category.displayName,
-                style = MaterialTheme.typography.labelSmall,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
+        Text(
+            text = category.displayName,
+            style = MaterialTheme.typography.labelSmall,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+        )
     }
 }

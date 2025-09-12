@@ -3,16 +3,16 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
-    id("com.google.gms.google-services") version "4.4.0" apply false
+    id("com.google.gms.google-services") version "4.4.0"
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.releaf.app"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.releaf.app"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

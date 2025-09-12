@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- App Basic -->
     <string name="app_name">Releaf</string>
     <string name="app_tagline">Técnicas de relajación y gestión de la ansiedad</string>
@@ -45,8 +45,29 @@
     
     <!-- Authentication -->
     <string name="email_label">Dirección de Correo</string>
+    <string name="password_label">Contraseña</string>
+    <string name="confirm_password_label">Confirmar Contraseña</string>
+    <string name="display_name_label">Nombre para Mostrar</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="register_title">Crear Cuenta</string>
+    <string name="forgot_password_title">Contraseña Olvidada</string>
+    <string name="forgot_password_text">Introduce tu dirección de correo y te enviaremos un enlace para restablecer tu contraseña.</string>
     <string name="send_reset_link">Enviar Enlace de Restablecimiento</string>
     <string name="back_to_login">Volver al Inicio de Sesión</string>
+    <string name="sign_in_button">Iniciar Sesión</string>
+    <string name="create_account_button">Crear Cuenta</string>
+    <string name="forgot_password_link">¿Contraseña olvidada?</string>
+    <string name="or_divider">o</string>
+    <string name="app_companion_text">Tu compañero de relajación</string>
+    <string name="password_min_length_error">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="passwords_dont_match_error">Las contraseñas no coinciden</string>
+    <string name="show_password">Mostrar contraseña</string>
+    <string name="hide_password">Ocultar contraseña</string>
+    <string name="anxiety_level_title">Nivel de ansiedad habitual</string>
+    <string name="anxiety_level_description">Esto nos ayudará a personalizar tu experiencia</string>
+    <string name="terms_privacy_text">Al continuar, aceptas nuestros términos de uso y política de privacidad</string>
+    <string name="help_title">Ayuda</string>
+    <string name="help_text">Si no recibes el correo, revisa tu carpeta de spam o contacta con soporte.</string>
     
     <!-- Test/Debug -->
     <string name="simple_version_test">Versión simple para pruebas</string>
@@ -61,6 +82,17 @@
     <string name="technique_bubble_stress_name">Burbujas Anti-Estrés</string>
     <string name="technique_sound_therapy_name">Terapia de Sonido</string>
     <string name="technique_stress_ball_name">Pelota Anti-Estrés</string>
+    <string name="technique_breathing_stress_15_name">Respiración anti-estrés (1-5)</string>
+    <string name="technique_respiration_e12_name">Respiración diafragmática</string>
+    <string name="technique_autogenic_training_name">Entrenamiento Autógeno</string>
+    <string name="technique_breathing_box_name">Respiración Cuadrada</string>
+    <string name="technique_breathing_478_name">Respiración 4-7-8</string>
+    <string name="technique_body_scan_meditation_name">Escaneo Corporal</string>
+    <string name="technique_mindful_breathing_name">Respiración Consciente</string>
+    <string name="technique_loving_kindness_meditation_name">Meditación de Bondad Amorosa</string>
+    <string name="technique_auto_hypnosis_autogenic_name">Auto-hipnosis Autógena</string>
+    <string name="technique_forest_immersion_nature_name">Inmersión en el Bosque</string>
+    <string name="technique_meditation_breath_awareness_name">Meditación de Conciencia Respiratoria</string>
     
     <!-- Technique Short Descriptions -->
     <string name="technique_breathing_short_desc">Ejercicio de respiración simple que calma tu sistema nervioso y reduce la ansiedad en minutos</string>
@@ -72,7 +104,66 @@
     <string name="technique_bubble_stress_short_desc">Una interacción lúdica y relajante para liberar el estrés a través de gestos simples</string>
     <string name="technique_sound_therapy_short_desc">Sonidos curativos y frecuencias que calman la mente y promueven la relajación profunda</string>
     <string name="technique_stress_ball_short_desc">Física interactiva con una pelota anti-estrés virtual para liberar la tensión</string>
+    <string name="technique_breathing_stress_15_short_desc">Técnica de respiración contando 1-5 para recuperar la calma durante picos de estrés</string>
+    <string name="technique_respiration_e12_short_desc">Técnica de respiración profunda con el diafragma para calmar la mente y prevenir la hiperventilación</string>
+    <string name="technique_autogenic_training_short_desc">Método de relajación profunda usando autosugerencias para crear sensaciones de pesadez y calor</string>
+    <string name="technique_breathing_box_short_desc">Técnica de respiración 4-4-4-4 utilizada por fuerzas especiales para recuperar rápidamente la calma</string>
+    <string name="technique_breathing_478_short_desc">Técnica del Dr. Weil para conciliar el sueño: inhalar 4s, retener 7s, exhalar 8s</string>
+    <string name="technique_body_scan_meditation_short_desc">Meditación de atención plena que recorre el cuerpo para desarrollar conciencia corporal y liberar tensiones</string>
+    <string name="technique_mindful_breathing_short_desc">Meditación mindfulness que desarrolla presencia observando simplemente la respiración natural</string>
+    <string name="technique_loving_kindness_meditation_short_desc">Meditación Metta que cultiva la compasión hacia uno mismo y otros para reducir el estrés emocional</string>
+    <string name="technique_auto_hypnosis_autogenic_short_desc">Técnica de inducción auto-hipnótica combinando entrenamiento autógeno y sugerencias para relajación profunda</string>
+    <string name="technique_forest_immersion_nature_short_desc">Escape mental inmersivo en un entorno forestal con sonidos 3D y guía sensorial</string>
+    <string name="technique_meditation_breath_awareness_short_desc">Meditación fundamental de atención plena usando la respiración natural como ancla para desarrollar atención presente</string>
     
+    <!-- Technique Full Descriptions -->
+    <string name="technique_breathing_desc">Cuando llega la ansiedad, tu respiración se vuelve superficial y rápida. Esta técnica te enseña patrones de respiración simples que activan la respuesta natural de relajación de tu cuerpo.</string>
+    <string name="technique_grounding_desc">La técnica de anclaje usa tus cinco sentidos para anclarate en el momento presente. Al notar 5 cosas que puedes ver, 4 que puedes tocar, 3 que puedes oír, 2 que puedes oler y 1 que puedes gustar, interrumpe el ciclo de pensamientos ansiosos.</string>
+    <string name="technique_guided_breathing_desc">Sigue ejercicios de respiración estructurados diseñados para regular tu sistema nervioso autónomo. Estas guías visuales te ayudan a mantener un timing y ritmo apropiados.</string>
+    <string name="technique_progressive_muscle_desc">La ansiedad a menudo crea tensión física que tal vez ni siquiera notes. Esta técnica te enseña a contraer y luego relajar diferentes grupos musculares.</string>
+    <string name="technique_peaceful_visualization_desc">Tu mente tiene el poder de crear experiencias vívidas y calmantes a través de la visualización. Esta técnica te guía a través de escenarios pacíficos.</string>
+    <string name="technique_thought_labeling_desc">Los pensamientos ansiosos pueden sentirse abrumadores cuando los tratas como verdades absolutas. Esta práctica de atención plena te enseña a observar tus pensamientos con curiosidad.</string>
+    <string name="technique_bubble_stress_desc">A veces la mejor manera de manejar la ansiedad es através de distracción suave y lúdica. Esta actividad interactiva simple ayuda a redirigir la energía nerviosa.</string>
+    <string name="technique_sound_therapy_desc">Frecuencias sonoras específicas han mostrado su capacidad de influir en las ondas cerebrales y promover la relajación.</string>
+    <string name="technique_stress_ball_desc">A veces la tensión física necesita liberación física. Esta pelota anti-estrés virtual ofrece una experiencia táctil satisfactoria.</string>
+    <string name="technique_breathing_stress_15_desc">Respirar profundamente contando del 1 al 5 activa el sistema parasimpático, promoviendo la relajación. El conteo regular actúa como metrónomo interno, reduciendo la carga mental y facilitando la autorregulación del ritmo cardíaco y respiratorio.</string>
+    <string name="technique_respiration_e12_desc">La respiración diafragmática involucra principalmente el diafragma; es naturalmente más lenta y profunda, promueve la activación del sistema nervioso parasimpático y disminuye el riesgo de hiperventilación. Particularmente indicada para personas ansiosas.</string>
+    <string name="technique_autogenic_training_desc">El entrenamiento autógeno es una técnica de auto-hipnosis basada en autosugerencias. Al repetir mentalmente fórmulas como \"Mi brazo derecho está pesado\", activas el sistema parasimpático e induces relajación profunda del cuerpo y la mente.</string>
+    <string name="technique_breathing_box_desc">La respiración cuadrada consiste en inhalar 4 segundos, retener 4 segundos, exhalar 4 segundos y retener 4 segundos. Esta técnica militar activa la respuesta de relajación, ralentiza el ritmo cardíaco y mejora la concentración.</string>
+    <string name="technique_breathing_478_desc">El método 4-7-8 consiste en inhalar 4 segundos, retener la respiración 7 segundos, luego exhalar 8 segundos. Este ritmo ralentiza la respiración, estimula el sistema parasimpático y favorece el sueño natural.</string>
+    <string name="technique_body_scan_meditation_desc">El escaneo corporal consiste en enfocar la atención sucesivamente en cada región del cuerpo. Esta práctica de atención plena ayuda a liberar tensión, calmar la mente y mejorar la calidad del sueño.</string>
+    <string name="technique_mindful_breathing_desc">La respiración consciente te invita a observar la respiración tal como es, sin tratar de cambiarla. Esta práctica de atención plena desarrolla presencia, reduce rumores y mejora la concentración.</string>
+    <string name="technique_loving_kindness_meditation_desc">La meditación de bondad amorosa consiste en repetir deseos positivos comenzando contigo mismo luego expandiendo a seres queridos y todos los seres. Esta práctica promueve emociones positivas y reduce la rumiación.</string>
+    <string name="technique_auto_hypnosis_autogenic_desc">La auto-hipnosis autógena combina técnicas de entrenamiento autógeno e inducción hipnótica para crear un estado de relajación profunda y controlada. Esta técnica avanzada te guía a través de sensaciones de pesadez, calor y regulación cardíaca.</string>
+    <string name="technique_forest_immersion_nature_desc">Esta técnica de inmersión te transporta mentalmente a un bosque relajante a través de una experiencia multisensorial. Descubrirás un sendero forestal, un claro bañado de luz y un arroyo cristalino para una reconexión completa con la naturaleza.</string>
+    <string name="technique_meditation_breath_awareness_desc">Esta meditación fundamental te enseña a prestar atención a tu respiración natural para cultivar la atención plena. Al simplemente observar las sensaciones de la respiración, desarrollas tu capacidad de atención y presencia en el momento presente.</string>
+
+    <!-- Breathing Animation -->
+    <string name="breathing_ready">¿Listo?</string>
+    <string name="breathing_inhale">Inhalar</string>
+    <string name="breathing_hold_in">Mantener</string>
+    <string name="breathing_exhale">Exhalar</string>
+    <string name="breathing_hold_out">Pausa</string>
+    <string name="breathing_inhale_slowly">Inhala lentamente...</string>
+    <string name="breathing_hold">Mantén...</string>
+    <string name="breathing_exhale_gently">Exhala suavemente...</string>
+    <string name="breathing_pause">Pausa...</string>
+    <string name="breathing_start_ready">Presiona comenzar cuando estés listo</string>
+    
+    <!-- Components -->
+    <string name="cycle_count">Ciclo <xliff:g id="count" example="3">%1$d</xliff:g></string>
+    <string name="daily_routine">Rutina Diaria</string>
+    <string name="completed">Completado</string>
+    <string name="progress_label">Progreso</string>
+    <string name="progress_percentage"><xliff:g id="percentage" example="75">%1$d</xliff:g>%%</string>
+    <string name="minutes_format"><xliff:g id="minutes" example="15">%1$d</xliff:g> min</string>
+    <string name="exercise_completed">¡Ejercicio completado!</string>
+    <string name="start_button">Comenzar</string>
+    
+    <!-- App Info -->
+    <string name="app_version">Releaf v0.2</string>
+    <string name="app_description">Aplicación de relajación y meditación</string>
+
     <!-- Duration Labels -->
     <string name="duration_2_3_min">2-3 min</string>
     <string name="duration_3_5_min">3-5 min</string>

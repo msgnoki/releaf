@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- App Basic -->
     <string name="app_name">Releaf</string>
     <string name="app_tagline">放松技巧和焦虑管理</string>
@@ -45,8 +45,29 @@
     
     <!-- Authentication -->
     <string name="email_label">电子邮件地址</string>
+    <string name="password_label">密码</string>
+    <string name="confirm_password_label">确认密码</string>
+    <string name="display_name_label">显示名称</string>
+    <string name="login_title">登录</string>
+    <string name="register_title">创建账户</string>
+    <string name="forgot_password_title">忘记密码</string>
+    <string name="forgot_password_text">输入您的电子邮件地址，我们将发送重置链接给您。</string>
     <string name="send_reset_link">发送重置链接</string>
     <string name="back_to_login">返回登录</string>
+    <string name="sign_in_button">登录</string>
+    <string name="create_account_button">创建账户</string>
+    <string name="forgot_password_link">忘记密码？</string>
+    <string name="or_divider">或</string>
+    <string name="app_companion_text">您的放松伴侣</string>
+    <string name="password_min_length_error">密码至少需要6个字符</string>
+    <string name="passwords_dont_match_error">密码不匹配</string>
+    <string name="show_password">显示密码</string>
+    <string name="hide_password">隐藏密码</string>
+    <string name="anxiety_level_title">常见焦虑水平</string>
+    <string name="anxiety_level_description">这将帮助我们个性化您的体验</string>
+    <string name="terms_privacy_text">继续即表示您接受我们的使用条款和隐私政策</string>
+    <string name="help_title">帮助</string>
+    <string name="help_text">如果您没有收到邮件，请检查垃圾邮件文件夹或联系支持。</string>
     
     <!-- Test/Debug -->
     <string name="simple_version_test">测试用简化版本</string>
@@ -73,6 +94,32 @@
     <string name="technique_sound_therapy_short_desc">治疗声音和频率，平静心灵并促进深度放松</string>
     <string name="technique_stress_ball_short_desc">与虚拟压力球的交互物理来释放紧张</string>
     
+    <!-- Breathing Animation -->
+    <string name="breathing_ready">准备好了吗？</string>
+    <string name="breathing_inhale">吸气</string>
+    <string name="breathing_hold_in">保持</string>
+    <string name="breathing_exhale">呼气</string>
+    <string name="breathing_hold_out">暂停</string>
+    <string name="breathing_inhale_slowly">慢慢吸气...</string>
+    <string name="breathing_hold">保持...</string>
+    <string name="breathing_exhale_gently">轻柔呼气...</string>
+    <string name="breathing_pause">暂停...</string>
+    <string name="breathing_start_ready">准备好时请按开始</string>
+    
+    <!-- Components -->
+    <string name="cycle_count">循环 <xliff:g id="count" example="3">%1$d</xliff:g></string>
+    <string name="daily_routine">每日例程</string>
+    <string name="completed">已完成</string>
+    <string name="progress_label">进度</string>
+    <string name="progress_percentage"><xliff:g id="percentage" example="75">%1$d</xliff:g>%%</string>
+    <string name="minutes_format"><xliff:g id="minutes" example="15">%1$d</xliff:g> 分钟</string>
+    <string name="exercise_completed">练习完成！</string>
+    <string name="start_button">开始</string>
+    
+    <!-- App Info -->
+    <string name="app_version">Releaf v0.2</string>
+    <string name="app_description">放松和冥想应用</string>
+
     <!-- Duration Labels -->
     <string name="duration_2_3_min">2-3 分钟</string>
     <string name="duration_3_5_min">3-5 分钟</string>

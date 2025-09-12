@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- App Basic -->
     <string name="app_name">Releaf</string>
     <string name="app_tagline">Relaxation techniques and anxiety management</string>
@@ -45,8 +45,29 @@
     
     <!-- Authentication -->
     <string name="email_label">Email Address</string>
+    <string name="password_label">Password</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="display_name_label">Display Name</string>
+    <string name="login_title">Sign In</string>
+    <string name="register_title">Create Account</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_text">Enter your email address and we\'ll send you a link to reset your password.</string>
     <string name="send_reset_link">Send Reset Link</string>
     <string name="back_to_login">Back to Login</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="create_account_button">Create Account</string>
+    <string name="forgot_password_link">Forgot Password?</string>
+    <string name="or_divider">or</string>
+    <string name="app_companion_text">Your relaxation companion</string>
+    <string name="password_min_length_error">Password must be at least 6 characters</string>
+    <string name="passwords_dont_match_error">Passwords do not match</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="anxiety_level_title">Usual anxiety level</string>
+    <string name="anxiety_level_description">This will help us personalize your experience</string>
+    <string name="terms_privacy_text">By continuing, you accept our terms of use and privacy policy</string>
+    <string name="help_title">Help</string>
+    <string name="help_text">If you don\'t receive the email, check your spam folder or contact support.</string>
     
     <!-- Test/Debug -->
     <string name="simple_version_test">Simple version for testing</string>
@@ -61,6 +82,17 @@
     <string name="technique_bubble_stress_name">Stress Relief Bubbles</string>
     <string name="technique_sound_therapy_name">Sound Therapy</string>
     <string name="technique_stress_ball_name">Stress Ball</string>
+    <string name="technique_breathing_stress_15_name">1-5 Stress Breathing</string>
+    <string name="technique_respiration_e12_name">Diaphragmatic Breathing</string>
+    <string name="technique_autogenic_training_name">Autogenic Training</string>
+    <string name="technique_breathing_box_name">Box Breathing</string>
+    <string name="technique_breathing_478_name">4-7-8 Breathing</string>
+    <string name="technique_body_scan_meditation_name">Body Scan</string>
+    <string name="technique_mindful_breathing_name">Mindful Breathing</string>
+    <string name="technique_loving_kindness_meditation_name">Loving Kindness Meditation</string>
+    <string name="technique_auto_hypnosis_autogenic_name">Autogenic Self-Hypnosis</string>
+    <string name="technique_forest_immersion_nature_name">Forest Immersion</string>
+    <string name="technique_meditation_breath_awareness_name">Breath Awareness Meditation</string>
     
     <!-- Technique Short Descriptions -->
     <string name="technique_breathing_short_desc">Simple breathing exercise that calms your nervous system and reduces anxiety in minutes</string>
@@ -72,7 +104,66 @@
     <string name="technique_bubble_stress_short_desc">A playful, soothing interaction to release stress through simple gestures</string>
     <string name="technique_sound_therapy_short_desc">Healing sounds and frequencies that calm the mind and promote deep relaxation</string>
     <string name="technique_stress_ball_short_desc">Interactive physics with a virtual stress ball to release tension</string>
+    <string name="technique_breathing_stress_15_short_desc">Counting 1-5 breathing technique to regain calm during stress surges</string>
+    <string name="technique_respiration_e12_short_desc">Deep diaphragmatic breathing technique to calm the mind and prevent hyperventilation</string>
+    <string name="technique_autogenic_training_short_desc">Deep relaxation method using self-suggestion to create sensations of heaviness and warmth</string>
+    <string name="technique_breathing_box_short_desc">4-4-4-4 breathing technique used by special forces to quickly regain calm</string>
+    <string name="technique_breathing_478_short_desc">Dr. Weil\'s technique for falling asleep: inhale 4s, hold 7s, exhale 8s</string>
+    <string name="technique_body_scan_meditation_short_desc">Mindfulness meditation that scans the body to develop body awareness and release tension</string>
+    <string name="technique_mindful_breathing_short_desc">Mindfulness meditation that develops presence by simply observing natural breathing</string>
+    <string name="technique_loving_kindness_meditation_short_desc">Metta meditation that cultivates compassion toward oneself and others to reduce emotional stress</string>
+    <string name="technique_auto_hypnosis_autogenic_short_desc">Self-hypnotic induction technique combining autogenic training and suggestions for deep relaxation</string>
+    <string name="technique_forest_immersion_nature_short_desc">Immersive mental escape into a forest environment with 3D sounds and sensory guidance</string>
+    <string name="technique_meditation_breath_awareness_short_desc">Fundamental mindfulness meditation using natural breathing as an anchor to develop present attention</string>
     
+    <!-- Technique Full Descriptions -->
+    <string name="technique_breathing_desc">Simple technique to calm your nervous system</string>
+    <string name="technique_grounding_desc">The grounding technique uses your five senses to anchor you in the present moment. By noticing 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste, it interrupts the cycle of anxious thoughts.</string>
+    <string name="technique_guided_breathing_desc">Follow structured breathing exercises designed to regulate your autonomic nervous system. These visual guides help you maintain appropriate timing and rhythm.</string>
+    <string name="technique_progressive_muscle_desc">Anxiety often creates physical tension that you may not even notice. This technique teaches you to contract and then release different muscle groups.</string>
+    <string name="technique_peaceful_visualization_desc">Your mind has the power to create vivid, calming experiences through visualization. This technique guides you through peaceful scenarios.</string>
+    <string name="technique_thought_labeling_desc">Anxious thoughts can feel overwhelming when you treat them as absolute truths. This mindfulness practice teaches you to observe your thoughts with curiosity.</string>
+    <string name="technique_bubble_stress_desc">Sometimes the best way to handle anxiety is through gentle, playful distraction. This simple interactive activity helps redirect nervous energy.</string>
+    <string name="technique_sound_therapy_desc">Specific sound frequencies have shown their ability to influence brain waves and promote relaxation.</string>
+    <string name="technique_stress_ball_desc">Sometimes physical tension needs physical release. This virtual stress ball offers a satisfying tactile experience.</string>
+    <string name="technique_breathing_stress_15_desc">Breathing deeply while counting from 1 to 5 activates the parasympathetic system, promoting relaxation. Regular counting acts as an internal metronome, reducing mental load and facilitating self-regulation of heart rate and breathing.</string>
+    <string name="technique_respiration_e12_desc">Deep diaphragmatic breathing to calm the mind</string>
+    <string name="technique_autogenic_training_desc">Autogenic training is a self-hypnosis technique based on auto-suggestions. By mentally repeating formulas like \\"My right arm is heavy,\\" you activate the parasympathetic system and induce deep relaxation of body and mind.</string>
+    <string name="technique_breathing_box_desc">Box breathing consists of inhaling 4 seconds, holding 4 seconds, exhaling 4 seconds, and holding 4 seconds. This military technique activates the relaxation response, slows heart rate, and improves concentration.</string>
+    <string name="technique_breathing_478_desc">The 4-7-8 method consists of inhaling 4 seconds, holding breath 7 seconds, then exhaling 8 seconds. This rhythm slows breathing, stimulates the parasympathetic system, and promotes natural sleep.</string>
+    <string name="technique_body_scan_meditation_desc">Body scan involves focusing attention successively on each region of the body. This mindfulness practice helps release tension, calm the mind, and improve sleep quality.</string>
+    <string name="technique_mindful_breathing_desc">Mindful breathing invites you to observe breath as it is, without trying to change it. This mindfulness practice develops presence, reduces rumination, and improves concentration.</string>
+    <string name="technique_loving_kindness_meditation_desc">Loving-kindness meditation involves repeating positive wishes starting with yourself then expanding to loved ones and all beings. This practice promotes positive emotions and reduces rumination.</string>
+    <string name="technique_auto_hypnosis_autogenic_desc">Autogenic self-hypnosis combines autogenic training and hypnotic induction techniques to create a state of deep and controlled relaxation. This advanced technique guides you through sensations of heaviness, warmth, and cardiac regulation.</string>
+    <string name="technique_forest_immersion_nature_desc">Mental immersion in a forest environment</string>
+    <string name="technique_meditation_breath_awareness_desc">This fundamental meditation teaches you to pay attention to your natural breathing to cultivate mindfulness. By simply observing breathing sensations, you develop your capacity for attention and presence in the present moment.</string>
+
+    <!-- Breathing Animation -->
+    <string name="breathing_ready">Ready?</string>
+    <string name="breathing_inhale">Inhale</string>
+    <string name="breathing_hold_in">Hold</string>
+    <string name="breathing_exhale">Exhale</string>
+    <string name="breathing_hold_out">Pause</string>
+    <string name="breathing_inhale_slowly">Inhale slowly...</string>
+    <string name="breathing_hold">Hold...</string>
+    <string name="breathing_exhale_gently">Exhale gently...</string>
+    <string name="breathing_pause">Pause...</string>
+    <string name="breathing_start_ready">Press start when you are ready</string>
+    
+    <!-- Components -->
+    <string name="cycle_count">Cycle <xliff:g id="count" example="3">%1$d</xliff:g></string>
+    <string name="daily_routine">Daily Routine</string>
+    <string name="completed">Completed</string>
+    <string name="progress_label">Progress</string>
+    <string name="progress_percentage"><xliff:g id="percentage" example="75">%1$d</xliff:g>%%</string>
+    <string name="minutes_format"><xliff:g id="minutes" example="15">%1$d</xliff:g> min</string>
+    <string name="exercise_completed">Exercise completed!</string>
+    <string name="start_button">Start</string>
+    
+    <!-- App Info -->
+    <string name="app_version">Releaf v0.2</string>
+    <string name="app_description">Relaxation and meditation app</string>
+
     <!-- Duration Labels -->
     <string name="duration_2_3_min">2-3 min</string>
     <string name="duration_3_5_min">3-5 min</string>
@@ -80,4 +171,11 @@
     <string name="duration_10_15_min">10-15 min</string>
     <string name="duration_15_20_min">15-20 min</string>
     <string name="duration_20_30_min">20-30 min</string>
+
+    <!-- Language Selection -->
+    <string name="language_title">Language Selection</string>
+    <string name="language_french">French</string>
+    <string name="language_english">English</string>
+    <string name="language_current">Current: <xliff:g id="language" example="English">%1$s</xliff:g></string>
+    <string name="language_restart_required">The app will restart to apply the new language</string>
 </resources>

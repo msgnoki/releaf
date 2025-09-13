@@ -15,11 +15,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.releaf.app.R
 import com.releaf.app.data.Technique
 import com.releaf.app.data.TechniquesRepository
-import com.releaf.app.data.FavoritesPreferences
 import com.releaf.app.ui.components.TechniqueCard
+import com.releaf.app.ui.viewmodel.FavoritesViewModel
+import com.releaf.app.ui.viewmodel.FavoritesViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,14 +29,21 @@ fun FavoritesScreen(
     onTechniqueClick: (Technique) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val favoritesPreferences = remember { FavoritesPreferences(context) }
-    var favoriteIds by remember { mutableStateOf(favoritesPreferences.getFavoriteIds()) }
+    val favoritesViewModel: FavoritesViewModel = viewModel(factory = FavoritesViewModelFactory())
+    val uiState by favoritesViewModel.uiState.collectAsState()
     
-    // Get favorite techniques
-    val favoriteTechniques = remember(favoriteIds) {
+    // Show error message
+    uiState.errorMessage?.let { error ->
+        LaunchedEffect(error) {
+            // You could show a snackbar here
+            favoritesViewModel.clearError()
+        }
+    }
+    
+    // Get favorite techniques from Firebase
+    val favoriteTechniques = remember(uiState.favorites) {
         TechniquesRepository.getAllTechniques().filter { technique ->
-            favoriteIds.contains(technique.id)
+            uiState.favorites.contains(technique.id)
         }
     }
     
@@ -98,8 +107,7 @@ fun FavoritesScreen(
                         onClick = { onTechniqueClick(technique) },
                         isFavorite = true,
                         onFavoriteClick = { 
-                            favoritesPreferences.removeFavorite(technique.id)
-                            favoriteIds = favoritesPreferences.getFavoriteIds()
+                            favoritesViewModel.removeFromFavorites(technique.id)
                         }
                     )
                 }

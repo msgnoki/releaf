@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import android.content.Intent
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.releaf.app.MainActivity
 import com.releaf.app.R
 import com.releaf.app.data.model.UserProgress
@@ -32,6 +33,9 @@ import com.releaf.app.data.model.UserLevel
 import com.releaf.app.data.model.Badge
 import com.releaf.app.data.model.BadgeRarity
 import com.releaf.app.data.LanguagePreferences
+import com.releaf.app.data.model.firebase.*
+import com.releaf.app.ui.viewmodel.ProfileViewModel
+import com.releaf.app.ui.viewmodel.ProfileViewModelFactory
 import com.releaf.app.ui.theme.CategoryColors
 import androidx.compose.material.icons.outlined.*
 
@@ -43,91 +47,155 @@ fun ProfileScreen(
     val context = LocalContext.current
     val languagePreferences = remember { LanguagePreferences(context) }
     var showLanguageDialog by remember { mutableStateOf(false) }
-    // Mock user progress for demonstration
-    val mockProgress = remember {
-        UserProgress(
-            userId = "demo-user",
-            currentStreak = 7,
-            longestStreak = 15,
-            totalSessions = 42,
-            totalMinutes = 320,
-            sessionsThisWeek = 5,
-            minutesThisWeek = 45,
-            sessionsThisMonth = 18,
-            minutesThisMonth = 150,
-            lastSessionDate = "2024-01-15",
-            averageMoodImprovement = 3.8f,
-            level = UserLevel.APPRENTICE,
-            experiencePoints = 245,
-            badges = listOf("first_session", "streak_3", "streak_7", "total_hour", "mood_booster")
+    
+    val profileViewModel: ProfileViewModel = viewModel(factory = ProfileViewModelFactory())
+    val uiState by profileViewModel.uiState.collectAsState()
+    
+    // Initialize user data if needed
+    LaunchedEffect(Unit) {
+        profileViewModel.initializeUserDataIfNeeded()
+    }
+    
+    // Show error message
+    val errorMessage = uiState.errorMessage
+    if (errorMessage != null) {
+        LaunchedEffect(errorMessage) {
+            // You could show a snackbar here
+            profileViewModel.clearError()
+        }
+    }
+    
+    // Convert Firebase data to legacy format for compatibility
+    val convertedProgress = uiState.profileData?.let { profileData ->
+        profileData.progress?.let { progress ->
+            UserProgress(
+                userId = progress.userId,
+                currentStreak = progress.currentStreak,
+                longestStreak = progress.longestStreak,
+                totalSessions = progress.totalSessions,
+                totalMinutes = progress.totalMinutes,
+                sessionsThisWeek = progress.sessionsThisWeek,
+                minutesThisWeek = progress.minutesThisWeek,
+                sessionsThisMonth = 0, // Not available in new schema
+                minutesThisMonth = 0, // Not available in new schema
+                lastSessionDate = progress.lastSessionDate,
+                averageMoodImprovement = progress.averageMoodImprovement,
+                level = getUserLevel(profileData.user?.level ?: 1),
+                experiencePoints = profileData.user?.currentXp ?: 0,
+                badges = profileData.unlockedBadges.map { it.badgeId }
+            )
+        }
+    }
+    
+    val convertedBadges = uiState.badgeDefinitions.map { badge ->
+        Badge(
+            id = badge.badgeId,
+            name = badge.name,
+            description = badge.description,
+            icon = badge.icon ?: "emoji_events",
+            category = when (badge.category) {
+                "STREAK" -> com.releaf.app.data.model.BadgeCategory.STREAK
+                "DURATION" -> com.releaf.app.data.model.BadgeCategory.DURATION
+                "FREQUENCY" -> com.releaf.app.data.model.BadgeCategory.FREQUENCY
+                "TECHNIQUE_MASTERY" -> com.releaf.app.data.model.BadgeCategory.TECHNIQUE_MASTERY
+                "MOOD_IMPROVEMENT" -> com.releaf.app.data.model.BadgeCategory.MOOD_IMPROVEMENT
+                else -> com.releaf.app.data.model.BadgeCategory.SPECIAL
+            },
+            rarity = when (badge.rarity) {
+                "COMMON" -> BadgeRarity.COMMON
+                "UNCOMMON" -> BadgeRarity.UNCOMMON
+                "RARE" -> BadgeRarity.RARE
+                "EPIC" -> BadgeRarity.EPIC
+                "LEGENDARY" -> BadgeRarity.LEGENDARY
+                else -> BadgeRarity.COMMON
+            },
+            unlockedAt = System.currentTimeMillis()
         )
     }
     
-    val mockBadges = remember {
-        listOf(
-            Badge("first_session", "Premier Pas", "Complétez votre première session", "play_circle", 
-                  com.releaf.app.data.model.BadgeCategory.STREAK, BadgeRarity.COMMON, System.currentTimeMillis()),
-            Badge("streak_3", "Constance", "Maintenez une série de 3 jours", "local_fire_department",
-                  com.releaf.app.data.model.BadgeCategory.STREAK, BadgeRarity.UNCOMMON, System.currentTimeMillis()),
-            Badge("streak_7", "Semaine Zen", "Série de 7 jours consécutifs", "whatshot",
-                  com.releaf.app.data.model.BadgeCategory.STREAK, BadgeRarity.RARE, System.currentTimeMillis()),
-            Badge("total_hour", "Une Heure Zen", "Cumulez 60 minutes de pratique", "schedule",
-                  com.releaf.app.data.model.BadgeCategory.DURATION, BadgeRarity.COMMON, System.currentTimeMillis()),
-            Badge("mood_booster", "Remonteur de Moral", "Améliorez votre humeur de 3+ points", "sentiment_very_satisfied",
-                  com.releaf.app.data.model.BadgeCategory.MOOD_IMPROVEMENT, BadgeRarity.COMMON, System.currentTimeMillis())
-        )
-    }
+    val nextLevelXP = convertedProgress?.let { progress ->
+        UserLevel.values().getOrNull(progress.level.ordinal + 1)?.minXP ?: progress.level.minXP
+    } ?: 100
     
-    val nextLevelXP = remember(mockProgress) {
-        UserLevel.values().getOrNull(mockProgress.level.ordinal + 1)?.minXP ?: mockProgress.level.minXP
-    }
-    
-    val progressToNextLevel = remember(mockProgress, nextLevelXP) {
-        if (nextLevelXP > mockProgress.level.minXP) {
-            ((mockProgress.experiencePoints - mockProgress.level.minXP).toFloat() / 
-             (nextLevelXP - mockProgress.level.minXP)).coerceIn(0f, 1f)
+    val progressToNextLevel = convertedProgress?.let { progress ->
+        if (nextLevelXP > progress.level.minXP) {
+            ((progress.experiencePoints - progress.level.minXP).toFloat() / 
+             (nextLevelXP - progress.level.minXP)).coerceIn(0f, 1f)
         } else 1f
-    }
+    } ?: 0f
     
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        // User Level Card
-        item {
-            UserLevelCard(
-                progress = mockProgress,
-                progressToNextLevel = progressToNextLevel,
-                nextLevelXP = nextLevelXP
-            )
+    if (uiState.isLoading) {
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
         }
-        
-        // Stats Overview
-        item {
-            StatsOverviewCard(progress = mockProgress)
+    } else if (convertedProgress != null) {
+        LazyColumn(
+            modifier = modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // User Level Card
+            item {
+                UserLevelCard(
+                    progress = convertedProgress,
+                    progressToNextLevel = progressToNextLevel,
+                    nextLevelXP = nextLevelXP,
+                    displayName = uiState.profileData?.user?.displayName ?: "Utilisateur"
+                )
+            }
+            
+            // Stats Overview
+            item {
+                StatsOverviewCard(progress = convertedProgress)
+            }
+            
+            // Badges Section
+            item {
+                BadgesSection(badges = convertedBadges)
+            }
+            
+            // Weekly Progress
+            item {
+                WeeklyProgressCard(
+                    progress = convertedProgress,
+                    weeklyProgress = uiState.profileData?.weeklyProgress
+                )
+            }
+            
+            // Settings Section (simplified)
+            item {
+                SettingsSection(
+                    onLanguageClick = { showLanguageDialog = true },
+                    onLogoutClick = { profileViewModel.signOut() }
+                )
+            }
         }
-        
-        // Badges Section
-        item {
-            BadgesSection(badges = mockBadges)
-        }
-        
-        // Weekly Progress
-        item {
-            WeeklyProgressCard(progress = mockProgress)
-        }
-        
-        // Aller plus loin Section
-        item {
-            GoFurtherSection()
-        }
-        
-        // Settings Section
-        item {
-            SettingsSection(
-                onLanguageClick = { showLanguageDialog = true }
-            )
+    } else {
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Erreur lors du chargement du profil",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                
+                val currentErrorMessage = uiState.errorMessage
+                if (currentErrorMessage != null) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = currentErrorMessage,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
         }
     }
     
@@ -137,6 +205,7 @@ fun ProfileScreen(
             currentLanguage = languagePreferences.getLanguage(),
             onLanguageSelected = { languageCode ->
                 languagePreferences.setLanguage(languageCode)
+                profileViewModel.updateLanguage(languageCode)
                 showLanguageDialog = false
                 // Restart the app to apply the language change
                 val activity = context as? androidx.activity.ComponentActivity
@@ -152,11 +221,25 @@ fun ProfileScreen(
     }
 }
 
+// Helper function to convert Firebase level to UserLevel enum
+private fun getUserLevel(level: Int): UserLevel {
+    return when (level) {
+        1 -> UserLevel.BEGINNER
+        2 -> UserLevel.APPRENTICE
+        3 -> UserLevel.PRACTITIONER
+        4 -> UserLevel.EXPERT
+        5 -> UserLevel.MASTER
+        6 -> UserLevel.ZEN_MASTER
+        else -> UserLevel.BEGINNER
+    }
+}
+
 @Composable
 private fun UserLevelCard(
     progress: UserProgress,
     progressToNextLevel: Float,
-    nextLevelXP: Int
+    nextLevelXP: Int,
+    displayName: String = "Utilisateur"
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -189,7 +272,7 @@ private fun UserLevelCard(
             Spacer(modifier = Modifier.height(16.dp))
             
             Text(
-                text = "Utilisateur Demo",
+                text = displayName,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -417,7 +500,10 @@ private fun BadgeItem(badge: Badge) {
 }
 
 @Composable
-private fun WeeklyProgressCard(progress: UserProgress) {
+private fun WeeklyProgressCard(
+    progress: UserProgress,
+    weeklyProgress: WeeklyProgress? = null
+) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -453,8 +539,12 @@ private fun WeeklyProgressCard(progress: UserProgress) {
                 }
                 
                 // Weekly goal indicator
+                val weeklyGoalProgress = weeklyProgress?.let { wp ->
+                    wp.dailySessions.sum() / 7f
+                } ?: (progress.sessionsThisWeek / 7f)
+                
                 CircularProgressIndicator(
-                    progress = { progress.sessionsThisWeek / 7f },
+                    progress = { weeklyGoalProgress.coerceAtMost(1f) },
                     modifier = Modifier.size(50.dp),
                     color = MaterialTheme.colorScheme.primary,
                     trackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
@@ -466,7 +556,8 @@ private fun WeeklyProgressCard(progress: UserProgress) {
 
 @Composable
 private fun SettingsSection(
-    onLanguageClick: () -> Unit = {}
+    onLanguageClick: () -> Unit = {},
+    onLogoutClick: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -485,13 +576,10 @@ private fun SettingsSection(
             
             Spacer(modifier = Modifier.height(12.dp))
             
+            // Simplified settings - only language and logout as requested
             val settingsItems = listOf(
-                Triple(Icons.Default.Notifications, "Notifications", {}),
-                Triple(Icons.Default.Palette, "Thème", {}),
                 Triple(Icons.Default.Language, "Langue", onLanguageClick),
-                Triple(Icons.Default.Backup, "Sauvegarde", {}),
-                Triple(Icons.Default.Help, "Aide", {}),
-                Triple(Icons.Default.ExitToApp, "Déconnexion", {})
+                Triple(Icons.Default.ExitToApp, "Déconnexion", onLogoutClick)
             )
             
             settingsItems.forEach { (icon, title, onClick) ->
@@ -546,185 +634,7 @@ private fun SettingsItem(
     }
 }
 
-@Composable
-private fun GoFurtherSection() {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = "Aller plus loin ?",
-                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            // About App Description
-            Text(
-                text = "Outils gratuits pour vous aider lorsque vous vous sentez anxieux. Ces exercices sont simples à suivre et ne nécessitent aucun équipement particulier, utilisez-les dès que votre esprit est trop agité ou lorsque vous avez besoin d'un moment de calme.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
-                lineHeight = 20.sp,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-            
-            // About anxiety section
-            Text(
-                text = "Comprendre l'anxiété",
-                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold),
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier.padding(bottom = 12.dp)
-            )
-            
-            Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                // What happens card
-                InfoCardProfile(
-                    icon = Icons.Default.Warning,
-                    title = "Ce qui se passe pendant l'anxiété",
-                    description = "Votre corps active la réponse « combat ou fuite », augmentant le rythme cardiaque, accélérant la respiration et libérant des hormones de stress comme l'adrénaline.",
-                    backgroundColor = Color(0xFFFEF3C7),
-                    iconColor = Color(0xFFD97706),
-                    borderColor = Color(0xFFF59E0B)
-                )
-                
-                // How techniques help card
-                InfoCardProfile(
-                    icon = Icons.Default.CheckCircle,
-                    title = "Comment ces techniques aident",
-                    description = "Ces techniques fondées sur des données scientifiques activent votre système nerveux parasympathique, qui contrebalance naturellement la réponse au stress.",
-                    backgroundColor = Color(0xFFDCFCE7),
-                    iconColor = Color(0xFF16A34A),
-                    borderColor = Color(0xFF22C55E)
-                )
-                
-                // Tips card
-                TipsCardProfile()
-            }
-        }
-    }
-}
-
-@Composable
-private fun InfoCardProfile(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
-    title: String,
-    description: String,
-    backgroundColor: Color,
-    iconColor: Color,
-    borderColor: Color
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(1.dp, borderColor, RoundedCornerShape(8.dp)),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = backgroundColor)
-    ) {
-        Column(
-            modifier = Modifier.padding(12.dp)
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 6.dp)
-            ) {
-                Icon(
-                    icon,
-                    contentDescription = null,
-                    tint = iconColor,
-                    modifier = Modifier.size(16.dp)
-                )
-                
-                Spacer(modifier = Modifier.width(6.dp))
-                
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
-            
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                lineHeight = 16.sp
-            )
-        }
-    }
-}
-
-@Composable
-private fun TipsCardProfile() {
-    val tips = listOf(
-        "Trouvez un endroit calme et confortable",
-        "Commencez par des techniques courtes (2-5 min)",
-        "Pratiquez régulièrement pour développer vos compétences",
-        "Soyez patient avec vous-même"
-    )
-    
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(1.dp, Color(0xFF60A5FA), RoundedCornerShape(8.dp)),
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFDBEAFE))
-    ) {
-        Column(
-            modifier = Modifier.padding(12.dp)
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(bottom = 8.dp)
-            ) {
-                Icon(
-                    Icons.Default.Lightbulb,
-                    contentDescription = null,
-                    tint = Color(0xFF2563EB),
-                    modifier = Modifier.size(16.dp)
-                )
-                
-                Spacer(modifier = Modifier.width(6.dp))
-                
-                Text(
-                    text = "Conseils pour de meilleurs résultats",
-                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
-            
-            Column {
-                tips.forEach { tip ->
-                    Row(
-                        modifier = Modifier.padding(vertical = 1.dp)
-                    ) {
-                        Text(
-                            text = "•",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(end = 6.dp, top = 1.dp)
-                        )
-                        
-                        Text(
-                            text = tip,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            lineHeight = 16.sp,
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
+// Section "Aller plus loin" removed as requested (section 6)
 
 @Composable
 private fun LanguageSelectionDialog(

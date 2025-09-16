@@ -2,7 +2,8 @@ package com.releaf.app.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.releaf.app.data.firebase.FirestoreUserRepositorySimple
+import com.google.firebase.auth.FirebaseAuth
+import com.releaf.app.data.repository.firebase.FavoritesRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -13,7 +14,8 @@ data class FavoritesUiState(
 )
 
 class FavoritesViewModel(
-    private val firestoreRepository: FirestoreUserRepositorySimple = FirestoreUserRepositorySimple()
+    private val favoritesRepository: FavoritesRepository = FavoritesRepository(),
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 ) : ViewModel() {
     
     private val _uiState = MutableStateFlow(FavoritesUiState())
@@ -24,22 +26,24 @@ class FavoritesViewModel(
     }
     
     private fun observeFavorites() {
+        val userId = auth.currentUser?.uid ?: return
         viewModelScope.launch {
-            firestoreRepository.getFavoritesFlow()
+            favoritesRepository.getUserFavoritesFlow(userId)
                 .catch { e ->
                     _uiState.value = _uiState.value.copy(
                         errorMessage = "Failed to observe favorites: ${e.message}"
                     )
                 }
                 .collect { favorites ->
-                    _uiState.value = _uiState.value.copy(favorites = favorites)
+                    _uiState.value = _uiState.value.copy(favorites = favorites.toSet())
                 }
         }
     }
     
     fun addToFavorites(techniqueId: String) {
+        val userId = auth.currentUser?.uid ?: return
         viewModelScope.launch {
-            val result = firestoreRepository.addToFavorites(techniqueId)
+            val result = favoritesRepository.addToFavorites(userId, techniqueId)
             result.onFailure { exception ->
                 _uiState.value = _uiState.value.copy(
                     errorMessage = exception.message
@@ -49,8 +53,9 @@ class FavoritesViewModel(
     }
     
     fun removeFromFavorites(techniqueId: String) {
+        val userId = auth.currentUser?.uid ?: return
         viewModelScope.launch {
-            val result = firestoreRepository.removeFromFavorites(techniqueId)
+            val result = favoritesRepository.removeFromFavorites(userId, techniqueId)
             result.onFailure { exception ->
                 _uiState.value = _uiState.value.copy(
                     errorMessage = exception.message

@@ -121,6 +121,10 @@ fun CalmNavigation(
             ProfileScreen()
         }
         
+        composable("statistics") {
+            StatisticsScreen()
+        }
+        
         composable("technique/{techniqueId}") { backStackEntry ->
             val techniqueId = backStackEntry.arguments?.getString("techniqueId") ?: return@composable
             val technique = TechniquesRepository.getTechnique(techniqueId) ?: return@composable

@@ -26,6 +26,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import android.content.Intent
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.foundation.Canvas
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.PathEffect
+import java.text.SimpleDateFormat
+import java.util.*
 import com.releaf.app.MainActivity
 import com.releaf.app.R
 import com.releaf.app.data.model.UserProgress
@@ -155,6 +163,11 @@ fun ProfileScreen(
             // Badges Section
             item {
                 BadgesSection(badges = convertedBadges)
+            }
+            
+            // Mood History Graph
+            item {
+                MoodHistoryCard(profileViewModel = profileViewModel)
             }
             
             // Weekly Progress
@@ -629,6 +642,152 @@ private fun SettingsItem(
                 imageVector = Icons.Default.ChevronRight,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+            )
+        }
+    }
+}
+
+@Composable
+private fun MoodHistoryCard(profileViewModel: ProfileViewModel) {
+    val moodHistory by profileViewModel.moodHistory.collectAsState()
+    
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Évolution de l'humeur",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            
+            Spacer(modifier = Modifier.height(12.dp))
+            
+            if (moodHistory.isEmpty()) {
+                Text(
+                    text = "Pas encore de données d'humeur disponibles.\nComplétez quelques sessions pour voir votre évolution !",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            } else {
+                // Mood Graph
+                MoodGraph(
+                    moodHistory = moodHistory,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp)
+                )
+                
+                Spacer(modifier = Modifier.height(12.dp))
+                
+                // Average improvement
+                val avgImprovement = moodHistory.map { it.improvement }.average()
+                Text(
+                    text = "Amélioration moyenne: ${String.format("%.1f", avgImprovement)} points",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun MoodGraph(
+    moodHistory: List<ProfileViewModel.MoodEntry>,
+    modifier: Modifier = Modifier
+) {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
+    
+    Canvas(modifier = modifier) {
+        if (moodHistory.isEmpty()) return@Canvas
+        
+        val width = size.width
+        val height = size.height
+        val padding = 20f
+        
+        // Drawing area
+        val graphWidth = width - 2 * padding
+        val graphHeight = height - 2 * padding
+        
+        // Mood range (1-10)
+        val minMood = 1f
+        val maxMood = 10f
+        val moodRange = maxMood - minMood
+        
+        // Draw background grid
+        for (i in 1..9) {
+            val y = padding + (i / 10f) * graphHeight
+            drawLine(
+                color = surfaceVariant,
+                start = Offset(padding, y),
+                end = Offset(width - padding, y),
+                strokeWidth = 1f,
+                pathEffect = PathEffect.dashPathEffect(floatArrayOf(5f, 5f))
+            )
+        }
+        
+        if (moodHistory.size < 2) return@Canvas
+        
+        // Calculate points for before and after mood lines
+        val beforePoints = moodHistory.mapIndexed { index, entry ->
+            val x = padding + (index.toFloat() / (moodHistory.size - 1)) * graphWidth
+            val y = padding + ((maxMood - entry.moodBefore) / moodRange) * graphHeight
+            Offset(x, y)
+        }
+        
+        val afterPoints = moodHistory.mapIndexed { index, entry ->
+            val x = padding + (index.toFloat() / (moodHistory.size - 1)) * graphWidth
+            val y = padding + ((maxMood - entry.moodAfter) / moodRange) * graphHeight
+            Offset(x, y)
+        }
+        
+        // Draw mood before line (lighter)
+        for (i in 0 until beforePoints.size - 1) {
+            drawLine(
+                color = primaryColor.copy(alpha = 0.4f),
+                start = beforePoints[i],
+                end = beforePoints[i + 1],
+                strokeWidth = 3f,
+                cap = StrokeCap.Round
+            )
+        }
+        
+        // Draw mood after line (darker)
+        for (i in 0 until afterPoints.size - 1) {
+            drawLine(
+                color = primaryColor,
+                start = afterPoints[i],
+                end = afterPoints[i + 1],
+                strokeWidth = 3f,
+                cap = StrokeCap.Round
+            )
+        }
+        
+        // Draw points
+        beforePoints.forEach { point ->
+            drawCircle(
+                color = primaryColor.copy(alpha = 0.4f),
+                radius = 4f,
+                center = point
+            )
+        }
+        
+        afterPoints.forEach { point ->
+            drawCircle(
+                color = primaryColor,
+                radius = 4f,
+                center = point
             )
         }
     }

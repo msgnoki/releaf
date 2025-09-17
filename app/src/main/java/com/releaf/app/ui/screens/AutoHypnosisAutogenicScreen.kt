@@ -22,6 +22,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun AutoHypnosisAutogenicScreen(
     onBackClick: () -> Unit,
+    onComplete: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var currentPhase by remember { mutableIntStateOf(0) }
@@ -52,6 +53,12 @@ fun AutoHypnosisAutogenicScreen(
                 isCompleted = true
                 isRunning = false
             }
+        }
+    }
+    
+    LaunchedEffect(isCompleted) {
+        if (isCompleted) {
+            onComplete()
         }
     }
 

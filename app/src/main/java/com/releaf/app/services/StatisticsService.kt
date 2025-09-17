@@ -234,7 +234,7 @@ class StatisticsService {
     ): Result<String> {
         val userId = auth.currentUser?.uid ?: return Result.failure(Exception("User not authenticated"))
         
-        val session = Session(
+        val session = com.releaf.app.data.model.firebase.Session(
             userId = userId,
             techniqueId = techniqueId,
             category = category,

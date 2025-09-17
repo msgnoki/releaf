@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.releaf.app.data.model.firebase.*
 import com.releaf.app.data.repository.firebase.*
+import com.releaf.app.services.StatisticsService
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -16,13 +17,27 @@ class ProfileViewModel : ViewModel() {
     private val badgeRepository = BadgeRepository()
     private val weeklyProgressRepository = WeeklyProgressRepository()
     private val userPreferencesRepository = UserPreferencesRepository()
+    private val sessionRepository = SessionRepository()
+    private val statisticsService = StatisticsService()
     
     private val _uiState = MutableStateFlow(ProfileUiState())
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
     
+    // Mood history for the graph
+    private val _moodHistory = MutableStateFlow<List<MoodEntry>>(emptyList())
+    val moodHistory: StateFlow<List<MoodEntry>> = _moodHistory.asStateFlow()
+    
     init {
         loadUserProfile()
+        setupMoodHistoryFlow()
     }
+    
+    data class MoodEntry(
+        val date: Long,
+        val moodBefore: Int,
+        val moodAfter: Int,
+        val improvement: Int = moodAfter - moodBefore
+    )
     
     private fun loadUserProfile() {
         val currentUser = auth.currentUser
@@ -36,20 +51,47 @@ class ProfileViewModel : ViewModel() {
         
         val userId = currentUser.uid
         
-        // Combine all user data flows
+        // Combine all user data flows with real statistics
         viewModelScope.launch {
             combine(
                 userRepository.getUserFlow(userId),
-                progressRepository.getProgressFlow(userId),
+                statisticsService.getStatisticsFlow(),
                 badgeRepository.getUserUnlockedBadgesFlow(userId),
-                weeklyProgressRepository.getCurrentWeekProgressFlow(userId),
                 userPreferencesRepository.getPreferencesFlow(userId)
-            ) { user, progress, badges, weeklyProgress, preferences ->
+            ) { user, statistics, badges, preferences ->
+                // Convert statistics to progress format
+                val progress = statistics?.let { stats ->
+                    // Calculate sessions this week from StatisticsService
+                    val sessionsThisWeek = if (stats.weeklyMinutes > 0 && stats.averageSessionDuration > 0) {
+                        stats.weeklyMinutes / stats.averageSessionDuration
+                    } else {
+                        0
+                    }
+                    
+                    Progress(
+                        userId = userId,
+                        totalSessions = stats.totalSessions,
+                        totalMinutes = stats.totalMinutes,
+                        currentStreak = stats.currentStreak,
+                        longestStreak = stats.longestStreak,
+                        sessionsThisWeek = sessionsThisWeek,
+                        minutesThisWeek = stats.weeklyMinutes,
+                        averageMoodImprovement = stats.averageMoodImprovement,
+                        lastSessionDate = java.time.Instant.now().toString()
+                    )
+                }
+                
+                // Enrich user data with statistics
+                val enrichedUser = user?.copy(
+                    level = statistics?.level ?: user.level,
+                    currentXp = statistics?.currentXp ?: user.currentXp
+                )
+                
                 ProfileData(
-                    user = user,
+                    user = enrichedUser,
                     progress = progress,
                     unlockedBadges = badges,
-                    weeklyProgress = weeklyProgress,
+                    weeklyProgress = null, // Will be handled by statistics
                     preferences = preferences
                 )
             }.catch { error ->
@@ -150,6 +192,35 @@ class ProfileViewModel : ViewModel() {
                 
                 // Initialize weekly progress
                 weeklyProgressRepository.initializeCurrentWeek(userId)
+            }
+        }
+    }
+    
+    private fun setupMoodHistoryFlow() {
+        val currentUser = auth.currentUser ?: return
+        val userId = currentUser.uid
+        
+        viewModelScope.launch {
+            try {
+                // Use the reactive Flow to get real-time updates
+                sessionRepository.getUserSessionsFlow(userId, limit = 30)
+                    .map { sessions ->
+                        sessions
+                            .filter { it.moodBefore > 0 && it.moodAfter > 0 }
+                            .map { session ->
+                                MoodEntry(
+                                    date = session.createdAt,
+                                    moodBefore = session.moodBefore,
+                                    moodAfter = session.moodAfter
+                                )
+                            }
+                            .sortedBy { it.date }
+                    }
+                    .collect { moodEntries ->
+                        _moodHistory.value = moodEntries
+                    }
+            } catch (e: Exception) {
+                // Silent fail for mood history
             }
         }
     }

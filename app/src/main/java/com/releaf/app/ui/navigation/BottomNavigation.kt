@@ -16,7 +16,6 @@ enum class BottomNavItem(
 ) {
     HOME("home", "Accueil", Icons.Default.Home, Icons.Filled.Home),
     FAVORITES("favorites", "Favoris", Icons.Default.FavoriteBorder, Icons.Filled.Favorite),
-    STATISTICS("statistics", "Statistiques", Icons.Default.Analytics, Icons.Filled.Analytics),
     PROFILE("profile", "Profil", Icons.Default.Person, Icons.Filled.Person)
 }
 

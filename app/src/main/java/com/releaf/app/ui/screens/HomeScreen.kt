@@ -10,7 +10,6 @@ import com.releaf.app.R
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,20 +19,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.releaf.app.data.Technique
 import com.releaf.app.data.TechniquesRepository
-import com.releaf.app.data.FavoritesPreferences
 import com.releaf.app.data.model.TechniqueCategory
 import com.releaf.app.ui.components.TechniqueCard
 import com.releaf.app.ui.components.CategoryChipRow
 import com.releaf.app.ui.theme.MyApplicationTheme
+import com.releaf.app.ui.viewmodel.FavoritesViewModel
+import com.releaf.app.ui.viewmodel.FavoritesViewModelFactory
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun HomeScreen(
     onTechniqueClick: (Technique) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
-    val favoritesPreferences = remember { FavoritesPreferences(context) }
-    var favoriteIds by remember { mutableStateOf(favoritesPreferences.getFavoriteIds()) }
+    val favoritesViewModel: FavoritesViewModel = viewModel(factory = FavoritesViewModelFactory())
+    val favoritesState by favoritesViewModel.uiState.collectAsState()
+    val favoriteIds = favoritesState.favorites
     
     // Get all techniques and categories
     val allTechniques by remember { 
@@ -120,8 +121,7 @@ fun HomeScreen(
                                 onClick = { onTechniqueClick(technique) },
                                 isFavorite = favoriteIds.contains(technique.id),
                                 onFavoriteClick = {
-                                    favoritesPreferences.toggleFavorite(technique.id)
-                                    favoriteIds = favoritesPreferences.getFavoriteIds()
+                                    favoritesViewModel.toggleFavorite(technique.id)
                                 }
                             )
                         }

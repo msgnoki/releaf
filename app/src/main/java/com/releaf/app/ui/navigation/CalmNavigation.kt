@@ -12,6 +12,7 @@ import com.releaf.app.data.TechniquesRepository
 import com.releaf.app.ui.screens.*
 import com.releaf.app.ui.screens.auth.*
 import com.releaf.app.ui.viewmodel.AuthViewModel
+import com.releaf.app.ui.viewmodel.SessionViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +27,7 @@ fun CalmNavigation(
     val context = LocalContext.current
     val application = context.applicationContext as ReleafApplication
     val authViewModel: AuthViewModel = viewModel(factory = AuthViewModelFactory(application.database))
+    val sessionViewModel: SessionViewModel = viewModel()
     val authState by authViewModel.authState.collectAsState()
     val forgotPasswordMessage by authViewModel.forgotPasswordState.collectAsState()
     
@@ -121,8 +123,21 @@ fun CalmNavigation(
             ProfileScreen()
         }
         
-        composable("statistics") {
-            StatisticsScreen()
+        
+        composable("session_completion/{techniqueId}") { backStackEntry ->
+            val techniqueId = backStackEntry.arguments?.getString("techniqueId") ?: return@composable
+            val technique = TechniquesRepository.getTechnique(techniqueId) ?: return@composable
+            
+            SessionCompletionScreen(
+                technique = technique,
+                sessionViewModel = sessionViewModel,
+                onComplete = {
+                    sessionViewModel.resetState()
+                    navController.navigate("home") {
+                        popUpTo("home") { inclusive = false }
+                    }
+                }
+            )
         }
         
         composable("technique/{techniqueId}") { backStackEntry ->
@@ -153,24 +168,35 @@ fun CalmNavigation(
             
             when (techniqueId) {
                 "breathing" -> {
+                    // Démarrer la session quand on entre dans l'écran
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     BreathingExerciseScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "grounding" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     GroundingScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
@@ -187,188 +213,287 @@ fun CalmNavigation(
                     )
                 }
                 "progressive-muscle-relaxation" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     ProgressiveMuscleRelaxationScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "peaceful-visualization" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     PeacefulVisualizationScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "thought-labeling" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     ThoughtLabelingScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "stress-relief-bubbles" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     StressReliefBubblesScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "sound-therapy" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     SoundTherapyScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "stress-ball" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     StressBallScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "breathing-stress-15" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     StressBreathingExerciseScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "respiration-e12" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     DiaphragmaticBreathingScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "autogenic-training" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     AutogenicTrainingScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "breathing-box" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     BoxBreathingScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "breathing-478" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     Breathing478Screen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "body-scan-meditation" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     BodyScanScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "mindful-breathing" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     MindfulBreathingScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "loving-kindness-meditation" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     LovingKindnessScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "auto-hypnosis-autogenic" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     AutoHypnosisAutogenicScreen(
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "forest-immersion-nature" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     ForestImmersionScreen(
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 "meditation-breath-awareness" -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     MeditationBreathAwarenessScreen(
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
+                        },
+                        onComplete = {
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }
                 else -> {
+                    LaunchedEffect(Unit) {
+                        sessionViewModel.startSession(technique)
+                    }
+                    
                     ExerciseScreen(
                         technique = technique,
                         onBackClick = {
+                            sessionViewModel.cancelSession()
                             navController.popBackStack()
                         },
                         onComplete = {
-                            navController.popBackStack("technique/${technique.id}", false)
+                            navController.navigate("session_completion/${technique.id}")
                         }
                     )
                 }

@@ -25,6 +25,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun MeditationBreathAwarenessScreen(
     onBackClick: () -> Unit,
+    onComplete: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var selectedDuration by remember { mutableIntStateOf(5) } // 5 minutes par défaut
@@ -51,6 +52,12 @@ fun MeditationBreathAwarenessScreen(
                 isCompleted = true
                 isRunning = false
             }
+        }
+    }
+    
+    LaunchedEffect(isCompleted) {
+        if (isCompleted) {
+            onComplete()
         }
     }
 

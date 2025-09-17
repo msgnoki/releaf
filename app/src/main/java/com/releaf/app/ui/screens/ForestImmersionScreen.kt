@@ -25,6 +25,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun ForestImmersionScreen(
     onBackClick: () -> Unit,
+    onComplete: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var currentScene by remember { mutableIntStateOf(0) }
@@ -61,6 +62,12 @@ fun ForestImmersionScreen(
                 isCompleted = true
                 isRunning = false
             }
+        }
+    }
+    
+    LaunchedEffect(isCompleted) {
+        if (isCompleted) {
+            onComplete()
         }
     }
 

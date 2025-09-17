@@ -63,6 +63,11 @@
     <string name="passwords_dont_match_error">Les mots de passe ne correspondent pas</string>
     <string name="show_password">Afficher le mot de passe</string>
     <string name="hide_password">Masquer le mot de passe</string>
+    <string name="continue_with_google">Continuer avec Google</string>
+    <string name="google_sign_in_loading">Connexion en cours...</string>
+    
+    <!-- Google Sign-In Web Client ID -->
+    <string name="default_web_client_id">853360103709-r78vg978er2pet7mk9vhr1hk0nbeahdu.apps.googleusercontent.com</string>
     <string name="anxiety_level_title">Niveau d\'anxiété habituel</string>
     <string name="anxiety_level_description">Cela nous aidera à personnaliser votre expérience</string>
     <string name="terms_privacy_text">En continuant, vous acceptez nos conditions d\'utilisation et notre politique de confidentialité</string>

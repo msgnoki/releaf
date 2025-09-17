@@ -83,6 +83,29 @@ class AuthViewModel(
         }
     }
     
+    fun signInWithGoogle(idToken: String) {
+        viewModelScope.launch {
+            _authState.value = _authState.value.copy(isLoading = true, errorMessage = null)
+            
+            val result = authRepository.signInWithGoogle(idToken)
+            result.fold(
+                onSuccess = {
+                    _authState.value = _authState.value.copy(
+                        isLoading = false,
+                        isLoggedIn = true,
+                        errorMessage = null
+                    )
+                },
+                onFailure = { exception ->
+                    _authState.value = _authState.value.copy(
+                        isLoading = false,
+                        errorMessage = getErrorMessage(exception)
+                    )
+                }
+            )
+        }
+    }
+    
     fun signOut() {
         viewModelScope.launch {
             _authState.value = _authState.value.copy(isLoading = true)

@@ -82,7 +82,7 @@ private fun RoundTechniqueCard(
                 contentDescription = name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(90.dp)
                     .clip(CircleShape)
             )
             
@@ -92,9 +92,9 @@ private fun RoundTechniqueCard(
                     onClick = onFavoriteClick,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .size(32.dp)
+                        .size(24.dp)
                         .background(
-                            Color.White.copy(alpha = 0.9f),
+                            Color.Transparent,
                             CircleShape
                         )
                 ) {
@@ -102,7 +102,7 @@ private fun RoundTechniqueCard(
                         imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                         contentDescription = if (isFavorite) "Retirer des favoris" else "Ajouter aux favoris",
                         tint = if (isFavorite) Color.Red else Color.Gray,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(12.dp)
                     )
                 }
             }
@@ -134,30 +134,30 @@ private fun RoundTechniqueCard(
 }
 
 
-// Map technique IDs to custom drawable resources from assets
-// Uses the 4 main category icons: respiration, relaxation, meditation, music
+// Map technique IDs to custom PNG icons
 private fun getDrawableForTechnique(techniqueId: String): Int {
     return when (techniqueId) {
-        // Breathing/Respiration techniques
-        "breathing", "guided-breathing", "breathing-stress-15", "respiration-e12", 
-        "breathing-box", "breathing-478", "mindful-breathing", "meditation-breath-awareness" -> 
-            R.drawable.respiration
-            
-        // Relaxation techniques
-        "progressive-muscle-relaxation", "autogenic-training", "stress-ball", "grounding",
-        "stress-relief-bubbles" -> 
-            R.drawable.relaxation
-            
-        // Meditation and visualization techniques  
-        "body-scan-meditation", "loving-kindness-meditation", "auto-hypnosis-autogenic",
-        "peaceful-visualization", "forest-immersion-nature", "thought-labeling" ->
-            R.drawable.meditayion
-            
-        // Sound therapy
-        "sound-therapy" -> 
-            R.drawable.music
-            
-        else -> R.drawable.respiration // Default fallback to respiration
+        "breathing" -> R.drawable.icon_respiration_2min
+        "grounding" -> R.drawable.icon_ancrage_54321
+        "guided-breathing" -> R.drawable.icon_respiration_guidee
+        "progressive-muscle-relaxation" -> R.drawable.icon_relaxation_musculaire
+        "peaceful-visualization" -> R.drawable.icon_visualisation_paisible
+        "thought-labeling" -> R.drawable.icon_etiquetage_pensees
+        "stress-relief-bubbles" -> R.drawable.icon_bulles_antistress
+        "sound-therapy" -> R.drawable.icon_therapie_sonore
+        "stress-ball" -> R.drawable.icon_balle_antistress
+        "breathing-stress-15" -> R.drawable.icon_respiration_1_5
+        "respiration-e12" -> R.drawable.icon_respiration_diaphragmatique
+        "autogenic-training" -> R.drawable.icon_training_autogene
+        "breathing-box" -> R.drawable.icon_respiration_carree
+        "breathing-478" -> R.drawable.icon_breathing_478
+        "body-scan-meditation" -> R.drawable.icon_body_scan
+        "mindful-breathing" -> R.drawable.icon_mindful_breathing
+        "loving-kindness-meditation" -> R.drawable.icon_loving_kindness
+        "auto-hypnosis-autogenic" -> R.drawable.icon_autogenic_hypnosis
+        "forest-immersion-nature" -> R.drawable.icon_forest_immersion
+        "meditation-breath-awareness" -> R.drawable.icon_breath_awareness
+        else -> R.drawable.icon_respiration_2min // Default fallback
     }
 }
 

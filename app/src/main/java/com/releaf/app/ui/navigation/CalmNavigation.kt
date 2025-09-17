@@ -54,10 +54,8 @@ fun CalmNavigation(
         
         // Authentication screens
         composable("login") {
-            LoginScreen(
-                onLoginClick = { email, password ->
-                    authViewModel.signIn(email, password)
-                },
+            LoginScreenWithGoogleAuth(
+                authViewModel = authViewModel,
                 onRegisterClick = {
                     navController.navigate("register")
                 },

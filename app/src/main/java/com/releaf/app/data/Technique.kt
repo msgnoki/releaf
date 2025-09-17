@@ -41,7 +41,7 @@ object TechniquesRepository {
     private val techniquesData = mapOf(
         "breathing" to Technique(
             id = "breathing",
-            icon = "air",
+            icon = "Techniques icons/icon_respiration_2min.png",
             iconColor = "cyan",
             tags = listOf("high-anxiety", "short-time"),
             name = "Respiration 2 Minutes",
@@ -57,7 +57,7 @@ object TechniquesRepository {
         ),
         "grounding" to Technique(
             id = "grounding",
-            icon = "anchor",
+            icon = "Techniques icons/icon_ancrage_54321.png",
             iconColor = "green",
             tags = listOf("high-anxiety", "short-time"),
             name = "Ancrage 5-4-3-2-1",
@@ -73,7 +73,7 @@ object TechniquesRepository {
         ),
         "guided-breathing" to Technique(
             id = "guided-breathing",
-            icon = "timer",
+            icon = "Techniques icons/icon_respiration_guidee.png",
             iconColor = "blue",
             tags = listOf("moderate-anxiety", "medium-time"),
             name = "Respiration Guidée",
@@ -88,7 +88,7 @@ object TechniquesRepository {
         ),
         "progressive-muscle-relaxation" to Technique(
             id = "progressive-muscle-relaxation",
-            icon = "accessibility",
+            icon = "Techniques icons/icon_relaxation_musculaire.png",
             iconColor = "purple",
             tags = listOf("moderate-anxiety", "medium-time"),
             name = "Relaxation Musculaire Progressive",
@@ -103,7 +103,7 @@ object TechniquesRepository {
         ),
         "peaceful-visualization" to Technique(
             id = "peaceful-visualization",
-            icon = "landscape",
+            icon = "Techniques icons/icon_visualisation_paisible.png",
             iconColor = "green",
             tags = listOf("moderate-anxiety", "medium-time"),
             name = "Visualisation Paisible",
@@ -118,7 +118,7 @@ object TechniquesRepository {
         ),
         "thought-labeling" to Technique(
             id = "thought-labeling",
-            icon = "psychology",
+            icon = "Techniques icons/icon_etiquetage_pensees.png",
             iconColor = "indigo",
             tags = listOf("moderate-anxiety", "medium-time"),
             name = "Étiquetage des Pensées",
@@ -133,7 +133,7 @@ object TechniquesRepository {
         ),
         "stress-relief-bubbles" to Technique(
             id = "stress-relief-bubbles",
-            icon = "bubble_chart",
+            icon = "Techniques icons/icon_bulles_antistress.png",
             iconColor = "teal",
             tags = listOf("high-anxiety", "short-time"),
             name = "Bulles Anti-Stress",
@@ -149,7 +149,7 @@ object TechniquesRepository {
         ),
         "sound-therapy" to Technique(
             id = "sound-therapy",
-            icon = "graphic_eq",
+            icon = "Techniques icons/icon_therapie_sonore.png",
             iconColor = "indigo",
             tags = listOf("moderate-anxiety", "medium-time", "long-time"),
             name = "Thérapie Sonore",
@@ -164,7 +164,7 @@ object TechniquesRepository {
         ),
         "stress-ball" to Technique(
             id = "stress-ball",
-            icon = "sports_handball",
+            icon = "Techniques icons/icon_balle_antistress.png",
             iconColor = "orange",
             tags = listOf("high-anxiety", "short-time"),
             name = "Balle Anti-Stress",
@@ -180,7 +180,7 @@ object TechniquesRepository {
         ),
         "breathing-stress-15" to Technique(
             id = "breathing-stress-15",
-            icon = "123",
+            icon = "Techniques icons/icon_respiration_1_5.png",
             iconColor = "teal",
             tags = listOf("moderate-anxiety", "high-anxiety", "medium-time", "beginner", "stress"),
             name = "Respiration anti-stress (1–5)",
@@ -196,7 +196,7 @@ object TechniquesRepository {
         ),
         "respiration-e12" to Technique(
             id = "respiration-e12",
-            icon = "air",
+            icon = "Techniques icons/icon_respiration_diaphragmatique.png",
             iconColor = "blue",
             tags = listOf("moderate-anxiety", "high-anxiety", "medium-time", "long-time", "diaphragme", "relaxation", "apprentissage"),
             name = "Respiration diaphragmatique (abdominale)",
@@ -212,7 +212,7 @@ object TechniquesRepository {
         ),
         "autogenic-training" to Technique(
             id = "autogenic-training",
-            icon = "psychology",
+            icon = "Techniques icons/icon_training_autogene.png",
             iconColor = "deep_purple",
             tags = listOf("moderate-anxiety", "high-anxiety", "medium-time", "long-time", "relaxation-profonde", "auto-suggestion"),
             name = "Training autogène",
@@ -228,7 +228,7 @@ object TechniquesRepository {
         ),
         "breathing-box" to Technique(
             id = "breathing-box",
-            icon = "crop_square",
+            icon = "Techniques icons/icon_respiration_carree.png",
             iconColor = "blue",
             tags = listOf("moderate-anxiety", "high-anxiety", "short-time", "stress", "concentration"),
             name = "Respiration carrée",
@@ -244,7 +244,7 @@ object TechniquesRepository {
         ),
         "breathing-478" to Technique(
             id = "breathing-478",
-            icon = "bedtime",
+            icon = "Techniques icons/icon_breathing_478.png",
             iconColor = "purple",
             tags = listOf("moderate-anxiety", "high-anxiety", "short-time", "stress", "sommeil", "debutant"),
             name = "Respiration 4-7-8",
@@ -260,7 +260,7 @@ object TechniquesRepository {
         ),
         "body-scan-meditation" to Technique(
             id = "body-scan-meditation",
-            icon = "accessibility",
+            icon = "Techniques icons/icon_body_scan.png",
             iconColor = "purple",
             tags = listOf("moderate-anxiety", "medium-time", "pleine-conscience", "relaxation", "sommeil", "bien-être"),
             name = "Body scan",
@@ -276,7 +276,7 @@ object TechniquesRepository {
         ),
         "mindful-breathing" to Technique(
             id = "mindful-breathing",
-            icon = "self_improvement",
+            icon = "Techniques icons/icon_mindful_breathing.png",
             iconColor = "green",
             tags = listOf("moderate-anxiety", "short-time", "pleine-conscience", "concentration", "apaisement"),
             name = "Respiration consciente",
@@ -292,7 +292,7 @@ object TechniquesRepository {
         ),
         "loving-kindness-meditation" to Technique(
             id = "loving-kindness-meditation",
-            icon = "favorite",
+            icon = "Techniques icons/icon_loving_kindness.png",
             iconColor = "pink",
             tags = listOf("moderate-anxiety", "medium-time", "compassion", "bienveillance", "emotion"),
             name = "Méditation bienveillante",
@@ -308,7 +308,7 @@ object TechniquesRepository {
         ),
         "auto-hypnosis-autogenic" to Technique(
             id = "auto-hypnosis-autogenic",
-            icon = "psychology",
+            icon = "Techniques icons/icon_autogenic_hypnosis.png",
             iconColor = "deep_purple",
             tags = listOf("moderate-anxiety", "long-time", "auto-hypnose", "relaxation-profonde", "avancé", "thérapeutique"),
             name = "Auto-hypnose Autogène",
@@ -323,7 +323,7 @@ object TechniquesRepository {
         ),
         "forest-immersion-nature" to Technique(
             id = "forest-immersion-nature",
-            icon = "park",
+            icon = "Techniques icons/icon_forest_immersion.png",
             iconColor = "green",
             tags = listOf("moderate-anxiety", "medium-time", "nature", "biophilie", "stress-relief", "immersif"),
             name = "Immersion Forêt",
@@ -338,7 +338,7 @@ object TechniquesRepository {
         ),
         "meditation-breath-awareness" to Technique(
             id = "meditation-breath-awareness",
-            icon = "self_improvement",
+            icon = "Techniques icons/icon_breath_awareness.png",
             iconColor = "amber",
             tags = listOf("moderate-anxiety", "medium-time", "pleine-conscience", "méditation", "attention", "débutant"),
             name = "Méditation Conscience du Souffle",

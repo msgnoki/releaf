@@ -94,6 +94,9 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
     
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    
     // Room pour la base de données locale
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")

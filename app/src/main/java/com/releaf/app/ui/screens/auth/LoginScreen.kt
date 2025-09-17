@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.releaf.app.ui.theme.MyApplicationTheme
+import com.releaf.app.ui.components.GoogleSignInButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,6 +38,7 @@ fun LoginScreen(
     onLoginClick: (email: String, password: String) -> Unit,
     onRegisterClick: () -> Unit,
     onForgotPasswordClick: () -> Unit,
+    onGoogleSignInClick: () -> Unit = {},
     isLoading: Boolean = false,
     errorMessage: String? = null,
     modifier: Modifier = Modifier
@@ -198,6 +200,15 @@ fun LoginScreen(
         
         Spacer(modifier = Modifier.height(24.dp))
         
+        // Google Sign-In Button
+        GoogleSignInButton(
+            onClick = onGoogleSignInClick,
+            isLoading = isLoading,
+            enabled = !isLoading
+        )
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
         // Register Button
         OutlinedButton(
             onClick = onRegisterClick,
@@ -228,7 +239,8 @@ fun LoginScreenPreview() {
         LoginScreen(
             onLoginClick = { _, _ -> },
             onRegisterClick = { },
-            onForgotPasswordClick = { }
+            onForgotPasswordClick = { },
+            onGoogleSignInClick = { }
         )
     }
 }
@@ -241,6 +253,7 @@ fun LoginScreenLoadingPreview() {
             onLoginClick = { _, _ -> },
             onRegisterClick = { },
             onForgotPasswordClick = { },
+            onGoogleSignInClick = { },
             isLoading = true
         )
     }
@@ -254,6 +267,7 @@ fun LoginScreenWithErrorPreview() {
             onLoginClick = { _, _ -> },
             onRegisterClick = { },
             onForgotPasswordClick = { },
+            onGoogleSignInClick = { },
             errorMessage = "Email ou mot de passe incorrect. Veuillez réessayer."
         )
     }
@@ -266,7 +280,8 @@ fun LoginScreenLightDarkPreview() {
         LoginScreen(
             onLoginClick = { _, _ -> },
             onRegisterClick = { },
-            onForgotPasswordClick = { }
+            onForgotPasswordClick = { },
+            onGoogleSignInClick = { }
         )
     }
 }
@@ -278,7 +293,8 @@ fun LoginScreenSizesPreview() {
         LoginScreen(
             onLoginClick = { _, _ -> },
             onRegisterClick = { },
-            onForgotPasswordClick = { }
+            onForgotPasswordClick = { },
+            onGoogleSignInClick = { }
         )
     }
 }
@@ -295,7 +311,8 @@ fun LoginScreenLandscapePreview() {
         LoginScreen(
             onLoginClick = { _, _ -> },
             onRegisterClick = { },
-            onForgotPasswordClick = { }
+            onForgotPasswordClick = { },
+            onGoogleSignInClick = { }
         )
     }
 }

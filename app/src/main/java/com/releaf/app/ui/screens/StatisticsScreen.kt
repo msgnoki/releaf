@@ -15,23 +15,16 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.releaf.app.ui.viewmodel.StatisticsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StatisticsScreen() {
-    // Mock data for demonstration - in a real app, this would come from a ViewModel
-    val mockStats = remember {
-        mapOf(
-            "totalSessions" to 45,
-            "totalMinutes" to 387,
-            "currentStreak" to 7,
-            "longestStreak" to 12,
-            "weeklyMinutes" to 68,
-            "averageMoodImprovement" to 2.3f,
-            "level" to 3,
-            "currentXp" to 280
-        )
-    }
+fun StatisticsScreen(
+    viewModel: StatisticsViewModel = viewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    val statistics = uiState.statistics
 
     Column(
         modifier = Modifier
@@ -45,16 +38,65 @@ fun StatisticsScreen() {
                     style = MaterialTheme.typography.headlineMedium
                 )
             },
+            actions = {
+                // Bouton temporaire pour créer des données de test
+                if (statistics == null || statistics.totalSessions == 0) {
+                    TextButton(
+                        onClick = { viewModel.createTestData() }
+                    ) {
+                        Text("Données test")
+                    }
+                }
+            },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.surface
             )
         )
 
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        when {
+            uiState.isLoading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+            uiState.errorMessage != null -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(48.dp)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = uiState.errorMessage ?: "Erreur inconnue",
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(
+                        onClick = { viewModel.refreshStatistics() }
+                    ) {
+                        Text("Réessayer")
+                    }
+                }
+            }
+            statistics != null -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
             item {
                 // Vue d'ensemble - Statistiques principales
                 Text(
@@ -70,13 +112,13 @@ fun StatisticsScreen() {
                 ) {
                     StatCard(
                         title = "Sessions totales",
-                        value = "${mockStats["totalSessions"]}",
+                        value = "${statistics.totalSessions}",
                         icon = Icons.Default.PlayArrow,
                         modifier = Modifier.weight(1f)
                     )
                     StatCard(
                         title = "Minutes totales",
-                        value = "${mockStats["totalMinutes"]}",
+                        value = "${statistics.totalMinutes}",
                         icon = Icons.Default.Timer,
                         modifier = Modifier.weight(1f)
                     )
@@ -90,13 +132,13 @@ fun StatisticsScreen() {
                 ) {
                     StatCard(
                         title = "Série actuelle",
-                        value = "${mockStats["currentStreak"]}",
+                        value = "${statistics.currentStreak}",
                         icon = Icons.Default.LocalFireDepartment,
                         modifier = Modifier.weight(1f)
                     )
                     StatCard(
                         title = "Meilleure série",
-                        value = "${mockStats["longestStreak"]}",
+                        value = "${statistics.longestStreak}",
                         icon = Icons.Default.EmojiEvents,
                         modifier = Modifier.weight(1f)
                     )
@@ -127,7 +169,7 @@ fun StatisticsScreen() {
                         ) {
                             Column {
                                 Text(
-                                    text = "${mockStats["weeklyMinutes"]}",
+                                    text = "${statistics.weeklyMinutes}",
                                     style = MaterialTheme.typography.headlineMedium,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.primary
@@ -140,7 +182,7 @@ fun StatisticsScreen() {
                             }
                             Column {
                                 Text(
-                                    text = "${(mockStats["averageMoodImprovement"] as Float).toInt()}",
+                                    text = "+${String.format("%.1f", statistics.averageMoodImprovement)}",
                                     style = MaterialTheme.typography.headlineMedium,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.primary
@@ -178,12 +220,12 @@ fun StatisticsScreen() {
                         ) {
                             Column {
                                 Text(
-                                    text = "Niveau ${mockStats["level"]}",
+                                    text = "Niveau ${statistics.level}",
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
-                                    text = "${mockStats["currentXp"]} XP",
+                                    text = "${statistics.currentXp} XP",
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -197,7 +239,7 @@ fun StatisticsScreen() {
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "${mockStats["level"]}",
+                                    text = "${statistics.level}",
                                     style = MaterialTheme.typography.titleLarge,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary
@@ -208,10 +250,10 @@ fun StatisticsScreen() {
                         Spacer(modifier = Modifier.height(16.dp))
                         
                         // Barre de progression vers le niveau suivant
-                        val currentXp = mockStats["currentXp"] as Int
-                        val currentLevel = mockStats["level"] as Int
-                        val nextLevelXp = (currentLevel + 1) * 100 // Simple calcul XP
-                        val progress = (currentXp % 100) / 100f
+                        val currentXp = statistics.currentXp
+                        val currentLevel = statistics.level
+                        val xpForCurrentLevel = currentXp
+                        val progress = (xpForCurrentLevel / 1000f).coerceAtMost(1f) // Progress vers niveau suivant
                         
                         LinearProgressIndicator(
                             progress = progress,
@@ -222,7 +264,7 @@ fun StatisticsScreen() {
                         Spacer(modifier = Modifier.height(8.dp))
                         
                         Text(
-                            text = "${currentXp % 100}/100 XP pour le niveau ${currentLevel + 1}",
+                            text = "${xpForCurrentLevel}/1000 XP pour le niveau ${currentLevel + 1}",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -247,19 +289,23 @@ fun StatisticsScreen() {
                     ) {
                         DetailStatRow(
                             title = "Durée moyenne des sessions",
-                            value = "${if ((mockStats["totalSessions"] as Int) > 0) (mockStats["totalMinutes"] as Int) / (mockStats["totalSessions"] as Int) else 0} min"
+                            value = "${statistics.averageSessionDuration} min"
                         )
                         DetailStatRow(
                             title = "Amélioration d'humeur moyenne",
-                            value = "+${String.format("%.1f", mockStats["averageMoodImprovement"] as Float)}"
+                            value = "+${String.format("%.1f", statistics.averageMoodImprovement)}"
                         )
                         DetailStatRow(
                             title = "Taux de completion",
-                            value = "95%"
+                            value = "${String.format("%.1f", statistics.completionRate)}%"
                         )
                         DetailStatRow(
-                            title = "Sessions ce mois",
-                            value = "12"
+                            title = "Minutes ce mois",
+                            value = "${statistics.monthlyMinutes}"
+                        )
+                        DetailStatRow(
+                            title = "Catégorie favorite",
+                            value = statistics.favoriteCategory
                         )
                     }
                 }
@@ -267,6 +313,16 @@ fun StatisticsScreen() {
 
             item {
                 Spacer(modifier = Modifier.height(100.dp)) // Bottom navigation padding
+            }
+                }
+            }
+            else -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("Aucune donnée disponible")
+                }
             }
         }
     }

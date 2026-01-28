@@ -13,10 +13,23 @@ class SessionRepository {
     private val firestore = FirebaseFirestore.getInstance()
     private val sessionsCollection = firestore.collection("sessions")
 
+    /**
+     * Crée une session avec un ID stable
+     * L'ID est généré côté client et injecté dans le document
+     */
     suspend fun createSession(session: Session): Result<String> {
         return try {
-            val documentRef = sessionsCollection.add(session).await()
-            Result.success(documentRef.id)
+            // Créer une référence de document avec un ID auto-généré
+            val documentRef = sessionsCollection.document()
+            val sessionId = documentRef.id
+
+            // Injecter l'ID dans la session avant sauvegarde
+            val sessionWithId = session.copy(id = sessionId)
+
+            // Sauvegarder avec l'ID inclus
+            documentRef.set(sessionWithId).await()
+
+            Result.success(sessionId)
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -25,7 +38,7 @@ class SessionRepository {
     suspend fun getSession(sessionId: String): Result<Session?> {
         return try {
             val document = sessionsCollection.document(sessionId).get().await()
-            val session = document.toObject<Session>()
+            val session = document.toObject<Session>()?.copy(id = document.id)
             Result.success(session)
         } catch (e: Exception) {
             Result.failure(e)
@@ -40,8 +53,10 @@ class SessionRepository {
                 .limit(limit.toLong())
                 .get()
                 .await()
-            
-            val sessions = documents.mapNotNull { it.toObject<Session>() }
+
+            val sessions = documents.mapNotNull { doc ->
+                doc.toObject<Session>()?.copy(id = doc.id)
+            }
             Result.success(sessions)
         } catch (e: Exception) {
             Result.failure(e)
@@ -55,14 +70,17 @@ class SessionRepository {
             .limit(limit.toLong())
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    close(error)
+                    // Ne pas fermer le flow pour une erreur temporaire, envoyer une liste vide
+                    trySend(emptyList())
                     return@addSnapshotListener
                 }
-                
-                val sessions = snapshot?.mapNotNull { it.toObject<Session>() } ?: emptyList()
+
+                val sessions = snapshot?.mapNotNull { doc ->
+                    doc.toObject<Session>()?.copy(id = doc.id)
+                } ?: emptyList()
                 trySend(sessions)
             }
-        
+
         awaitClose { listener.remove() }
     }
 
@@ -108,20 +126,22 @@ class SessionRepository {
                 .whereEqualTo("completed", true)
                 .get()
                 .await()
-            
-            val sessions = documents.mapNotNull { it.toObject<Session>() }
+
+            val sessions = documents.mapNotNull { doc ->
+                doc.toObject<Session>()?.copy(id = doc.id)
+            }
             val totalSessions = sessions.size
             val totalMinutes = sessions.sumOf { it.duration }
             val averageMoodImprovement = if (sessions.isNotEmpty()) {
                 sessions.map { it.moodAfter - it.moodBefore }.average().toFloat()
             } else 0f
-            
+
             val stats = TechniqueStats(
                 totalSessions = totalSessions,
                 totalMinutes = totalMinutes,
                 averageMoodImprovement = averageMoodImprovement
             )
-            
+
             Result.success(stats)
         } catch (e: Exception) {
             Result.failure(e)

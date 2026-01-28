@@ -14,15 +14,39 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 object ProgressService {
-    
+
     private val _userProgress = MutableStateFlow<UserProgress?>(null)
     val userProgress: Flow<UserProgress?> = _userProgress.asStateFlow()
-    
+
     private val _availableBadges = MutableStateFlow<List<Badge>>(emptyList())
     val availableBadges: Flow<List<Badge>> = _availableBadges.asStateFlow()
-    
+
+    // Track the current user ID to prevent data leaks between users
+    private var currentUserId: String? = null
+
     init {
         initializeBadges()
+    }
+
+    /**
+     * Reset all user-specific state.
+     * MUST be called on user logout to prevent data leaks to the next user.
+     */
+    fun reset() {
+        _userProgress.value = null
+        currentUserId = null
+        // Note: _availableBadges is not reset as it contains static badge definitions
+    }
+
+    /**
+     * Reset state if the user ID has changed (safety check).
+     */
+    private fun ensureCorrectUser(userId: String) {
+        if (currentUserId != null && currentUserId != userId) {
+            // User has changed without proper logout - reset state
+            reset()
+        }
+        currentUserId = userId
     }
     
     private fun initializeBadges() {
@@ -66,11 +90,12 @@ object ProgressService {
     }
     
     suspend fun initializeUserProgress(userId: String): UserProgress {
+        ensureCorrectUser(userId)
         val progress = UserProgress(userId = userId)
         _userProgress.value = progress
         return progress
     }
-    
+
     suspend fun recordSession(
         userId: String,
         techniqueId: String,
@@ -79,6 +104,7 @@ object ProgressService {
         moodAfter: Int,
         category: TechniqueCategory
     ): UserProgress {
+        ensureCorrectUser(userId)
         val currentProgress = _userProgress.value ?: initializeUserProgress(userId)
         val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
         

@@ -4,7 +4,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.userProfileChangeRequest
+import com.releaf.app.data.user.AnxietyLevel
 import com.releaf.app.data.user.User
+import com.releaf.app.services.ProgressService
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -39,29 +41,35 @@ class FirebaseAuthRepository(
         }
     }
     
-    suspend fun signUp(email: String, password: String, displayName: String): Result<Boolean> {
+    suspend fun signUp(
+        email: String,
+        password: String,
+        displayName: String,
+        anxietyLevel: AnxietyLevel = AnxietyLevel.MODERATE
+    ): Result<Boolean> {
         return try {
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             val firebaseUser = result.user ?: return Result.failure(Exception("User creation failed"))
-            
+
             // Update display name
             val profileUpdates = userProfileChangeRequest {
                 this.displayName = displayName
             }
             firebaseUser.updateProfile(profileUpdates).await()
-            
-            // Create user in local database
+
+            // Create user in local database with anxiety level
             val user = User(
                 uid = firebaseUser.uid,
                 email = firebaseUser.email ?: email,
                 displayName = displayName,
+                anxietyLevel = anxietyLevel,
                 createdAt = System.currentTimeMillis(),
                 lastLoginAt = System.currentTimeMillis()
             )
-            
+
             userRepository.insertUser(user)
             userRepository.createDefaultUserPreferences(user.uid)
-            
+
             Result.success(true)
         } catch (e: CancellationException) {
             throw e
@@ -135,6 +143,9 @@ class FirebaseAuthRepository(
     
     suspend fun signOut(): Result<Unit> {
         return try {
+            // Reset all singleton services to prevent data leaks
+            ProgressService.reset()
+
             auth.signOut()
             Result.success(Unit)
         } catch (e: Exception) {

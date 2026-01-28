@@ -80,14 +80,15 @@ class BadgeRepository {
             .whereEqualTo("userId", userId)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    close(error)
+                    // Ne pas fermer le flow pour une erreur temporaire
+                    trySend(emptyList())
                     return@addSnapshotListener
                 }
-                
+
                 val unlockedBadges = snapshot?.mapNotNull { it.toObject<UnlockedBadge>() } ?: emptyList()
                 trySend(unlockedBadges)
             }
-        
+
         awaitClose { listener.remove() }
     }
 
@@ -103,19 +104,16 @@ class BadgeRepository {
 
     suspend fun getUserBadgeStats(userId: String): Result<BadgeStats> {
         return try {
-            val unlockedResult = getUserUnlockedBadges(userId)
-            if (unlockedResult.isFailure) {
-                return Result.failure(unlockedResult.exceptionOrNull()!!)
+            // Récupérer les badges débloqués avec gestion sécurisée
+            val unlockedBadges = getUserUnlockedBadges(userId).getOrElse { error ->
+                return Result.failure(error)
             }
-            
-            val allBadgesResult = getAllBadgeDefinitions()
-            if (allBadgesResult.isFailure) {
-                return Result.failure(allBadgesResult.exceptionOrNull()!!)
+
+            // Récupérer toutes les définitions de badges avec gestion sécurisée
+            val allBadges = getAllBadgeDefinitions().getOrElse { error ->
+                return Result.failure(error)
             }
-            
-            val unlockedBadges = unlockedResult.getOrNull() ?: emptyList()
-            val allBadges = allBadgesResult.getOrNull() ?: emptyList()
-            
+
             val stats = BadgeStats(
                 totalUnlocked = unlockedBadges.size,
                 totalAvailable = allBadges.size,
@@ -123,7 +121,7 @@ class BadgeRepository {
                     .sortedByDescending { it.unlockedAt }
                     .take(3)
             )
-            
+
             Result.success(stats)
         } catch (e: Exception) {
             Result.failure(e)

@@ -53,7 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
-        buildConfig = false // Disable BuildConfig generation for faster builds
+        buildConfig = true // Enabled for secure configuration
     }
     composeOptions {
         // Use stable Compose compiler version
@@ -101,6 +101,13 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+
+    // SQLCipher pour le chiffrement de la base de données
+    implementation("net.zetetic:android-database-sqlcipher:4.5.4")
+    implementation("androidx.sqlite:sqlite-ktx:2.4.0")
+
+    // Security pour la gestion sécurisée des clés
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
     
     // DataStore pour les préférences
     implementation("androidx.datastore:datastore-preferences:1.0.0")

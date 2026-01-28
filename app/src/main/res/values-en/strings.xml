@@ -72,71 +72,6 @@
     <!-- Test/Debug -->
     <string name="simple_version_test">Simple version for testing</string>
     
-    <!-- Technique Names -->
-    <string name="technique_breathing_name">2-Minute Breathing</string>
-    <string name="technique_grounding_name">5-4-3-2-1 Grounding</string>
-    <string name="technique_guided_breathing_name">Guided Breathing</string>
-    <string name="technique_progressive_muscle_name">Progressive Muscle Relaxation</string>
-    <string name="technique_peaceful_visualization_name">Peaceful Visualization</string>
-    <string name="technique_thought_labeling_name">Thought Labeling</string>
-    <string name="technique_bubble_stress_name">Stress Relief Bubbles</string>
-    <string name="technique_sound_therapy_name">Sound Therapy</string>
-    <string name="technique_stress_ball_name">Stress Ball</string>
-    <string name="technique_breathing_stress_15_name">1-5 Stress Breathing</string>
-    <string name="technique_respiration_e12_name">Diaphragmatic Breathing</string>
-    <string name="technique_autogenic_training_name">Autogenic Training</string>
-    <string name="technique_breathing_box_name">Box Breathing</string>
-    <string name="technique_breathing_478_name">4-7-8 Breathing</string>
-    <string name="technique_body_scan_meditation_name">Body Scan</string>
-    <string name="technique_mindful_breathing_name">Mindful Breathing</string>
-    <string name="technique_loving_kindness_meditation_name">Loving Kindness Meditation</string>
-    <string name="technique_auto_hypnosis_autogenic_name">Autogenic Self-Hypnosis</string>
-    <string name="technique_forest_immersion_nature_name">Forest Immersion</string>
-    <string name="technique_meditation_breath_awareness_name">Breath Awareness Meditation</string>
-    
-    <!-- Technique Short Descriptions -->
-    <string name="technique_breathing_short_desc">Simple breathing exercise that calms your nervous system and reduces anxiety in minutes</string>
-    <string name="technique_grounding_short_desc">A sensory technique that pulls you out of anxious thoughts by focusing on what surrounds you now</string>
-    <string name="technique_guided_breathing_short_desc">Step-by-step breathing patterns to slow your heart rate and reduce tension</string>
-    <string name="technique_progressive_muscle_short_desc">Systematically tense and release muscle groups to release physical tension and anxiety</string>
-    <string name="technique_peaceful_visualization_short_desc">Guide your mind to a calm, safe place to create a sense of inner peace</string>
-    <string name="technique_thought_labeling_short_desc">Observe and categorize your anxious thoughts to reduce their emotional impact</string>
-    <string name="technique_bubble_stress_short_desc">A playful, soothing interaction to release stress through simple gestures</string>
-    <string name="technique_sound_therapy_short_desc">Healing sounds and frequencies that calm the mind and promote deep relaxation</string>
-    <string name="technique_stress_ball_short_desc">Interactive physics with a virtual stress ball to release tension</string>
-    <string name="technique_breathing_stress_15_short_desc">Counting 1-5 breathing technique to regain calm during stress surges</string>
-    <string name="technique_respiration_e12_short_desc">Deep diaphragmatic breathing technique to calm the mind and prevent hyperventilation</string>
-    <string name="technique_autogenic_training_short_desc">Deep relaxation method using self-suggestion to create sensations of heaviness and warmth</string>
-    <string name="technique_breathing_box_short_desc">4-4-4-4 breathing technique used by special forces to quickly regain calm</string>
-    <string name="technique_breathing_478_short_desc">Dr. Weil\'s technique for falling asleep: inhale 4s, hold 7s, exhale 8s</string>
-    <string name="technique_body_scan_meditation_short_desc">Mindfulness meditation that scans the body to develop body awareness and release tension</string>
-    <string name="technique_mindful_breathing_short_desc">Mindfulness meditation that develops presence by simply observing natural breathing</string>
-    <string name="technique_loving_kindness_meditation_short_desc">Metta meditation that cultivates compassion toward oneself and others to reduce emotional stress</string>
-    <string name="technique_auto_hypnosis_autogenic_short_desc">Self-hypnotic induction technique combining autogenic training and suggestions for deep relaxation</string>
-    <string name="technique_forest_immersion_nature_short_desc">Immersive mental escape into a forest environment with 3D sounds and sensory guidance</string>
-    <string name="technique_meditation_breath_awareness_short_desc">Fundamental mindfulness meditation using natural breathing as an anchor to develop present attention</string>
-    
-    <!-- Technique Full Descriptions -->
-    <string name="technique_breathing_desc">Simple technique to calm your nervous system</string>
-    <string name="technique_grounding_desc">The grounding technique uses your five senses to anchor you in the present moment. By noticing 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste, it interrupts the cycle of anxious thoughts.</string>
-    <string name="technique_guided_breathing_desc">Follow structured breathing exercises designed to regulate your autonomic nervous system. These visual guides help you maintain appropriate timing and rhythm.</string>
-    <string name="technique_progressive_muscle_desc">Anxiety often creates physical tension that you may not even notice. This technique teaches you to contract and then release different muscle groups.</string>
-    <string name="technique_peaceful_visualization_desc">Your mind has the power to create vivid, calming experiences through visualization. This technique guides you through peaceful scenarios.</string>
-    <string name="technique_thought_labeling_desc">Anxious thoughts can feel overwhelming when you treat them as absolute truths. This mindfulness practice teaches you to observe your thoughts with curiosity.</string>
-    <string name="technique_bubble_stress_desc">Sometimes the best way to handle anxiety is through gentle, playful distraction. This simple interactive activity helps redirect nervous energy.</string>
-    <string name="technique_sound_therapy_desc">Specific sound frequencies have shown their ability to influence brain waves and promote relaxation.</string>
-    <string name="technique_stress_ball_desc">Sometimes physical tension needs physical release. This virtual stress ball offers a satisfying tactile experience.</string>
-    <string name="technique_breathing_stress_15_desc">Breathing deeply while counting from 1 to 5 activates the parasympathetic system, promoting relaxation. Regular counting acts as an internal metronome, reducing mental load and facilitating self-regulation of heart rate and breathing.</string>
-    <string name="technique_respiration_e12_desc">Deep diaphragmatic breathing to calm the mind</string>
-    <string name="technique_autogenic_training_desc">Autogenic training is a self-hypnosis technique based on auto-suggestions. By mentally repeating formulas like \\"My right arm is heavy,\\" you activate the parasympathetic system and induce deep relaxation of body and mind.</string>
-    <string name="technique_breathing_box_desc">Box breathing consists of inhaling 4 seconds, holding 4 seconds, exhaling 4 seconds, and holding 4 seconds. This military technique activates the relaxation response, slows heart rate, and improves concentration.</string>
-    <string name="technique_breathing_478_desc">The 4-7-8 method consists of inhaling 4 seconds, holding breath 7 seconds, then exhaling 8 seconds. This rhythm slows breathing, stimulates the parasympathetic system, and promotes natural sleep.</string>
-    <string name="technique_body_scan_meditation_desc">Body scan involves focusing attention successively on each region of the body. This mindfulness practice helps release tension, calm the mind, and improve sleep quality.</string>
-    <string name="technique_mindful_breathing_desc">Mindful breathing invites you to observe breath as it is, without trying to change it. This mindfulness practice develops presence, reduces rumination, and improves concentration.</string>
-    <string name="technique_loving_kindness_meditation_desc">Loving-kindness meditation involves repeating positive wishes starting with yourself then expanding to loved ones and all beings. This practice promotes positive emotions and reduces rumination.</string>
-    <string name="technique_auto_hypnosis_autogenic_desc">Autogenic self-hypnosis combines autogenic training and hypnotic induction techniques to create a state of deep and controlled relaxation. This advanced technique guides you through sensations of heaviness, warmth, and cardiac regulation.</string>
-    <string name="technique_forest_immersion_nature_desc">Mental immersion in a forest environment</string>
-    <string name="technique_meditation_breath_awareness_desc">This fundamental meditation teaches you to pay attention to your natural breathing to cultivate mindfulness. By simply observing breathing sensations, you develop your capacity for attention and presence in the present moment.</string>
 
     <!-- Breathing Animation -->
     <string name="breathing_ready">Ready?</string>
@@ -178,4 +113,211 @@
     <string name="language_english">English</string>
     <string name="language_current">Current: <xliff:g id="language" example="English">%1$s</xliff:g></string>
     <string name="language_restart_required">The app will restart to apply the new language</string>
+    
+    <!-- Navigation Tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_favorites">Favorites</string>
+    <string name="tab_profile">Profile</string>
+    
+    <!-- Favorites -->
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_empty">No favorites</string>
+    <string name="favorites_empty_desc">Add your favorite techniques by tapping the heart in the exercises list</string>
+    
+    <!-- Profile -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_level">Level <xliff:g id="level" example="3">%1$d</xliff:g></string>
+    <string name="profile_xp"><xliff:g id="current" example="150">%1$d</xliff:g> / <xliff:g id="total" example="200">%2$d</xliff:g> XP</string>
+    <string name="profile_total_sessions">Total sessions</string>
+    <string name="profile_total_minutes">Total minutes</string>
+    <string name="profile_current_streak">Current streak</string>
+    <string name="profile_longest_streak">Longest streak</string>
+    <string name="profile_sessions_this_week">Sessions this week</string>
+    <string name="profile_minutes_this_week">Minutes this week</string>
+    <string name="profile_mood_improvement">Mood improvement</string>
+    <string name="profile_mood_history">Mood history</string>
+    <string name="profile_mood_before">Before</string>
+    <string name="profile_mood_after">After</string>
+    <string name="profile_badges">Badges</string>
+    <string name="profile_settings">Settings</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_logout">Logout</string>
+    <string name="profile_weekly_progress">Weekly progress</string>
+    <string name="profile_goal">Goal</string>
+    <string name="profile_sessions">sessions</string>
+    <string name="profile_user_not_logged_in">User not logged in</string>
+    <string name="profile_loading_error">Loading error: <xliff:g id="error" example="Network error">%1$s</xliff:g></string>
+    <string name="profile_stats_title">Statistics</string>
+    <string name="profile_this_week">This week</string>
+    <string name="profile_mood_empty">No mood data available yet.\nComplete a few sessions to see your progress!</string>
+    <string name="profile_mood_avg_improvement">Average improvement: <xliff:g id="value" example="2.5">%1$s</xliff:g> points</string>
+    <string name="profile_error_loading">Error loading profile</string>
+    
+    <!-- Session Completion -->
+    <string name="session_completion_title">Congratulations!</string>
+    <string name="session_completion_message">You completed the session "<xliff:g id="technique" example="Breathing">%1$s</xliff:g>"</string>
+    <string name="session_completion_duration">Duration: <xliff:g id="duration" example="5">%1$d</xliff:g> minute<xliff:g id="plural" example="s">%2$s</xliff:g></string>
+    <string name="session_completion_mood_question">How do you feel now?</string>
+    <string name="session_completion_mood_bad">😔 Bad</string>
+    <string name="session_completion_mood_good">😊 Very good</string>
+    <string name="session_completion_mood_rating"><xliff:g id="rating" example="7">%1$d</xliff:g>/10</string>
+    <string name="session_completion_notes_label">Notes (optional)</string>
+    <string name="session_completion_notes_placeholder">How was this session?</string>
+    <string name="session_completion_ignore">Skip</string>
+    <string name="session_completion_save">Save</string>
+    <string name="session_completion_improvement">Improvement: +<xliff:g id="points" example="2">%1$d</xliff:g> points 🎉</string>
+    
+    <!-- Common -->
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="all">All</string>
+    <string name="none">None</string>
+    <string name="unknown">Unknown</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    
+    <!-- Sound Therapy -->
+    <string name="sound_therapy_title">Sound Therapy</string>
+    <string name="sound_therapy_frequency_396">Liberation</string>
+    <string name="sound_therapy_frequency_396_desc">Liberation from guilt and fear</string>
+    <string name="sound_therapy_frequency_417">Change</string>
+    <string name="sound_therapy_frequency_417_desc">Facilitates change and undoing situations</string>
+    <string name="sound_therapy_frequency_528">Love</string>
+    <string name="sound_therapy_frequency_528_desc">Transformation and DNA repair</string>
+    <string name="sound_therapy_frequency_639">Connection</string>
+    <string name="sound_therapy_frequency_639_desc">Improves communication and relationships</string>
+    <string name="sound_therapy_frequency_741">Expression</string>
+    <string name="sound_therapy_frequency_741_desc">Awakening and self-expression</string>
+    <string name="sound_therapy_frequency_852">Intuition</string>
+    <string name="sound_therapy_frequency_852_desc">Return to spiritual order</string>
+    <string name="sound_therapy_frequency_963">Unity</string>
+    <string name="sound_therapy_frequency_963_desc">Connection with universal energy</string>
+    <string name="sound_therapy_frequency_174">Foundation</string>
+    <string name="sound_therapy_frequency_174_desc">Natural foundation for evolution</string>
+    <string name="sound_therapy_binaural_none">None</string>
+    <string name="sound_therapy_binaural_none_desc">Pure tone without beats</string>
+    <string name="sound_therapy_binaural_delta">Delta</string>
+    <string name="sound_therapy_binaural_delta_desc">Deep sleep and healing</string>
+    <string name="sound_therapy_binaural_theta">Theta</string>
+    <string name="sound_therapy_binaural_theta_desc">Deep meditation and creativity</string>
+    <string name="sound_therapy_binaural_alpha">Alpha</string>
+    <string name="sound_therapy_binaural_alpha_desc">Relaxation and concentration</string>
+    <string name="sound_therapy_binaural_beta">Beta</string>
+    <string name="sound_therapy_binaural_beta_desc">Active concentration and alertness</string>
+    <string name="sound_therapy_modulation_none">None</string>
+    <string name="sound_therapy_modulation_none_desc">Pure and stable sound</string>
+    <string name="sound_therapy_modulation_subtle">Subtle</string>
+    <string name="sound_therapy_modulation_subtle_desc">Gentle and soothing variation</string>
+    <string name="sound_therapy_modulation_moderate">Moderate</string>
+    <string name="sound_therapy_modulation_moderate_desc">Relaxing undulation</string>
+    <string name="sound_therapy_modulation_intense">Intense</string>
+    <string name="sound_therapy_modulation_intense_desc">Deep modulation</string>
+    <string name="sound_therapy_modulation_dynamic">Dynamic</string>
+    <string name="sound_therapy_modulation_dynamic_desc">Complex variation</string>
+    
+    <!-- Exercise Status -->
+    <string name="exercise_get_ready">Get ready...</string>
+    <string name="exercise_in_progress">In progress</string>
+    <string name="exercise_paused">Paused</string>
+    <string name="exercise_time_remaining">Time remaining: <xliff:g id="time" example="5:30">%1$s</xliff:g></string>
+    
+    <!-- Buttons -->
+    <string name="start">Start</string>
+    
+    <!-- Technique Breathing -->
+    <string name="technique_breathing_name">2-Minute Breathing</string>
+    <string name="technique_breathing_short_desc">Simple breathing exercise that calms your nervous system and reduces anxiety in minutes</string>
+    <string name="technique_breathing_desc">When anxiety strikes, your breathing becomes shallow and rapid. This technique teaches you simple breathing patterns that activate your body\'s natural relaxation response.</string>
+    
+    <!-- Technique Grounding -->
+    <string name="technique_grounding_name">5-4-3-2-1 Grounding</string>
+    <string name="technique_grounding_short_desc">A sensory technique that pulls you out of anxious thoughts by focusing on what surrounds you now</string>
+    <string name="technique_grounding_desc">When anxiety carries you away in spiraling thoughts, this technique firmly brings you back to the present moment using your five senses. It effectively interrupts anxious thought patterns.</string>
+    
+    <!-- Technique Guided Breathing -->
+    <string name="technique_guided_breathing_name">Guided Breathing</string>
+    <string name="technique_guided_breathing_short_desc">Step-by-step breathing patterns to slow your heart rate and reduce tension</string>
+    <string name="technique_guided_breathing_desc">A series of structured breathing exercises that guide you through different techniques, from simple to advanced, to master breathing control and your mental state.</string>
+    
+    <!-- Technique Progressive Muscle -->
+    <string name="technique_progressive_muscle_name">Progressive Muscle Relaxation</string>
+    <string name="technique_progressive_muscle_short_desc">Systematically tense and release muscle groups to free physical tension and anxiety</string>
+    <string name="technique_progressive_muscle_desc">This classic technique teaches you to identify and release physical tension by contracting then releasing different muscle groups, creating deep whole-body relaxation.</string>
+    
+    <!-- Technique Peaceful Visualization -->
+    <string name="technique_peaceful_visualization_name">Peaceful Visualization</string>
+    <string name="technique_peaceful_visualization_short_desc">Guide your mind to a calm and safe place to create a sense of inner peace</string>
+    <string name="technique_peaceful_visualization_desc">Use the power of your imagination to create a soothing mental refuge. This technique transports you to peaceful environments that can be revisited whenever needed.</string>
+    
+    <!-- Technique Thought Labeling -->
+    <string name="technique_thought_labeling_name">Thought Labeling</string>
+    <string name="technique_thought_labeling_short_desc">Observe and categorize your anxious thoughts to reduce their emotional impact</string>
+    <string name="technique_thought_labeling_desc">By learning to observe your thoughts like a neutral scientist, you can reduce their emotional charge and develop a more balanced perspective on your concerns.</string>
+    
+    <!-- Technique Bubble Stress -->
+    <string name="technique_bubble_stress_name">Stress Relief Bubbles</string>
+    <string name="technique_bubble_stress_short_desc">A playful and soothing interaction to release stress through simple gestures</string>
+    <string name="technique_bubble_stress_desc">Combine play and relaxation with this interactive activity that transforms tension into pleasure, offering therapeutic distraction during difficult moments.</string>
+    
+    <!-- Technique Sound Therapy -->
+    <string name="technique_sound_therapy_name">Sound Therapy</string>
+    <string name="technique_sound_therapy_short_desc">Therapeutic sounds and frequencies that calm the mind and promote deep relaxation</string>
+    <string name="technique_sound_therapy_desc">Explore the healing power of sound with specially selected frequencies to promote healing, reduce anxiety, and induce deep meditative states.</string>
+    
+    <!-- Technique Stress Ball -->
+    <string name="technique_stress_ball_name">Stress Ball</string>
+    <string name="technique_stress_ball_short_desc">Interactive physics with a virtual stress ball to release tensions</string>
+    <string name="technique_stress_ball_desc">Use this tactile simulation to channel and release nervous energy through physical interaction, providing immediate outlet for accumulated stress.</string>
+    
+    <!-- More techniques... -->
+    <string name="technique_breathing_stress_15_name">Anti-stress breathing (1-5)</string>
+    <string name="technique_breathing_stress_15_short_desc">Breathing technique counting 1-5 to regain calm during stress peaks</string>
+    <string name="technique_breathing_stress_15_desc">A quick and effective method using simple breathing countdown to immediately interrupt stress reactions and restore calm state.</string>
+    
+    <string name="technique_respiration_e12_name">Diaphragmatic (abdominal) breathing</string>
+    <string name="technique_respiration_e12_short_desc">Deep breathing technique with the diaphragm to calm the mind and prevent hyperventilation</string>
+    <string name="technique_respiration_e12_desc">Learn to breathe with your diaphragm rather than your chest to maximize oxygenation and activate your body\'s natural relaxation response.</string>
+    
+    <string name="technique_autogenic_training_name">Autogenic Training</string>
+    <string name="technique_autogenic_training_short_desc">Deep relaxation method using self-suggestion to create sensations of heaviness and warmth</string>
+    <string name="technique_autogenic_training_desc">A physician-developed self-hypnosis technique that uses self-suggestion phrases to induce deep and restorative relaxation state.</string>
+    
+    <string name="technique_breathing_box_name">Box Breathing</string>
+    <string name="technique_breathing_box_short_desc">4-4-4-4 breathing technique used by special forces to quickly regain calm</string>
+    <string name="technique_breathing_box_desc">Also known as tactical breathing, this proven method is used by military and first responders to maintain calm under pressure.</string>
+    
+    <string name="technique_breathing_478_name">4-7-8 Breathing</string>
+    <string name="technique_breathing_478_short_desc">Dr. Weil\'s technique for falling asleep: inhale 4s, hold 7s, exhale 8s</string>
+    <string name="technique_breathing_478_desc">Developed by Dr. Andrew Weil, this powerful technique can induce relaxation in under a minute and is particularly effective for falling asleep.</string>
+    
+    <string name="technique_body_scan_meditation_name">Body Scan</string>
+    <string name="technique_body_scan_meditation_short_desc">Mindfulness meditation that scans the body to develop body awareness and release tensions</string>
+    <string name="technique_body_scan_meditation_desc">A fundamental meditative practice that develops body awareness by systematically directing attention through each part of the body.</string>
+    
+    <string name="technique_mindful_breathing_name">Mindful Breathing</string>
+    <string name="technique_mindful_breathing_short_desc">Mindfulness meditation that develops presence by simply observing natural breath</string>
+    <string name="technique_mindful_breathing_desc">The foundation of all mindfulness practice, this meditation teaches you to be present by observing your natural breathing without modifying it.</string>
+    
+    <string name="technique_loving_kindness_meditation_name">Loving-Kindness Meditation</string>
+    <string name="technique_loving_kindness_meditation_short_desc">Metta meditation that cultivates compassion for oneself and others to reduce emotional stress</string>
+    <string name="technique_loving_kindness_meditation_desc">This traditional Buddhist practice develops compassion and self-love, creating a powerful antidote to self-criticism and social anxiety.</string>
+    
+    <string name="technique_auto_hypnosis_autogenic_name">Autogenic Self-Hypnosis</string>
+    <string name="technique_auto_hypnosis_autogenic_short_desc">Self-hypnotic induction technique combining autogenic training and suggestions for deep relaxation</string>
+    <string name="technique_auto_hypnosis_autogenic_desc">An advanced approach combining autogenic training principles with self-hypnosis to achieve exceptionally deep relaxation states.</string>
+    
+    <string name="technique_forest_immersion_nature_name">Forest Immersion</string>
+    <string name="technique_forest_immersion_nature_short_desc">Immersive mental escape into a forest environment with 3D sounds and sensory guidance</string>
+    <string name="technique_forest_immersion_nature_desc">Inspired by Japanese \"forest bathing\" (shinrin-yoku), this immersive experience transports you to a soothing forest environment to reduce stress and restore mental balance.</string>
+    
+    <string name="technique_meditation_breath_awareness_name">Breath Awareness Meditation</string>
+    <string name="technique_meditation_breath_awareness_short_desc">Mindfulness meditation using natural breathing as anchor to develop present attention</string>
+    <string name="technique_meditation_breath_awareness_desc">A classic meditation that uses breathing as an anchoring point to develop concentration and presence, the foundation of all contemplative practice.</string>
 </resources>

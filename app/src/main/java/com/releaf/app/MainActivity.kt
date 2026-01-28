@@ -1,5 +1,7 @@
 package com.releaf.app
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,13 +22,20 @@ import com.releaf.app.ui.navigation.BottomNavigationBar
 import com.releaf.app.ui.navigation.shouldShowBottomNav
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        private const val EXTRA_LANGUAGE_CHANGED = "language_changed"
+
+        fun restart(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.putExtra(EXTRA_LANGUAGE_CHANGED, true)
+            context.startActivity(intent)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        // Apply language preference
-        val languagePreferences = LanguagePreferences(this)
-        languagePreferences.applyLanguage(this)
-        
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
@@ -34,6 +43,15 @@ class MainActivity : ComponentActivity() {
                 CalmApp(navController = navController)
             }
         }
+    }
+
+    /**
+     * Applique la langue préférée au contexte de l'activité.
+     * Cette méthode est appelée avant onCreate.
+     */
+    override fun attachBaseContext(newBase: Context?) {
+        val wrappedContext = newBase?.let { LanguagePreferences.wrapContext(it) }
+        super.attachBaseContext(wrappedContext ?: newBase)
     }
 }
 

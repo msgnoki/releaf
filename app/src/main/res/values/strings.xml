@@ -77,71 +77,6 @@
     <!-- Test/Debug -->
     <string name="simple_version_test">Version simple pour les tests</string>
     
-    <!-- Technique Names -->
-    <string name="technique_breathing_name">Respiration 2 Minutes</string>
-    <string name="technique_grounding_name">Ancrage 5-4-3-2-1</string>
-    <string name="technique_guided_breathing_name">Respiration Guidée</string>
-    <string name="technique_progressive_muscle_name">Relaxation Musculaire Progressive</string>
-    <string name="technique_peaceful_visualization_name">Visualisation Paisible</string>
-    <string name="technique_thought_labeling_name">Étiquetage des Pensées</string>
-    <string name="technique_bubble_stress_name">Bulles Anti-Stress</string>
-    <string name="technique_sound_therapy_name">Thérapie Sonore</string>
-    <string name="technique_stress_ball_name">Balle Anti-Stress</string>
-    <string name="technique_breathing_stress_15_name">Respiration anti-stress (1-5)</string>
-    <string name="technique_respiration_e12_name">Respiration diaphragmatique (abdominale)</string>
-    <string name="technique_autogenic_training_name">Training autogène</string>
-    <string name="technique_breathing_box_name">Respiration carrée</string>
-    <string name="technique_breathing_478_name">Respiration 4-7-8</string>
-    <string name="technique_body_scan_meditation_name">Body scan</string>
-    <string name="technique_mindful_breathing_name">Respiration consciente</string>
-    <string name="technique_loving_kindness_meditation_name">Méditation bienveillante</string>
-    <string name="technique_auto_hypnosis_autogenic_name">Auto-hypnose Autogène</string>
-    <string name="technique_forest_immersion_nature_name">Immersion Forêt</string>
-    <string name="technique_meditation_breath_awareness_name">Méditation Conscience du Souffle</string>
-    
-    <!-- Technique Short Descriptions -->
-    <string name="technique_breathing_short_desc">Exercice de respiration simple qui calme votre système nerveux et réduit l\'anxiété en quelques minutes</string>
-    <string name="technique_grounding_short_desc">Une technique sensorielle qui vous sort des pensées anxieuses en vous concentrant sur ce qui vous entoure maintenant</string>
-    <string name="technique_guided_breathing_short_desc">Modèles de respiration étape par étape pour ralentir votre rythme cardiaque et réduire la tension</string>
-    <string name="technique_progressive_muscle_short_desc">Tendez et relâchez systématiquement les groupes musculaires pour libérer la tension physique et l\'anxiété</string>
-    <string name="technique_peaceful_visualization_short_desc">Guidez votre esprit vers un endroit calme et sécuritaire pour créer un sentiment de paix intérieure</string>
-    <string name="technique_thought_labeling_short_desc">Observez et catégorisez vos pensées anxieuses pour réduire leur impact émotionnel</string>
-    <string name="technique_bubble_stress_short_desc">Une interaction ludique et apaisante pour libérer le stress par des gestes simples</string>
-    <string name="technique_sound_therapy_short_desc">Sons thérapeutiques et fréquences qui calment l\'esprit et favorisent la relaxation profonde</string>
-    <string name="technique_stress_ball_short_desc">Physique interactive avec une balle anti-stress virtuelle pour libérer les tensions</string>
-    <string name="technique_breathing_stress_15_short_desc">Technique de respiration en comptant 1-5 pour retrouver le calme lors des pics de stress</string>
-    <string name="technique_respiration_e12_short_desc">Technique de respiration profonde avec le diaphragme pour calmer l\'esprit et prévenir l\'hyperventilation</string>
-    <string name="technique_autogenic_training_short_desc">Méthode de relaxation profonde utilisant l\'auto-suggestion pour créer des sensations de lourdeur et de chaleur</string>
-    <string name="technique_breathing_box_short_desc">Technique de respiration 4-4-4-4 utilisée par les forces spéciales pour retrouver rapidement le calme</string>
-    <string name="technique_breathing_478_short_desc">Technique du Dr. Weil pour l\'endormissement : inspirez 4s, retenez 7s, expirez 8s</string>
-    <string name="technique_body_scan_meditation_short_desc">Méditation de pleine conscience qui parcourt le corps pour développer la conscience corporelle et relâcher les tensions</string>
-    <string name="technique_mindful_breathing_short_desc">Méditation mindfulness qui développe la présence en observant simplement le souffle naturel</string>
-    <string name="technique_loving_kindness_meditation_short_desc">Méditation Metta qui cultive la compassion envers soi-même et les autres pour réduire le stress émotionnel</string>
-    <string name="technique_auto_hypnosis_autogenic_short_desc">Technique d\'induction auto-hypnotique combinant entraînement autogène et suggestions pour une relaxation profonde</string>
-    <string name="technique_forest_immersion_nature_short_desc">Évasion mentale immersive dans un environnement forestier avec sons 3D et guidage sensoriel</string>
-    <string name="technique_meditation_breath_awareness_short_desc">Méditation de pleine conscience utilisant la respiration naturelle comme ancre pour développer l\'attention présente</string>
-    
-    <!-- Technique Full Descriptions -->
-    <string name="technique_breathing_desc">Technique simple pour calmer votre système nerveux</string>
-    <string name="technique_grounding_desc">Utilisez vos cinq sens pour vous ancrer dans le présent</string>
-    <string name="technique_guided_breathing_desc">Exercices structurés pour réguler votre respiration</string>
-    <string name="technique_progressive_muscle_desc">Relâchez la tension physique groupe par groupe</string>
-    <string name="technique_peaceful_visualization_desc">Créez des expériences apaisantes par la visualisation</string>
-    <string name="technique_thought_labeling_desc">Observez vos pensées avec curiosité et détachement</string>
-    <string name="technique_bubble_stress_desc">Activité ludique pour rediriger l\'énergie nerveuse</string>
-    <string name="technique_sound_therapy_desc">Sons thérapeutiques pour favoriser la relaxation</string>
-    <string name="technique_stress_ball_desc">Expérience tactile pour libérer la tension</string>
-    <string name="technique_breathing_stress_15_desc">Comptage rythmé pour activer la détente</string>
-    <string name="technique_respiration_e12_desc">Respiration profonde pour calmer l\'esprit</string>
-    <string name="technique_autogenic_training_desc">Technique d\'auto-hypnose par suggestions</string>
-    <string name="technique_breathing_box_desc">Technique militaire 4-4-4-4 pour la concentration</string>
-    <string name="technique_breathing_478_desc">Méthode du Dr Weil pour favoriser le sommeil</string>
-    <string name="technique_body_scan_meditation_desc">Attention successive sur chaque région corporelle</string>
-    <string name="technique_mindful_breathing_desc">Observer le souffle naturel sans le modifier</string>
-    <string name="technique_loving_kindness_meditation_desc">Méditation de bienveillance envers soi et autrui</string>
-    <string name="technique_auto_hypnosis_autogenic_desc">Relaxation profonde par auto-hypnose contrôlée</string>
-    <string name="technique_forest_immersion_nature_desc">Immersion mentale dans un environnement forestier</string>
-    <string name="technique_meditation_breath_awareness_desc">Méditation de base utilisant la respiration naturelle</string>
     
     <!-- Duration Labels -->
     <string name="duration_2_3_min">2-3 min</string>
@@ -183,4 +118,211 @@
     <string name="language_english">English</string>
     <string name="language_current">Actuelle : <xliff:g id="language" example="Français">%1$s</xliff:g></string>
     <string name="language_restart_required">L\'application redémarrera pour appliquer la nouvelle langue</string>
+    
+    <!-- Navigation Tabs -->
+    <string name="tab_home">Accueil</string>
+    <string name="tab_favorites">Favoris</string>
+    <string name="tab_profile">Profil</string>
+    
+    <!-- Favorites -->
+    <string name="favorites_title">Favoris</string>
+    <string name="favorites_empty">Aucun favori</string>
+    <string name="favorites_empty_desc">Ajoutez vos techniques préférées en appuyant sur le cœur dans la liste des exercices</string>
+    
+    <!-- Profile -->
+    <string name="profile_title">Profil</string>
+    <string name="profile_level">Niveau <xliff:g id="level" example="3">%1$d</xliff:g></string>
+    <string name="profile_xp"><xliff:g id="current" example="150">%1$d</xliff:g> / <xliff:g id="total" example="200">%2$d</xliff:g> XP</string>
+    <string name="profile_total_sessions">Sessions totales</string>
+    <string name="profile_total_minutes">Minutes totales</string>
+    <string name="profile_current_streak">Série actuelle</string>
+    <string name="profile_longest_streak">Plus longue série</string>
+    <string name="profile_sessions_this_week">Sessions cette semaine</string>
+    <string name="profile_minutes_this_week">Minutes cette semaine</string>
+    <string name="profile_mood_improvement">Amélioration humeur</string>
+    <string name="profile_mood_history">Historique humeur</string>
+    <string name="profile_mood_before">Avant</string>
+    <string name="profile_mood_after">Après</string>
+    <string name="profile_badges">Badges</string>
+    <string name="profile_settings">Paramètres</string>
+    <string name="profile_language">Langue</string>
+    <string name="profile_logout">Déconnexion</string>
+    <string name="profile_weekly_progress">Progression hebdomadaire</string>
+    <string name="profile_goal">Objectif</string>
+    <string name="profile_sessions">sessions</string>
+    <string name="profile_user_not_logged_in">Utilisateur non connecté</string>
+    <string name="profile_loading_error">Erreur lors du chargement : <xliff:g id="error" example="Network error">%1$s</xliff:g></string>
+    <string name="profile_stats_title">Statistiques</string>
+    <string name="profile_this_week">Cette semaine</string>
+    <string name="profile_mood_empty">Pas encore de données d\'humeur disponibles.\nComplétez quelques sessions pour voir votre évolution !</string>
+    <string name="profile_mood_avg_improvement">Amélioration moyenne: <xliff:g id="value" example="2.5">%1$s</xliff:g> points</string>
+    <string name="profile_error_loading">Erreur lors du chargement du profil</string>
+    
+    <!-- Session Completion -->
+    <string name="session_completion_title">Félicitations !</string>
+    <string name="session_completion_message">Vous avez terminé la session « <xliff:g id="technique" example="Respiration">%1$s</xliff:g> »</string>
+    <string name="session_completion_duration">Durée: <xliff:g id="duration" example="5">%1$d</xliff:g> minute<xliff:g id="plural" example="s">%2$s</xliff:g></string>
+    <string name="session_completion_mood_question">Comment vous sentez-vous maintenant ?</string>
+    <string name="session_completion_mood_bad">😔 Mal</string>
+    <string name="session_completion_mood_good">😊 Très bien</string>
+    <string name="session_completion_mood_rating"><xliff:g id="rating" example="7">%1$d</xliff:g>/10</string>
+    <string name="session_completion_notes_label">Notes (optionnel)</string>
+    <string name="session_completion_notes_placeholder">Comment s\'est passée cette session ?</string>
+    <string name="session_completion_ignore">Ignorer</string>
+    <string name="session_completion_save">Enregistrer</string>
+    <string name="session_completion_improvement">Amélioration: +<xliff:g id="points" example="2">%1$d</xliff:g> points 🎉</string>
+    
+    <!-- Common -->
+    <string name="loading">Chargement...</string>
+    <string name="error">Erreur</string>
+    <string name="retry">Réessayer</string>
+    <string name="close">Fermer</string>
+    <string name="save">Enregistrer</string>
+    <string name="delete">Supprimer</string>
+    <string name="edit">Modifier</string>
+    <string name="search">Rechercher</string>
+    <string name="filter">Filtrer</string>
+    <string name="all">Tous</string>
+    <string name="none">Aucun</string>
+    <string name="unknown">Inconnu</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    
+    <!-- Sound Therapy -->
+    <string name="sound_therapy_title">Thérapie sonore</string>
+    <string name="sound_therapy_frequency_396">Libération</string>
+    <string name="sound_therapy_frequency_396_desc">Libération de la culpabilité et de la peur</string>
+    <string name="sound_therapy_frequency_417">Changement</string>
+    <string name="sound_therapy_frequency_417_desc">Facilite le changement et défait les situations</string>
+    <string name="sound_therapy_frequency_528">Amour</string>
+    <string name="sound_therapy_frequency_528_desc">Transformation et réparation de l\'ADN</string>
+    <string name="sound_therapy_frequency_639">Connexion</string>
+    <string name="sound_therapy_frequency_639_desc">Améliore la communication et les relations</string>
+    <string name="sound_therapy_frequency_741">Expression</string>
+    <string name="sound_therapy_frequency_741_desc">Éveil et expression de soi</string>
+    <string name="sound_therapy_frequency_852">Intuition</string>
+    <string name="sound_therapy_frequency_852_desc">Retour à l\'ordre spirituel</string>
+    <string name="sound_therapy_frequency_963">Unité</string>
+    <string name="sound_therapy_frequency_963_desc">Connexion avec l\'énergie universelle</string>
+    <string name="sound_therapy_frequency_174">Fondation</string>
+    <string name="sound_therapy_frequency_174_desc">Base naturelle pour l\'évolution</string>
+    <string name="sound_therapy_binaural_none">Aucun</string>
+    <string name="sound_therapy_binaural_none_desc">Tonalité pure sans battements</string>
+    <string name="sound_therapy_binaural_delta">Delta</string>
+    <string name="sound_therapy_binaural_delta_desc">Sommeil profond et guérison</string>
+    <string name="sound_therapy_binaural_theta">Theta</string>
+    <string name="sound_therapy_binaural_theta_desc">Méditation profonde et créativité</string>
+    <string name="sound_therapy_binaural_alpha">Alpha</string>
+    <string name="sound_therapy_binaural_alpha_desc">Relaxation et concentration</string>
+    <string name="sound_therapy_binaural_beta">Beta</string>
+    <string name="sound_therapy_binaural_beta_desc">Concentration active et éveil</string>
+    <string name="sound_therapy_modulation_none">Aucune</string>
+    <string name="sound_therapy_modulation_none_desc">Son pur et stable</string>
+    <string name="sound_therapy_modulation_subtle">Subtile</string>
+    <string name="sound_therapy_modulation_subtle_desc">Variation douce et apaisante</string>
+    <string name="sound_therapy_modulation_moderate">Modérée</string>
+    <string name="sound_therapy_modulation_moderate_desc">Ondulation relaxante</string>
+    <string name="sound_therapy_modulation_intense">Intense</string>
+    <string name="sound_therapy_modulation_intense_desc">Modulation profonde</string>
+    <string name="sound_therapy_modulation_dynamic">Dynamique</string>
+    <string name="sound_therapy_modulation_dynamic_desc">Variation complexe</string>
+    
+    <!-- Exercise Status -->
+    <string name="exercise_get_ready">Préparez-vous...</string>
+    <string name="exercise_in_progress">En cours</string>
+    <string name="exercise_paused">En pause</string>
+    <string name="exercise_time_remaining">Temps restant : <xliff:g id="time" example="5:30">%1$s</xliff:g></string>
+    
+    <!-- Buttons -->
+    <string name="start">Commencer</string>
+    
+    <!-- Technique Breathing -->
+    <string name="technique_breathing_name">Respiration 2 Minutes</string>
+    <string name="technique_breathing_short_desc">Exercice de respiration simple qui calme votre système nerveux et réduit l\'anxiété en quelques minutes</string>
+    <string name="technique_breathing_desc">Quand l\'anxiété frappe, votre respiration devient superficielle et rapide. Cette technique vous enseigne des modèles de respiration simples qui activent la réponse naturelle de relaxation de votre corps.</string>
+    
+    <!-- Technique Grounding -->
+    <string name="technique_grounding_name">Ancrage 5-4-3-2-1</string>
+    <string name="technique_grounding_short_desc">Une technique sensorielle qui vous sort des pensées anxieuses en vous concentrant sur ce qui vous entoure maintenant</string>
+    <string name="technique_grounding_desc">Lorsque l\'anxiété vous emporte dans des pensées en spirale, cette technique vous ramène fermement dans le moment présent en utilisant vos cinq sens. Elle interrompt efficacement les schémas de pensée anxieuse.</string>
+    
+    <!-- Technique Guided Breathing -->
+    <string name="technique_guided_breathing_name">Respiration Guidée</string>
+    <string name="technique_guided_breathing_short_desc">Modèles de respiration étape par étape pour ralentir votre rythme cardiaque et réduire la tension</string>
+    <string name="technique_guided_breathing_desc">Une série d\'exercices de respiration structurés qui vous guident à travers différentes techniques, des plus simples aux plus avancées, pour maîtriser le contrôle de votre respiration et votre état mental.</string>
+    
+    <!-- Technique Progressive Muscle -->
+    <string name="technique_progressive_muscle_name">Relaxation Musculaire Progressive</string>
+    <string name="technique_progressive_muscle_short_desc">Tendez et relâchez systématiquement les groupes musculaires pour libérer la tension physique et l\'anxiété</string>
+    <string name="technique_progressive_muscle_desc">Cette technique classique vous apprend à identifier et relâcher la tension physique en contractant puis en relâchant différents groupes musculaires, créant une relaxation profonde de tout le corps.</string>
+    
+    <!-- Technique Peaceful Visualization -->
+    <string name="technique_peaceful_visualization_name">Visualisation Paisible</string>
+    <string name="technique_peaceful_visualization_short_desc">Guidez votre esprit vers un endroit calme et sécuritaire pour créer un sentiment de paix intérieure</string>
+    <string name="technique_peaceful_visualization_desc">Utilisez le pouvoir de votre imagination pour créer un refuge mental apaisant. Cette technique vous transporte vers des environnements paisibles qui peuvent être revisités quand vous en avez besoin.</string>
+    
+    <!-- Technique Thought Labeling -->
+    <string name="technique_thought_labeling_name">Étiquetage des Pensées</string>
+    <string name="technique_thought_labeling_short_desc">Observez et catégorisez vos pensées anxieuses pour réduire leur impact émotionnel</string>
+    <string name="technique_thought_labeling_desc">En apprenant à observer vos pensées comme un scientifique neutre, vous pouvez réduire leur charge émotionnelle et développer une perspective plus équilibrée sur vos préoccupations.</string>
+    
+    <!-- Technique Bubble Stress -->
+    <string name="technique_bubble_stress_name">Bulles Anti-Stress</string>
+    <string name="technique_bubble_stress_short_desc">Une interaction ludique et apaisante pour libérer le stress par des gestes simples</string>
+    <string name="technique_bubble_stress_desc">Combinez jeu et relaxation avec cette activité interactive qui transforme la tension en plaisir, offrant une distraction thérapeutique pendant les moments difficiles.</string>
+    
+    <!-- Technique Sound Therapy -->
+    <string name="technique_sound_therapy_name">Thérapie Sonore</string>
+    <string name="technique_sound_therapy_short_desc">Sons thérapeutiques et fréquences qui calment l\'esprit et favorisent la relaxation profonde</string>
+    <string name="technique_sound_therapy_desc">Explorez le pouvoir curatif du son avec des fréquences spécialement sélectionnées pour promouvoir la guérison, réduire l\'anxiété et induire des états méditatifs profonds.</string>
+    
+    <!-- Technique Stress Ball -->
+    <string name="technique_stress_ball_name">Balle Anti-Stress</string>
+    <string name="technique_stress_ball_short_desc">Physique interactive avec une balle anti-stress virtuelle pour libérer les tensions</string>
+    <string name="technique_stress_ball_desc">Utilisez cette simulation tactile pour canaliser et libérer l\'énergie nerveuse à travers l\'interaction physique, offrant un exutoire immédiat pour le stress accumulé.</string>
+    
+    <!-- More techniques... -->
+    <string name="technique_breathing_stress_15_name">Respiration anti-stress (1-5)</string>
+    <string name="technique_breathing_stress_15_short_desc">Technique de respiration en comptant 1-5 pour retrouver le calme lors des pics de stress</string>
+    <string name="technique_breathing_stress_15_desc">Une méthode rapide et efficace utilisant un simple décompte respiratoire pour interrompre immédiatement les réactions de stress et restaurer un état de calme.</string>
+    
+    <string name="technique_respiration_e12_name">Respiration diaphragmatique (abdominale)</string>
+    <string name="technique_respiration_e12_short_desc">Technique de respiration profonde avec le diaphragme pour calmer l\'esprit et prévenir l\'hyperventilation</string>
+    <string name="technique_respiration_e12_desc">Apprenez à respirer avec votre diaphragme plutôt qu\'avec votre poitrine pour maximiser l\'oxygénation et activer la réponse de relaxation naturelle de votre corps.</string>
+    
+    <string name="technique_autogenic_training_name">Training autogène</string>
+    <string name="technique_autogenic_training_short_desc">Méthode de relaxation profonde utilisant l\'auto-suggestion pour créer des sensations de lourdeur et de chaleur</string>
+    <string name="technique_autogenic_training_desc">Une technique d\'auto-hypnose développée par des médecins qui utilise des phrases d\'auto-suggestion pour induire un état de relaxation profonde et réparatrice.</string>
+    
+    <string name="technique_breathing_box_name">Respiration carrée</string>
+    <string name="technique_breathing_box_short_desc">Technique de respiration 4-4-4-4 utilisée par les forces spéciales pour retrouver rapidement le calme</string>
+    <string name="technique_breathing_box_desc">Également connue sous le nom de respiration tactique, cette méthode éprouvée est utilisée par les militaires et les premiers intervenants pour maintenir le calme sous pression.</string>
+    
+    <string name="technique_breathing_478_name">Respiration 4-7-8</string>
+    <string name="technique_breathing_478_short_desc">Technique du Dr. Weil pour l\'endormissement : inspirez 4s, retenez 7s, expirez 8s</string>
+    <string name="technique_breathing_478_desc">Développée par le Dr Andrew Weil, cette technique puissante peut induire la relaxation en moins d\'une minute et est particulièrement efficace pour l\'endormissement.</string>
+    
+    <string name="technique_body_scan_meditation_name">Body scan</string>
+    <string name="technique_body_scan_meditation_short_desc">Méditation de pleine conscience qui parcourt le corps pour développer la conscience corporelle et relâcher les tensions</string>
+    <string name="technique_body_scan_meditation_desc">Une pratique méditative fondamentale qui développe la conscience corporelle en dirigeant systématiquement l\'attention à travers chaque partie du corps.</string>
+    
+    <string name="technique_mindful_breathing_name">Respiration consciente</string>
+    <string name="technique_mindful_breathing_short_desc">Méditation mindfulness qui développe la présence en observant simplement le souffle naturel</string>
+    <string name="technique_mindful_breathing_desc">La base de toute pratique de pleine conscience, cette méditation vous apprend à être présent en observant votre respiration naturelle sans la modifier.</string>
+    
+    <string name="technique_loving_kindness_meditation_name">Méditation bienveillante</string>
+    <string name="technique_loving_kindness_meditation_short_desc">Méditation Metta qui cultive la compassion envers soi-même et les autres pour réduire le stress émotionnel</string>
+    <string name="technique_loving_kindness_meditation_desc">Cette pratique traditionnelle bouddhiste développe la compassion et l\'amour-propre, créant un antidote puissant à l\'autocritique et à l\'anxiété sociale.</string>
+    
+    <string name="technique_auto_hypnosis_autogenic_name">Auto-hypnose Autogène</string>
+    <string name="technique_auto_hypnosis_autogenic_short_desc">Technique d\'induction auto-hypnotique combinant entraînement autogène et suggestions pour une relaxation profonde</string>
+    <string name="technique_auto_hypnosis_autogenic_desc">Une approche avancée combinant les principes de l\'entraînement autogène avec l\'auto-hypnose pour atteindre des états de relaxation exceptionnellement profonds.</string>
+    
+    <string name="technique_forest_immersion_nature_name">Immersion Forêt</string>
+    <string name="technique_forest_immersion_nature_short_desc">Évasion mentale immersive dans un environnement forestier avec sons 3D et guidage sensoriel</string>
+    <string name="technique_forest_immersion_nature_desc">Inspirée du \"bain de forêt\" japonais (shinrin-yoku), cette expérience immersive vous transporte dans un environnement forestier apaisant pour réduire le stress et restaurer l\'équilibre mental.</string>
+    
+    <string name="technique_meditation_breath_awareness_name">Méditation Conscience du Souffle</string>
+    <string name="technique_meditation_breath_awareness_short_desc">Méditation de pleine conscience utilisant la respiration naturelle comme ancre pour développer l\'attention présente</string>
+    <string name="technique_meditation_breath_awareness_desc">Une méditation classique qui utilise la respiration comme point d\'ancrage pour développer la concentration et la présence, base de toute pratique contemplative.</string>
 </resources>

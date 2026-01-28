@@ -63,8 +63,9 @@ class AuthViewModel(
     fun signUp(email: String, password: String, displayName: String, anxietyLevel: AnxietyLevel) {
         viewModelScope.launch {
             _authState.value = _authState.value.copy(isLoading = true, errorMessage = null)
-            
-            val result = authRepository.signUp(email, password, displayName)
+
+            // Pass anxietyLevel to the repository to save with user profile
+            val result = authRepository.signUp(email, password, displayName, anxietyLevel)
             result.fold(
                 onSuccess = {
                     _authState.value = _authState.value.copy(

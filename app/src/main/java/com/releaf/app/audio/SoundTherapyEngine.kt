@@ -11,71 +11,96 @@ import kotlin.math.*
  * Alternative à TarsosDSP pour une intégration plus simple sur Android
  */
 class SoundTherapyEngine {
-    
+
     private var audioTrack: AudioTrack? = null
+    @Volatile
     private var isPlaying = false
     private var audioJob: Job? = null
-    
+
+    // Scope dédié pour la génération audio - ne bloque pas l'appelant
+    private val audioScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
     private val sampleRate = 44100
     private val bufferSize = AudioTrack.getMinBufferSize(
         sampleRate,
         AudioFormat.CHANNEL_OUT_MONO,
         AudioFormat.ENCODING_PCM_16BIT
     )
-    
+
     /**
      * Démarre la lecture d'une fréquence thérapeutique
+     * Retourne immédiatement - la génération audio se fait en arrière-plan
      */
-    suspend fun startFrequency(
+    fun startFrequency(
         frequency: Int,
         binauralBeatHz: Int = 0,
         volume: Float = 0.5f
-    ) = withContext(Dispatchers.IO) {
-        stopAudio()
-        
-        // Configuration AudioTrack
-        audioTrack = AudioTrack.Builder()
-            .setAudioAttributes(
-                AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .build()
-            )
-            .setAudioFormat(
-                AudioFormat.Builder()
-                    .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
-                    .setSampleRate(sampleRate)
-                    .setChannelMask(
-                        if (binauralBeatHz > 0) AudioFormat.CHANNEL_OUT_STEREO 
-                        else AudioFormat.CHANNEL_OUT_MONO
+    ) {
+        // Arrêter toute lecture en cours de manière synchrone
+        stopAudioInternal()
+
+        // Configuration AudioTrack sur le thread IO
+        audioJob = audioScope.launch {
+            try {
+                audioTrack = AudioTrack.Builder()
+                    .setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build()
                     )
+                    .setAudioFormat(
+                        AudioFormat.Builder()
+                            .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                            .setSampleRate(sampleRate)
+                            .setChannelMask(
+                                if (binauralBeatHz > 0) AudioFormat.CHANNEL_OUT_STEREO
+                                else AudioFormat.CHANNEL_OUT_MONO
+                            )
+                            .build()
+                    )
+                    .setBufferSizeInBytes(bufferSize * 2)
                     .build()
-            )
-            .setBufferSizeInBytes(bufferSize * 2)
-            .build()
-        
-        isPlaying = true
-        audioTrack?.play()
-        
-        // Génération audio en coroutine
-        audioJob = launch {
-            generateAudio(frequency, binauralBeatHz, volume)
+
+                isPlaying = true
+                audioTrack?.play()
+
+                // Génération audio dans la même coroutine
+                generateAudio(frequency, binauralBeatHz, volume)
+            } catch (e: CancellationException) {
+                // Annulation normale, ne pas logger comme erreur
+                throw e
+            } catch (e: Exception) {
+                // Erreur lors de l'initialisation audio
+                isPlaying = false
+            }
         }
     }
     
     /**
-     * Arrête la lecture audio
+     * Arrête la lecture audio de manière interne (synchrone)
      */
-    fun stopAudio() {
+    private fun stopAudioInternal() {
         isPlaying = false
         audioJob?.cancel()
         audioJob = null
-        
+
         audioTrack?.apply {
-            stop()
-            release()
+            try {
+                stop()
+                release()
+            } catch (e: Exception) {
+                // Ignorer les erreurs lors de l'arrêt
+            }
         }
         audioTrack = null
+    }
+
+    /**
+     * Arrête la lecture audio
+     */
+    fun stopAudio() {
+        stopAudioInternal()
     }
     
     /**
@@ -158,5 +183,6 @@ class SoundTherapyEngine {
      */
     fun release() {
         stopAudio()
+        audioScope.cancel()
     }
 }

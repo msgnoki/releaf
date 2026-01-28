@@ -4,9 +4,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.releaf.app.data.model.firebase.*
 import com.releaf.app.data.repository.firebase.*
 import kotlinx.coroutines.flow.*
+import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 
 /**
  * Service pour les statistiques utilisateur avec données Firebase réelles
@@ -138,45 +139,59 @@ class StatisticsService {
     }
     
     /**
-     * Calcule le streak actuel basé sur les sessions
+     * Calcule le streak actuel basé sur les sessions.
+     * Utilise le fuseau horaire système pour une conversion correcte des timestamps.
      */
     private fun calculateCurrentStreak(sessions: List<Session>): Int {
         if (sessions.isEmpty()) return 0
-        
-        // Grouper par date et trier par date décroissante
-        val sessionsByDate = sessions
-            .map { LocalDate.ofEpochDay(it.createdAt / (24 * 60 * 60 * 1000)) }
+
+        val zoneId = ZoneId.systemDefault()
+        val today = LocalDate.now(zoneId)
+        val yesterday = today.minusDays(1)
+
+        // Convertir les timestamps en LocalDate avec le fuseau horaire système
+        val sessionDates = sessions
+            .map { session -> timestampToLocalDate(session.createdAt, zoneId) }
             .distinct()
             .sortedDescending()
-        
-        if (sessionsByDate.isEmpty()) return 0
-        
-        // Vérifier si la date la plus récente est aujourd'hui ou hier
-        val today = LocalDate.now()
-        val yesterday = today.minusDays(1)
-        val mostRecent = sessionsByDate.first()
-        
+
+        if (sessionDates.isEmpty()) return 0
+
+        val mostRecent = sessionDates.first()
+
+        // Le streak est cassé si la dernière session n'est ni aujourd'hui ni hier
         if (mostRecent != today && mostRecent != yesterday) {
-            return 0 // Streak cassé
+            return 0
         }
-        
+
         // Compter les jours consécutifs
         var streak = 0
-        var currentDate = if (mostRecent == today) today else yesterday
-        
-        for (sessionDate in sessionsByDate) {
-            if (sessionDate == currentDate) {
-                streak++
-                currentDate = currentDate.minusDays(1)
-            } else if (sessionDate == currentDate.plusDays(1)) {
-                // Continue, c'est le même jour
-                continue
-            } else {
-                break // Streak cassé
+        var expectedDate = if (mostRecent == today) today else yesterday
+
+        for (sessionDate in sessionDates) {
+            when {
+                sessionDate == expectedDate -> {
+                    streak++
+                    expectedDate = expectedDate.minusDays(1)
+                }
+                sessionDate.isBefore(expectedDate) -> {
+                    // Jour manqué, le streak s'arrête
+                    break
+                }
+                // sessionDate > expectedDate : plusieurs sessions le même jour, on continue
             }
         }
-        
+
         return streak
+    }
+
+    /**
+     * Convertit un timestamp en LocalDate avec le fuseau horaire spécifié
+     */
+    private fun timestampToLocalDate(timestamp: Long, zoneId: ZoneId): LocalDate {
+        return Instant.ofEpochMilli(timestamp)
+            .atZone(zoneId)
+            .toLocalDate()
     }
     
     /**
@@ -197,27 +212,31 @@ class StatisticsService {
      * Vérifie si un timestamp est dans les N derniers jours
      */
     private fun isWithinDays(timestamp: Long, days: Int): Boolean {
-        val sessionDate = LocalDate.ofEpochDay(timestamp / (24 * 60 * 60 * 1000))
-        val cutoffDate = LocalDate.now().minusDays(days.toLong())
-        return sessionDate.isAfter(cutoffDate) || sessionDate.isEqual(cutoffDate)
+        val zoneId = ZoneId.systemDefault()
+        val sessionDate = timestampToLocalDate(timestamp, zoneId)
+        val cutoffDate = LocalDate.now(zoneId).minusDays(days.toLong())
+        return !sessionDate.isBefore(cutoffDate)
     }
-    
+
     /**
-     * Vérifie si un timestamp est dans la semaine actuelle
+     * Vérifie si un timestamp est dans la semaine actuelle (lundi-dimanche)
      */
     private fun isThisWeek(timestamp: Long): Boolean {
-        val sessionDate = LocalDate.ofEpochDay(timestamp / (24 * 60 * 60 * 1000))
-        val today = LocalDate.now()
+        val zoneId = ZoneId.systemDefault()
+        val sessionDate = timestampToLocalDate(timestamp, zoneId)
+        val today = LocalDate.now(zoneId)
         val weekStart = today.minusDays(today.dayOfWeek.value - 1L)
-        return sessionDate.isAfter(weekStart.minusDays(1)) || sessionDate.isEqual(weekStart)
+        val weekEnd = weekStart.plusDays(6)
+        return !sessionDate.isBefore(weekStart) && !sessionDate.isAfter(weekEnd)
     }
-    
+
     /**
      * Vérifie si un timestamp est dans le mois actuel
      */
     private fun isThisMonth(timestamp: Long): Boolean {
-        val sessionDate = LocalDate.ofEpochDay(timestamp / (24 * 60 * 60 * 1000))
-        val today = LocalDate.now()
+        val zoneId = ZoneId.systemDefault()
+        val sessionDate = timestampToLocalDate(timestamp, zoneId)
+        val today = LocalDate.now(zoneId)
         return sessionDate.month == today.month && sessionDate.year == today.year
     }
     

@@ -4,6 +4,9 @@ import com.releaf.app.data.database.AppDatabase
 import com.releaf.app.data.user.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 class UserRepository(
     private val database: AppDatabase
 ) {
@@ -136,16 +139,52 @@ class UserRepository(
         }
     }
     
+    /**
+     * Calcule le streak actuel en vérifiant les jours consécutifs.
+     * Utilise le fuseau horaire système pour la conversion des timestamps.
+     */
     private suspend fun calculateCurrentStreak(userId: String): Int {
-        val sessionDates = sessionDao.getUserSessionDates(userId)
+        val sessionTimestamps = sessionDao.getUserSessionDates(userId)
+        if (sessionTimestamps.isEmpty()) return 0
+
+        val zoneId = ZoneId.systemDefault()
+        val today = LocalDate.now(zoneId)
+        val yesterday = today.minusDays(1)
+
+        // Convertir les timestamps en LocalDate et dédupliquer
+        val sessionDates = sessionTimestamps
+            .map { timestamp ->
+                Instant.ofEpochMilli(timestamp)
+                    .atZone(zoneId)
+                    .toLocalDate()
+            }
+            .distinct()
+            .sortedDescending()
+
         if (sessionDates.isEmpty()) return 0
-        
-        var streak = 1
-        for (i in 1 until sessionDates.size) {
-            // Logic to calculate consecutive days
-            // This is simplified - you'd want more robust date comparison
-            streak++
+
+        val mostRecentDate = sessionDates.first()
+
+        // Le streak est cassé si la dernière session n'est ni aujourd'hui ni hier
+        if (mostRecentDate != today && mostRecentDate != yesterday) {
+            return 0
         }
+
+        // Compter les jours consécutifs en partant de la date la plus récente
+        var streak = 0
+        var expectedDate = if (mostRecentDate == today) today else yesterday
+
+        for (sessionDate in sessionDates) {
+            if (sessionDate == expectedDate) {
+                streak++
+                expectedDate = expectedDate.minusDays(1)
+            } else if (sessionDate.isBefore(expectedDate)) {
+                // Jour manqué, le streak s'arrête
+                break
+            }
+            // Si sessionDate > expectedDate, on continue (plusieurs sessions le même jour)
+        }
+
         return streak
     }
     

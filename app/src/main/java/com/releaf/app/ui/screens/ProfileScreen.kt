@@ -195,10 +195,10 @@ fun ProfileScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Erreur lors du chargement du profil",
+                    text = stringResource(R.string.profile_error_loading),
                     style = MaterialTheme.typography.titleMedium
                 )
-                
+
                 val currentErrorMessage = uiState.errorMessage
                 if (currentErrorMessage != null) {
                     Spacer(modifier = Modifier.height(8.dp))
@@ -217,16 +217,14 @@ fun ProfileScreen(
         LanguageSelectionDialog(
             currentLanguage = languagePreferences.getLanguage(),
             onLanguageSelected = { languageCode ->
+                // Update local preference first
                 languagePreferences.setLanguage(languageCode)
-                profileViewModel.updateLanguage(languageCode)
                 showLanguageDialog = false
-                // Restart the app to apply the language change
-                val activity = context as? androidx.activity.ComponentActivity
-                activity?.let {
-                    val intent = Intent(context, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                    it.finish()
+                
+                // Update Firebase and restart on success
+                profileViewModel.updateLanguage(languageCode) {
+                    // Restart the app to apply the language change
+                    MainActivity.restart(context)
                 }
             },
             onDismiss = { showLanguageDialog = false }
@@ -362,13 +360,13 @@ private fun StatsOverviewCard(progress: UserProgress) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Statistiques",
+                text = stringResource(R.string.profile_stats_title),
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                 color = MaterialTheme.colorScheme.onSurface
             )
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
@@ -376,28 +374,28 @@ private fun StatsOverviewCard(progress: UserProgress) {
                 StatItem(
                     icon = Icons.Default.LocalFireDepartment,
                     value = "${progress.currentStreak}",
-                    label = "Série actuelle",
+                    label = stringResource(R.string.profile_current_streak),
                     iconColor = CategoryColors.getCategoryColorByHex("#FF5722")
                 )
-                
+
                 StatItem(
                     icon = Icons.Default.Schedule,
                     value = "${progress.totalMinutes}",
-                    label = "Minutes totales",
+                    label = stringResource(R.string.profile_total_minutes),
                     iconColor = CategoryColors.getCategoryColorByHex("#2196F3")
                 )
-                
+
                 StatItem(
                     icon = Icons.Default.Refresh,
                     value = "${progress.totalSessions}",
-                    label = "Sessions",
+                    label = stringResource(R.string.profile_sessions),
                     iconColor = CategoryColors.getCategoryColorByHex("#4CAF50")
                 )
-                
+
                 StatItem(
                     icon = Icons.Default.SentimentVerySatisfied,
                     value = "${String.format("%.1f", progress.averageMoodImprovement)}",
-                    label = "Amélioration",
+                    label = stringResource(R.string.profile_mood_improvement),
                     iconColor = CategoryColors.getCategoryColorByHex("#FF9800")
                 )
             }
@@ -456,11 +454,11 @@ private fun BadgesSection(badges: List<Badge>) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Badges",
+                    text = stringResource(R.string.profile_badges),
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                
+
                 Text(
                     text = "${badges.size}/20",
                     style = MaterialTheme.typography.bodySmall,
@@ -527,7 +525,7 @@ private fun WeeklyProgressCard(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Cette semaine",
+                text = stringResource(R.string.profile_this_week),
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -572,6 +570,9 @@ private fun SettingsSection(
     onLanguageClick: () -> Unit = {},
     onLogoutClick: () -> Unit = {}
 ) {
+    val languageLabel = stringResource(R.string.profile_language)
+    val logoutLabel = stringResource(R.string.profile_logout)
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -582,19 +583,19 @@ private fun SettingsSection(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Paramètres",
+                text = stringResource(R.string.profile_settings),
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                 color = MaterialTheme.colorScheme.onSurface
             )
-            
+
             Spacer(modifier = Modifier.height(12.dp))
-            
-            // Simplified settings - only language and logout as requested
+
+            // Simplified settings - only language and logout
             val settingsItems = listOf(
-                Triple(Icons.Default.Language, "Langue", onLanguageClick),
-                Triple(Icons.Default.ExitToApp, "Déconnexion", onLogoutClick)
+                Triple(Icons.Default.Language, languageLabel, onLanguageClick),
+                Triple(Icons.Default.ExitToApp, logoutLabel, onLogoutClick)
             )
-            
+
             settingsItems.forEach { (icon, title, onClick) ->
                 SettingsItem(
                     icon = icon,
@@ -650,7 +651,7 @@ private fun SettingsItem(
 @Composable
 private fun MoodHistoryCard(profileViewModel: ProfileViewModel) {
     val moodHistory by profileViewModel.moodHistory.collectAsState()
-    
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
@@ -661,17 +662,17 @@ private fun MoodHistoryCard(profileViewModel: ProfileViewModel) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Évolution de l'humeur",
+                text = stringResource(R.string.profile_mood_history),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface
             )
-            
+
             Spacer(modifier = Modifier.height(12.dp))
-            
+
             if (moodHistory.isEmpty()) {
                 Text(
-                    text = "Pas encore de données d'humeur disponibles.\nComplétez quelques sessions pour voir votre évolution !",
+                    text = stringResource(R.string.profile_mood_empty),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
@@ -691,7 +692,7 @@ private fun MoodHistoryCard(profileViewModel: ProfileViewModel) {
                 // Average improvement
                 val avgImprovement = moodHistory.map { it.improvement }.average()
                 Text(
-                    text = "Amélioration moyenne: ${String.format("%.1f", avgImprovement)} points",
+                    text = stringResource(R.string.profile_mood_avg_improvement, String.format("%.1f", avgImprovement)),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Medium
@@ -803,7 +804,7 @@ private fun LanguageSelectionDialog(
 ) {
     val context = LocalContext.current
     val languagePreferences = remember { LanguagePreferences(context) }
-    
+
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -822,45 +823,29 @@ private fun LanguageSelectionDialog(
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
-                
-                // French Option
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RadioButton(
-                        selected = currentLanguage == "fr",
-                        onClick = { onLanguageSelected("fr") }
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = stringResource(R.string.language_french),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+
+                // Dynamically list all supported languages
+                LanguagePreferences.SUPPORTED_LANGUAGES.forEach { languageOption ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = currentLanguage == languageOption.code,
+                            onClick = { onLanguageSelected(languageOption.code) }
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = languageOption.displayName,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
                 }
-                
-                // English Option
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RadioButton(
-                        selected = currentLanguage == "en",
-                        onClick = { onLanguageSelected("en") }
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = stringResource(R.string.language_english),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 Text(
                     text = stringResource(R.string.language_restart_required),
                     style = MaterialTheme.typography.bodySmall,

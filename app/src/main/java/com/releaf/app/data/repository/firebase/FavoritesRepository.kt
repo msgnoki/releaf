@@ -59,17 +59,18 @@ class FavoritesRepository {
             .whereEqualTo("userId", userId)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
-                    close(error)
+                    // Ne pas fermer le flow pour une erreur temporaire
+                    trySend(emptyList())
                     return@addSnapshotListener
                 }
-                
-                val techniqueIds = snapshot?.mapNotNull { 
-                    it.toObject<FavoriteTechnique>().techniqueId 
+
+                val techniqueIds = snapshot?.mapNotNull {
+                    it.toObject<FavoriteTechnique>().techniqueId
                 } ?: emptyList()
-                
+
                 trySend(techniqueIds)
             }
-        
+
         awaitClose { listener.remove() }
     }
 
@@ -86,19 +87,22 @@ class FavoritesRepository {
     suspend fun toggleFavorite(userId: String, techniqueId: String): Result<Boolean> {
         return try {
             val isFavoriteResult = isFavorite(userId, techniqueId)
-            if (isFavoriteResult.isFailure) {
-                return Result.failure(isFavoriteResult.exceptionOrNull()!!)
-            }
-            
-            val isCurrentlyFavorite = isFavoriteResult.getOrNull() ?: false
-            
-            if (isCurrentlyFavorite) {
-                removeFromFavorites(userId, techniqueId)
-                Result.success(false)
-            } else {
-                addToFavorites(userId, techniqueId)
-                Result.success(true)
-            }
+
+            // Gestion sécurisée de l'erreur sans !!
+            isFavoriteResult.fold(
+                onSuccess = { isCurrentlyFavorite ->
+                    if (isCurrentlyFavorite) {
+                        removeFromFavorites(userId, techniqueId)
+                        Result.success(false)
+                    } else {
+                        addToFavorites(userId, techniqueId)
+                        Result.success(true)
+                    }
+                },
+                onFailure = { error ->
+                    Result.failure(error)
+                }
+            )
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -107,17 +111,20 @@ class FavoritesRepository {
     suspend fun getFavoriteStats(userId: String): Result<FavoriteStats> {
         return try {
             val favoritesResult = getUserFavorites(userId)
-            if (favoritesResult.isFailure) {
-                return Result.failure(favoritesResult.exceptionOrNull()!!)
-            }
-            
-            val favorites = favoritesResult.getOrNull() ?: emptyList()
-            val stats = FavoriteStats(
-                totalFavorites = favorites.size,
-                favoriteIds = favorites
+
+            // Gestion sécurisée de l'erreur sans !!
+            favoritesResult.fold(
+                onSuccess = { favorites ->
+                    val stats = FavoriteStats(
+                        totalFavorites = favorites.size,
+                        favoriteIds = favorites
+                    )
+                    Result.success(stats)
+                },
+                onFailure = { error ->
+                    Result.failure(error)
+                }
             )
-            
-            Result.success(stats)
         } catch (e: Exception) {
             Result.failure(e)
         }
